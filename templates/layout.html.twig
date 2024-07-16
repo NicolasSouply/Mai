@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="{% block description %} Bienvenue au Restaurant Maï, un restaurant asiatique en Bretagne dans les Côtes-d'armor dans la ville de Saint-Brieuc où nous servons des plats délicieux et authentiques. Nous vous attendons avec impatience.  {% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/styles/css/style.css" />
+    <script src="https://kit.fontawesome.com/84e325796e.js" crossorigin="anonymous"></script> <!-- a DL les icones -->
+
+    
+    <title>{% block title %}Restaurant Maï{% endblock %}</title></title>
+    
+  </head>
+  <body>
+    <header class="header">
+       {% block header %} 
+       <nav class="navbar">
+            <div class="logo" >
+              <a href="index.php?route=home">
+                <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
+              </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.php?route=card">La carte</a>
+                <a href="index.php?route=about">À propos</a>
+                <a href="index.php?route=localisation">Localiser</a>
+                <a href="index.php?route=contact">Contact</a>
+            </div>
+            <div class="reserved">
+            <a href="index.php?route=reservation">Réserver</a></div>
+            <input type="checkbox" id="toggle">
+            <label for="toggle">Light/dark mode</label>
+        </nav>
+          <div class="log-link">
+            <a href="index.php?route=connexion">Connexion</a>
+            <a href="index.php?route=registration">Inscription</a>
+          </div>
+       {% endblock %}
+    </header>
+    <main>
+      {% block main %} 
+      <p>coucou je test si leeeee dark mode marche</p>
+      <i class="fa-solid fa-user"></i>
+      {% endblock %}
+    </main>
+    <footer>
+      {% block footer %} 
+      {% endblock %}
+      </footer>
+  </body>
+</html>
