@@ -5,18 +5,18 @@ class ClientManager extends AbstractManager
 
   public function findAll() : array
   {
-    $query = $this->db->prepare('SELECT * FROM clients');
+    $query = $this->db->prepare('SELECT * FROM contacts');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $clients = [];
+        $contacts = [];
 
         foreach($result as $item)
         {
-            $client = new Clients($item["firstName"], $item["lastName"], $item["email"], $item["phone"], $item["password"]);
-            $client->setId($item["id"]);
-            $clients[] = $client;
+            $contact = new Clients($item["firstName"], $item["lastName"], $item["email"], $item["phone"], $item["password"]);
+            $contact->setId($item["id"]);
+            $contacts[] = $contact;
         }
 
-        return $clients;
+        return $contacts;
   }
 }

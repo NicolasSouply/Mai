@@ -6,7 +6,7 @@ class SiteController extends AbstractController
     public function home() : void
     {
       
-      $cm = new ClientManager();
+        $cm = new ClientManager();
         $om = new OrderManager();
         $dom = new DetailOrderManager();
         $dm = new DisheManager();
@@ -53,4 +53,6 @@ class SiteController extends AbstractController
     {
       $this->render('reservation.html.twig', []);
     }
+   
+
   }

@@ -3,9 +3,10 @@
 class DisheManager extends AbstractManager 
 {
 
+  private $dishes  = [];
   public function findAll() : array
   {
-    $query = $this->db->prepare('SELECT * FROM dishes');
+        $query = $this->db->prepare('SELECT * FROM dishes');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $dishes = [];
@@ -19,4 +20,6 @@ class DisheManager extends AbstractManager
 
         return $dishes;
   }
+  
+  
 }

@@ -1,17 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%; /* 1rem = 10px (la formule est 10/16*100) la taille par défaut étant 16px */
+}
 body {
-  background-color: $background-light;
-  /*
-  transition: background-color 0.5s;
-
-  background-image: url("../../images/angkor-wat.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
   margin: 0;
-  &.dark-mode {
-    background-color: $background-dark;
-    transition: background-color 0.5s;
-  }
-*/
+  padding: 0;
+  line-height: 1.5;
+  font-family: sans-serif;
+  color: $blue-mai;
+  font-size: 1.6rem; /* on remets la taille du texte par défaut pour le body à 16px en utilisant les rem comme unité) */
+  background: $bg-img-day no-repeat center center fixed;
+  background-size: cover;
+  background-color: $background-light;
+}
+ul {
+  padding: 0;
+  margin-left: 0;
+}
+a {
+  text-decoration: none;
+  color: $blue-mai;
 }

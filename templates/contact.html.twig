@@ -2,3 +2,14 @@
 
 {% block description %}
   Page contact du restaurant Maï afin de pouvoir demander des renseingments ou organiser des événements.{% endblock %}
+
+
+
+  {% block content %}
+    <h1>Liste des clients</h1>
+    <ul>
+        {% for client in clients %}
+            <li>{{ client.name }} - {{ client.email }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,1 +1,15 @@
 {% extends 'layout.html.twig' %}
+
+
+{% block content %}
+    <h1>Dishes by Category</h1>
+    {% if dishes is not empty %}
+        <ul>
+        {% for dish in dishes %}
+            <li>{{ dish.name }} - {{ dish.description }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No dishes found in this category.</p>
+    {% endif %}
+{% endblock %}

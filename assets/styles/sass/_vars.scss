@@ -1,11 +1,20 @@
 // colors
 
 $blue-mai: #213f7d;
-$cream-mai: #f0e9e1;
+$cream-mai: rgb(240, 233, 225);
 $golden-button: #ffbc0d;
 
+//background colors
 
-//background colors 
+$background-light: #f0e9e1;
+$background-dark: #213f7d;
 
-$background-light : #f0e9e1;
-$background-dark : #213f7d;
+//background images
+
+$bg-img-day: url("../../images/angkor-wat.webp");
+$bg-img-night: url("../../images/angkor-wat2.webp");
+
+// logo Maï
+
+$logo-width: 100px;
+$logo-height: auto;

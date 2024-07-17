@@ -1,24 +1,101 @@
-body {
-  background-color: #f0e9e1;
-  /*
-    transition: background-color 0.5s;
-
-    background-image: url("../../images/angkor-wat.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    margin: 0;
-    &.dark-mode {
-      background-color: $background-dark;
-      transition: background-color 0.5s;
-    }
-  */
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
 }
 
-body > header {
+html {
+  font-size: 62.5%; /* 1rem = 10px (la formule est 10/16*100) la taille par défaut étant 16px */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-family: sans-serif;
+  color: #213f7d;
+  font-size: 1.6rem; /* on remets la taille du texte par défaut pour le body à 16px en utilisant les rem comme unité) */
+  background: url("../../images/angkor-wat.webp") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #f0e9e1;
+}
+
+ul {
+  padding: 0;
+  margin-left: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #213f7d;
+}
+
+header {
+  display: flex;
+  justify-content: space-evenly;
   width: 100vw;
-  border-bottom: 1px solid white;
-  display: grid;
-  grid-template-columns: 15vw 85vw;
+  padding: 2em 1em;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 45px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.navbar__logo {
+  padding: 0;
+}
+.navbar__logo img {
+  width: 10rem;
+  height: auto;
+}
+
+.navbar__links {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.navbar__reservation {
+  background-color: #213f7d;
+  color: white;
+  border-radius: 45px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__toggle button {
+  background-color: #ffbc0d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+body.dark-mode {
+  background: url("../../images/angkor-wat2.webp") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #213f7d;
+  color: rgb(240, 233, 225);
+}
+body.dark-mode.dark-mode .navbar {
+  background-color: #213f7d;
+  color: rgb(240, 233, 225);
+}
+body.dark-mode.dark-mode a {
+  color: rgb(240, 233, 225);
+}
+
+.navbar__login {
+  display: flex;
 }

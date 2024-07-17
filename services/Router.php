@@ -40,11 +40,8 @@ class Router
     {
       $this->sc->reservation();
     }
-
-
-
-
-
+    
+  
 
     else if(!isset($get["route"]))
     {
