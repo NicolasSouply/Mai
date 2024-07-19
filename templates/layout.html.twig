@@ -12,9 +12,12 @@
     
   </head>
   <body>
+  {% block header %} 
     <header class="header">
-       {% block header %} 
-
+      <div class="burger-menu open">
+        <span class="burger-menu__1"></span>
+        <span class="burger-menu__2"></span>
+      </div>
       <nav class="navbar">
           <a class="navbar__logo" href="index.php?route=home">
             <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
@@ -25,25 +28,76 @@
                 <li><a href="index.php?route=localisation">Localiser</a></li>
                 <li><a href="index.php?route=contact">Contact</a></li>
             </ul>
-              <a class="navbar__reservation" href="index.php?route=reservation">Réserver</a>
-              <button class="navbar__toggle">🌙</button>
+            
+              <a class="navbar__button" href="index.php?route=reservation">Réserver</a>
+              <div class="navbar__dark-mode">
+                <button id="js-darkMode" class="navbar__toggle">
+                  <img id="js-moonIcon" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
+                  <img id="js-sunIcon" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
+                </button>
+              </div>
       </nav>
             <div class="navbar__login">
-              <a href="index.php?route=contact">Connexion</a>
-              <a href="index.php?route=contact">Inscription</a>
+              <a class="navbar__button sign-in" href="index.php?route=contact">Connexion</a>
+              <a class="navbar__button " href="index.php?route=contact">Inscription</a>
+      
             </div>
 
        {% endblock %}
     </header>
     <main>
       {% block main %} 
-      <p>coucou je test si leeeee dark mode marche</p>
+      <h1 class="main-title">Maï</h1>
       <i class="fa-solid fa-user"></i>
       {% endblock %}
     </main>
-    <footer>
-      {% block footer %} 
-      {% endblock %}
+
+    {% block footer %} 
+    <footer class="footer">
+      <section class="footer__logo">
+        <a href="index.php?route=home">
+          <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
+        </a>
+      </section>
+
+      <section class="footer__location">
+        <p>101 rue Jules Ferry</p>
+        <p>22000 Saint-Brieuc</p>
+        <p>02 96 75 62 73</p>
+      </section>
+
+      <section class="footer__hours">
+        <p>Du mardi au samedi </p>
+        <p>11h-14h / 17h-20h</p>
+        <p>sur place le midi & à emporter</p>
+      </section>
+
+      <section class="footer__social">
+        
+          <a href="https://www.instagram.com/maii.family/?locale=bz-hans&hl=am-et">
+            <img id="js-insta" src="./assets/images/icons/instagram-blue.webp" alt="logo instagram" />
+          </a>
+          <a href="https://www.facebook.com/maiifamily/?locale=fr_FR">
+            <img id="js-facebook" src="./assets/images/icons/facebook-blue.webp" alt="logo facebook" />
+          </a>
+        
+      </section>
+      <section class="footer__legal">
+
+          <a href="index.php?route=rgpd">
+            <p>Politique de confidentialité</p>
+          </a>
+          <a href="index.php?route=general-conditions">
+            <p>Conditions générales de vente</p>
+          </a>
+          <a href="index.php?route=legals-mentions">
+            <p>Mentions légales</p>
+          </a>
+      
+      </section>
+      
       </footer>
+      {% endblock %}
+      <script src="./assets/styles/js/main.js" type="module"></script>
   </body>
 </html>

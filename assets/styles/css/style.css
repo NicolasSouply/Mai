@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sassy+Frass&display=swap");
 * {
   box-sizing: border-box;
 }
@@ -15,8 +16,19 @@ body {
   color: #213f7d;
   font-size: 1.6rem; /* on remets la taille du texte par défaut pour le body à 16px en utilisant les rem comme unité) */
   background: url("../../images/angkor-wat.webp") no-repeat center center fixed;
-  background-size: cover;
+  background-position: 60% 19%;
+  background-size: 103%;
   background-color: #f0e9e1;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.js-darkMode {
+  background-image: url("../../images/angkor-wat2.webp");
+  background-color: #213f7d;
+}
+
+.body.dark-mode .footer {
+  background-color: #213f7d;
 }
 
 ul {
@@ -24,14 +36,31 @@ ul {
   margin-left: 0;
 }
 
+li {
+  padding: 0;
+  margin: 0;
+}
+
 a {
+  padding: 0;
+  margin: 0;
   text-decoration: none;
   color: #213f7d;
+}
+
+h1 {
+  font-family: "Sassy Frass", cursive;
+  color: white;
+  text-align: center;
+  font-weight: 400;
+  font-size: 40rem;
+  font-style: normal;
 }
 
 header {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   width: 100vw;
   padding: 2em 1em;
   position: sticky;
@@ -41,14 +70,19 @@ header {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
-  background-color: white;
-  border-radius: 45px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  justify-content: space-around;
+  align-content: center;
   align-items: center;
+  background-color: white;
+  width: 60%;
+  padding: 0.5rem;
+  border-radius: 55px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar__logo {
+  display: flex;
+  align-items: center;
   padding: 0;
 }
 .navbar__logo img {
@@ -58,28 +92,71 @@ header {
 
 .navbar__links {
   display: flex;
+  align-items: center;
   width: 50%;
   justify-content: space-between;
   list-style: none;
 }
-
-.navbar__reservation {
+.navbar__links a {
+  display: inline-block;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+}
+.navbar__links a a:hover {
   background-color: #213f7d;
   color: white;
-  border-radius: 45px;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 
-.navbar__toggle button {
-  background-color: #ffbc0d;
+.navbar__button,
+.navbar__registration {
+  background-color: #213f7d;
   color: white;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  border-radius: 45px;
+  padding: 1rem 2rem;
+  margin-left: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.navbar__button:hover,
+.navbar__registration:hover {
+  background-color: #213f7d;
+  color: white;
+  transform: scale(1.1);
+}
+
+.navbar__button.sign-in {
+  background-color: transparent; /* Pas de couleur de fond */
+  color: #213f7d; /* Couleur du texte */
+  box-shadow: none;
+}
+
+.navbar__toggle {
+  position: relative;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar__toggle .navbar__icon {
+  max-width: 2rem;
+  max-height: 2rem;
   cursor: pointer;
-  font-size: 1.2rem;
+  transition: opacity 0.3s ease;
+}
+.navbar__toggle .js-hidden {
+  display: none;
+}
+.navbar__toggle .navbar__moon-icon {
+  display: block;
+}
+.navbar__toggle .navbar__sun-icon {
+  display: none;
 }
 
 body.dark-mode {
@@ -88,14 +165,61 @@ body.dark-mode {
   background-color: #213f7d;
   color: rgb(240, 233, 225);
 }
-body.dark-mode.dark-mode .navbar {
+body.dark-mode .navbar {
   background-color: #213f7d;
   color: rgb(240, 233, 225);
 }
-body.dark-mode.dark-mode a {
+body.dark-mode a {
   color: rgb(240, 233, 225);
 }
+body.dark-mode .navbar__moon-icon {
+  display: none;
+}
+body.dark-mode .navbar__sun-icon {
+  display: block;
+}
 
-.navbar__login {
+footer {
   display: flex;
+  justify-content: space-between;
+  background-color: #f0e9e1;
+  width: 100vw;
+  padding: 1em 1em;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+footer.js-darkMode {
+  background-color: #213f7d;
+  color: #fff;
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.footer__logo img {
+  width: 15rem;
+  height: auto;
+}
+
+.footer__location {
+  font-weight: bold;
+}
+
+.footer__hours {
+  font-weight: bold;
+}
+
+.footer__social {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 0;
+}
+.footer__social img {
+  width: 3rem;
+  height: auto;
 }

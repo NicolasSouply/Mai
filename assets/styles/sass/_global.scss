@@ -4,6 +4,8 @@
 html {
   font-size: 62.5%; /* 1rem = 10px (la formule est 10/16*100) la taille par défaut étant 16px */
 }
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sassy+Frass&display=swap");
+
 body {
   margin: 0;
   padding: 0;
@@ -12,14 +14,38 @@ body {
   color: $blue-mai;
   font-size: 1.6rem; /* on remets la taille du texte par défaut pour le body à 16px en utilisant les rem comme unité) */
   background: $bg-img-day no-repeat center center fixed;
-  background-size: cover;
+  background-position: 60% 19%;
+  background-size: 103%;
   background-color: $background-light;
+  transition: background-color 0.5s ease-in-out;
 }
+.js-darkMode {
+  background-image: $bg-img-night;
+  background-color: $background-dark;
+}
+.body.dark-mode .footer {
+  background-color: $background-dark; // Couleur de fond en mode sombre
+}
+
 ul {
   padding: 0;
   margin-left: 0;
 }
+li {
+  padding: 0;
+  margin: 0;
+}
 a {
+  padding: 0;
+  margin: 0;
   text-decoration: none;
   color: $blue-mai;
+}
+h1 {
+  font-family: "Sassy Frass", cursive;
+  color: white;
+  text-align: center;
+  font-weight: 400;
+  font-size: 40rem;
+  font-style: normal;
 }
