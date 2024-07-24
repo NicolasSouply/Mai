@@ -1,48 +1,100 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Récupération des éléments pour le mode sombre
   const darkModeToggle = document.getElementById("js-darkMode");
   const moonIcon = document.getElementById("js-moonIcon");
   const sunIcon = document.getElementById("js-sunIcon");
   const body = document.body;
   const footer = document.querySelector(".footer");
+  const sections = document.querySelectorAll(
+    ".hook, .gallery, .card, .end-page"
+  );
+  const footerLegalLinks = document.querySelectorAll(".footer__legal a");
   const instaIcon = document.getElementById("js-insta");
   const facebookIcon = document.getElementById("js-facebook");
 
-  darkModeToggle.addEventListener("click", function () {
-    body.classList.toggle("js-darkMode");
+  // Gestion du menu burger
+  const burgerMenu = document.getElementById("burger-menu");
+  const navLinks = document.getElementById("navLinks");
+
+  // Gestion du mode sombre pour la version mobile
+  const darkModeToggleMobile = document.getElementById("js-darkModeMobile");
+  const moonIconMobile = document.getElementById("js-moonIconMobile");
+  const sunIconMobile = document.getElementById("js-sunIconMobile");
+
+  // Affichage du bouton retour en haut
+  const upButtonLink = document.getElementById("up-button-link");
+
+  // Gestion de la galerie d'images
+  const galleryInner = document.querySelector(".gallery__inner");
+  const containers = document.querySelectorAll(".gallery__container");
+
+  // Fonction pour activer/désactiver le mode sombre
+  const toggleDarkMode = () => {
+    body.classList.toggle("dark-mode");
+    body.classList.toggle("light-mode");
     updateIcons();
     updateFooterBackground();
-    updateBackgroundImage();
+    updateFooterLegalLinks();
+    updateSectionsBackground(); // Ajout pour mettre à jour les sections
+  };
+
+  // Met à jour les icônes de mode sombre
+  const updateIcons = () => {
+    const isDarkMode = body.classList.contains("dark-mode");
+    moonIcon?.classList.toggle("js-hidden", isDarkMode);
+    sunIcon?.classList.toggle("js-hidden", !isDarkMode);
+    moonIconMobile?.classList.toggle("js-hidden", isDarkMode);
+    sunIconMobile?.classList.toggle("js-hidden", !isDarkMode);
+    facebookIcon.src = isDarkMode
+      ? "./assets/images/icons/facebook-cream.webp"
+      : "./assets/images/icons/facebook-blue.webp";
+    instaIcon.src = isDarkMode
+      ? "./assets/images/icons/instagram-cream.webp"
+      : "./assets/images/icons/instagram-blue.webp";
+  };
+
+  // Met à jour l'arrière-plan du footer
+  const updateFooterBackground = () => {
+    const isDarkMode = body.classList.contains("dark-mode");
+    footer.style.backgroundColor = isDarkMode ? "#213F7D" : "#f0e9e1";
+    footer.style.color = isDarkMode ? "#fff" : "#213F7D";
+  };
+
+  // Met à jour les fonds des sections
+  const updateSectionsBackground = () => {
+    const isDarkMode = body.classList.contains("dark-mode");
+    sections.forEach((section) => {
+      section.classList.toggle("dark-mode", isDarkMode);
+    });
+  };
+
+  // Met à jour les liens légaux du footer
+  const updateFooterLegalLinks = () => {
+    const isDarkMode = body.classList.contains("dark-mode");
+    footerLegalLinks.forEach((link) => {
+      link.style.color = isDarkMode ? "#fff" : "#213F7D";
+    });
+  };
+
+  // Ajout des écouteurs d'événements
+  darkModeToggle?.addEventListener("click", toggleDarkMode);
+  darkModeToggleMobile?.addEventListener("click", toggleDarkMode);
+  burgerMenu?.addEventListener("click", () => {
+    navLinks?.classList.toggle("show");
   });
 
-  function updateIcons() {
-    if (body.classList.contains("js-darkMode")) {
-      moonIcon.classList.add("js-hidden");
-      sunIcon.classList.remove("js-hidden");
-      facebookIcon.src = "./assets/images/icons/facebook-cream.webp"; // Image en mode sombre
-      instaIcon.src = "./assets/images/icons/instagram-cream.webp";
-    } else {
-      moonIcon.classList.remove("js-hidden");
-      sunIcon.classList.add("js-hidden");
-      facebookIcon.src = "./assets/images/icons/facebook-blue.webp"; // Image en mode clair
-      instaIcon.src = "./assets/images/icons/instagram-blue.webp";
-    }
-  }
+  // Affiche le bouton retour en haut au scroll
+  window.addEventListener("scroll", () => {
+    upButtonLink.style.display = window.scrollY > 300 ? "block" : "none";
+  });
 
-  function updateFooterBackground() {
-    if (body.classList.contains("js-darkMode")) {
-      footer.style.backgroundColor = "#213F7D"; // Couleur de fond en mode sombre
-      footer.style.color = "#fff"; // Couleur de texte en mode sombre
-    } else {
-      footer.style.backgroundColor = "#f0e9e1"; // Couleur de fond en mode clair
-      footer.style.color = "#213F7D"; // Couleur de texte en mode clair
-    }
-  }
+  // Ajoute un comportement de retour en haut du bouton
+  upButtonLink?.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-  function updateBackgroundImage() {
-    if (body.classList.contains("js-darkMode")) {
-      body.style.backgroundImage = 'url("./assets/images/angkor-wat2.webp")'; // Assurez-vous que le chemin est correct
-    } else {
-      body.style.backgroundImage = 'url("./assets/images/angkor-wat.webp")'; // Assurez-vous que le chemin est correct
-    }
-  }
+  // Ajuster la largeur du conteneur de la galerie d'images
+  const totalWidth = containers.length * (containers[0].offsetWidth + 10); // Largeur totale des éléments + espace
+  galleryInner.style.width = `${totalWidth}px`;
 });

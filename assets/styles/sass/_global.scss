@@ -1,9 +1,11 @@
 * {
   box-sizing: border-box;
 }
+
 html {
-  font-size: 62.5%; /* 1rem = 10px (la formule est 10/16*100) la taille par défaut étant 16px */
+  font-size: 62.5%; /* 1rem = 10px */
 }
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sassy+Frass&display=swap");
 
 body {
@@ -12,40 +14,492 @@ body {
   line-height: 1.5;
   font-family: sans-serif;
   color: $blue-mai;
-  font-size: 1.6rem; /* on remets la taille du texte par défaut pour le body à 16px en utilisant les rem comme unité) */
+  font-size: 1.6rem;
   background: $bg-img-day no-repeat center center fixed;
-  background-position: 60% 19%;
-  background-size: 103%;
-  background-color: $background-light;
-  transition: background-color 0.5s ease-in-out;
+  background-size: cover;
+  transition: background-color 0.5s ease-in-out,
+    background-image 0.5s ease-in-out;
+
+  &.light-mode {
+    background: $background-light no-repeat center center fixed;
+  }
+
+  &.dark-mode {
+    background: $background-dark no-repeat center center fixed;
+    color: $cream-mai;
+  }
 }
-.js-darkMode {
-  background-image: $bg-img-night;
-  background-color: $background-dark;
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
 }
-.body.dark-mode .footer {
-  background-color: $background-dark; // Couleur de fond en mode sombre
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 ul {
   padding: 0;
   margin-left: 0;
 }
+
 li {
   padding: 0;
   margin: 0;
 }
-a {
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
-  color: $blue-mai;
+
+.main {
+  display: flex;
+  justify-content: center;
+  max-height: 75vh;
+  padding: 0rem;
+
+  .main-title {
+    margin: 0;
+  }
 }
+
 h1 {
+  padding: 0;
   font-family: "Sassy Frass", cursive;
   color: white;
   text-align: center;
   font-weight: 400;
   font-size: 40rem;
   font-style: normal;
+}
+
+/* **************************** SECTION HOOK ***************************/
+.hook {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
+  background-color: $background-light;
+  padding: 15rem 2rem;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+
+  &.dark-mode {
+    background-color: $background-dark;
+    color: $cream-mai;
+  }
+
+  h2 {
+    font-family: "Inter", sans-serif;
+    font-size: 5rem;
+    margin-top: 5rem;
+  }
+
+  div {
+    display: flex;
+    width: 38%;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 50%;
+    height: auto;
+    padding-right: 2rem;
+  }
+}
+
+/* **************************** SECTION GALLERY ***************************/
+
+.gallery {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  background-color: $cream-mai;
+  height: 50vh;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+
+  .gallery__inner {
+    display: flex;
+    width: 200%;
+    animation: scrollLeft 20s linear infinite;
+  }
+
+  .gallery__container {
+    flex: 0 0 auto;
+    width: 20rem;
+    height: 20rem;
+    margin-right: 10px;
+    background-color: $cream-mai;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  &.dark-mode {
+    background-color: $background-dark;
+  }
+}
+/* **************************** SECTION CARD ***************************/
+
+.card {
+  background: $bg-img-cat no-repeat center center fixed;
+  background-size: cover;
+  padding: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+
+  .card__blur {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    width: 50%;
+    max-width: 40rem;
+    background: rgba(255, 255, 254, 0.3);
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    h3 {
+      font-size: 5rem;
+      text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    button {
+      display: flex;
+      background-color: $blue-mai;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+      border-radius: 2rem;
+      padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+      margin-left: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border: none;
+    }
+  }
+
+  .card__blur {
+    background: rgba(252, 251, 251, 0.699);
+  }
+}
+
+/* **************************** SECTION END PAGE ***************************/
+
+.end-page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: $cream-mai;
+  padding: 2rem;
+  margin-bottom: -3rem;
+
+  &.dark-mode {
+    background-color: $background-dark;
+  }
+
+  .end-page__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    border-radius: 1rem;
+    background: $bg-img-vitrine no-repeat center center;
+    background-size: cover;
+    width: 50%;
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    max-width: 40rem;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    a {
+      color: $blue-mai;
+      text-decoration: none;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 3rem;
+      transition: color 0.3s;
+
+      &:hover {
+        color: darken($blue-mai, 10%);
+      }
+    }
+
+    h2,
+    h3,
+    p {
+      z-index: 1;
+      font-size: 2.5rem;
+      color: $blue-mai;
+    }
+  }
+}
+
+.go-top {
+  position: fixed;
+  color: $blue-mai;
+  bottom: 1rem;
+  right: 1rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  #up-button-link {
+    display: flex;
+    width: 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #up-button-img {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    transition: filter 0.5s ease-in-out;
+
+    .dark-mode & {
+      filter: invert(1);
+    }
+  }
+}
+
+.footer {
+  padding: 1rem 0;
+  text-align: center;
+}
+/* VERSION MOBILE */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 56.25%; // 1rem = 9px
+  }
+
+  body {
+    font-size: 1.4rem;
+    background-size: cover;
+    background-attachment: scroll;
+  }
+
+  h1 {
+    font-size: 6rem; // Taille réduite pour h1
+  }
+
+  .main {
+    max-height: auto; // Ajuste la hauteur maximale pour les petits écrans
+    padding: 2rem;
+    max-height: 75vh;
+  }
+
+  .hook {
+    flex-direction: column; // Affiche les éléments en colonne
+    padding: 8rem 1rem; // Réduit le padding pour mieux s'adapter aux petits écrans
+
+    h2 {
+      font-size: 3rem; // Réduit la taille de h2
+      margin-top: 2rem; // Réduit la marge supérieure
+    }
+
+    div {
+      width: 100%; // Ajuste la largeur pour les petits écrans
+      flex-direction: column; // Affiche les éléments en colonne
+    }
+
+    img {
+      width: 80%; // Réduit la largeur des images
+    }
+  }
+
+  .gallery {
+    height: auto; // Ajuste la hauteur pour les petits écrans
+
+    .gallery__inner {
+      width: 300%; // Ajuste la largeur pour un meilleur défilement
+    }
+
+    .gallery__container {
+      width: 15rem; // Réduit la largeur des conteneurs
+      height: 15rem; // Réduit la hauteur des conteneurs
+    }
+  }
+
+  .card {
+    padding: 5rem; // Réduit le padding
+    height: auto;
+
+    .card__blur {
+      width: 80%; // Réduit la largeur du conteneur flou
+      max-width: 90%; // Ajuste la largeur maximale
+    }
+
+    h3 {
+      font-size: 3rem; // Réduit la taille de h3
+    }
+
+    button {
+      padding: 0.5rem 1rem; // Réduit le padding du bouton
+      font-size: 1.4rem; // Réduit la taille de la police
+    }
+  }
+
+  .end-page {
+    padding: 2rem;
+    margin-bottom: 0; // Supprime la marge inférieure
+
+    .end-page__container {
+      width: 90%; // Réduit la largeur du conteneur
+      max-width: 100%; // Ajuste la largeur maximale
+      padding: 2rem; // Réduit le padding
+      font-size: 1.6rem; // Réduit la taille de la police
+
+      a {
+        font-size: 2rem; // Réduit la taille des liens
+      }
+
+      h2,
+      h3,
+      p {
+        font-size: 2rem; // Réduit la taille de la police
+      }
+    }
+  }
+
+  .go-top {
+    bottom: 2rem; // Ajuste la position du bouton "Retour en haut"
+    right: 2rem;
+
+    #up-button-link {
+      width: 2.5rem; // Réduit la taille du lien de retour en haut
+    }
+
+    #up-button-img {
+      width: 2.5rem; // Réduit la taille de l'image du bouton
+      height: 2.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 50%; // 1rem = 8px
+  }
+
+  body {
+    font-size: 1.2rem;
+  }
+
+  h1 {
+    font-size: 4rem; // Réduit encore la taille pour les très petits écrans
+  }
+
+  .main {
+    padding: 1rem; // Réduit le padding
+  }
+
+  .hook {
+    padding: 4rem 0.5rem; // Réduit davantage le padding
+
+    h2 {
+      font-size: 2rem; // Réduit encore la taille de h2
+      margin-top: 1rem; // Réduit la marge supérieure
+    }
+
+    div {
+      width: 100%;
+    }
+
+    img {
+      width: 100%; // Ajuste les images pour qu'elles s'adaptent à l'écran
+    }
+  }
+
+  .gallery {
+    height: auto; // Ajuste la hauteur pour les très petits écrans
+
+    .gallery__inner {
+      width: 400%; // Ajuste la largeur pour un meilleur défilement
+    }
+
+    .gallery__container {
+      width: 12rem; // Réduit davantage la largeur des conteneurs
+      height: 12rem; // Réduit davantage la hauteur des conteneurs
+    }
+  }
+
+  .card {
+    padding: 3rem; // Réduit le padding pour les petits écrans
+
+    .card__blur {
+      width: 90%; // Ajuste la largeur du conteneur flou
+      max-width: 100%;
+    }
+
+    h3 {
+      font-size: 2rem; // Réduit la taille de h3
+    }
+
+    button {
+      padding: 0.5rem 0.5rem; // Ajuste le padding du bouton
+      font-size: 1.2rem; // Réduit la taille de la police
+    }
+  }
+
+  .end-page {
+    padding: 1rem; // Réduit le padding
+
+    .end-page__container {
+      width: 100%; // Ajuste la largeur pour les très petits écrans
+      padding: 1rem; // Réduit le padding
+      font-size: 1.4rem; // Réduit la taille de la police
+
+      a {
+        font-size: 1.6rem; // Réduit la taille des liens
+      }
+
+      h2,
+      h3,
+      p {
+        font-size: 1.6rem; // Réduit la taille de la police
+      }
+    }
+  }
+
+  .go-top {
+    bottom: 1rem; // Ajuste la position du bouton
+    right: 1rem;
+
+    #up-button-link {
+      width: 2rem; // Réduit encore la taille du lien de retour en haut
+    }
+
+    #up-button-img {
+      width: 2rem; // Réduit encore la taille de l'image du bouton
+      height: 2rem;
+    }
+  }
 }

@@ -6,60 +6,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/styles/css/style.css" />
     <script src="https://kit.fontawesome.com/84e325796e.js" crossorigin="anonymous"></script> <!-- a DL les icones -->
-
-    
-    <title>{% block title %}Restaurant Maï{% endblock %}</title></title>
-    
+    <title>{% block title %}Restaurant Maï{% endblock %}</title>
   </head>
   <body>
-  {% block header %} 
-    <header class="header">
-      <div class="burger-menu open">
-        <span class="burger-menu__1"></span>
-        <span class="burger-menu__2"></span>
-      </div>
+    {% block header %}
+    <!-- version mobile -->
+    <header class="header__mobile">
+    
       <nav class="navbar">
-          <a class="navbar__logo" href="index.php?route=home">
-            <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
-          </a>
-            <ul class="navbar__links">
-                <li><a href="index.php?route=card">La carte</a></li>
-                <li><a href="index.php?route=about">À propos</a></li>
-                <li><a href="index.php?route=localisation">Localiser</a></li>
-                <li><a href="index.php?route=contact">Contact</a></li>
-            </ul>
-            
-              <a class="navbar__button" href="index.php?route=reservation">Réserver</a>
-              <div class="navbar__dark-mode">
-                <button id="js-darkMode" class="navbar__toggle">
-                  <img id="js-moonIcon" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
-                  <img id="js-sunIcon" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
-                </button>
-              </div>
+        <a class="navbar__logo" href="index.php?route=home">
+          <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
+        </a>
+        
+          <a href="index.php?route=reservation" class="navbar__button navbar__button--reserve">Réserver</a></li>
+        
+        <div class="burger-menu" id="burger-menu">
+          <img src="./assets/images/icons/burger-blue.webp" />
+        </div>
+        <div class="navbar__dark-mode">
+          <button id="js-darkModeMobile" class="navbar__toggle">
+            <img id="js-moonIconMobile" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
+            <img id="js-sunIconMobile" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
+          </button>
+        </div>
       </nav>
-            <div class="navbar__login">
-              <a class="navbar__button sign-in" href="index.php?route=contact">Connexion</a>
-              <a class="navbar__button " href="index.php?route=contact">Inscription</a>
-      
-            </div>
+      <ul class="navbar__links " id="navLinks">
+        <li><a href="index.php?route=card">La carte</a></li>
+        <li><a href="index.php?route=about">À propos</a></li>
+        <li><a href="index.php?route=localisation">Localiser</a></li>
+        <li><a href="index.php?route=contact">Contact</a></li>
 
-       {% endblock %}
+        <li><a href="index.php?route=contact " class="navbar__button">Connexion</a></li>
+        <li><a href="index.php?route=contact " class="navbar__button">Inscription</a></li>
+      </ul>
     </header>
+        <!-- version desktop -->
+    <header class="header__desktop">
+      <nav class="navbar">
+        <a class="navbar__logo" href="index.php?route=home">
+          <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
+        </a>
+        <ul class="navbar__links">
+          <li><a href="index.php?route=card">La carte</a></li>
+          <li><a href="index.php?route=about">À propos</a></li>
+          <li><a href="index.php?route=localisation">Localiser</a></li>
+          <li><a href="index.php?route=contact">Contact</a></li>
+        </ul>
+            <a class="navbar__button" href="index.php?route=reservation">Réserver</a>
+        <div class="navbar__dark-mode">
+          <button id="js-darkMode" class="navbar__toggle">
+            <img id="js-moonIcon" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
+            <img id="js-sunIcon" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
+
+          </button>
+        </div>
+              </nav>
+                
+        <div class="navbar__login">
+          <a class="navbar__button sign-in" href="index.php?route=contact">Connexion</a>
+          <a class="navbar__button" href="index.php?route=contact">Inscription</a>
+        </div>
+
+    </header>
+
+    {% endblock %}
+    
     <main>
       {% block main %} 
-      <h1 class="main-title">Maï</h1>
-      <i class="fa-solid fa-user"></i>
+      <section class="main">
+        <h1 class="main-title">Maï</h1>
+      </section>
+
+      <section class="hook">
+        <h2>Venez découvrir nos </br>saveurs d'Asie</h2>
+        <div>
+          <img class="hook__cat" src="./assets/images/chat.webp" alt="image de statue de chat" />
+        </div>
+        <h2>sur place </br>ou à emporter</h2>
+
+      </section>
+      
+      <section class="gallery">
+        <div class="gallery__inner">
+          <div class="gallery__container">
+            <img src="./assets/images/boules-coco.webp" alt="image de desserts boules coco" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/dessert.webp" alt="image de dessert" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/cuisine.webp" alt="image de mains" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/poulet-pekinois.webp" alt="image de poulet pekinois" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/vitrine.webp" alt="image de la vitrine" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/boeufSatay.webp" alt="image d'un plat, le boeuf Satay" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/gateau-vert-pandan.webp" alt="image d'un gâteau vert traditionnel cambodgien le Pandan" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/nem-choco.webp" alt="image de nems au chocolat" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/mangue.webp" alt="image d'un dessert riz gluant à la mangue" />
+          </div>
+          <div class="gallery__container">
+            <img src="./assets/images/poulet-pekinois.webp" alt="image d'un plat le poulet Pekinois" />
+          </div>
+        </div>
+      </section>
+      
+      <section class="card">
+        <div class="card__blur">
+          <h3>La carte</h3>
+          <button><a href="index.php?route=card">Découvrir</a></button>
+        </div>
+      </section>
+      <section class="end-page">
+        <div class="end-page__container">
+          
+            <p><a href="index.php?route=localisation">Nous trouver</p>
+            <p><a href="index.php?route=card">Commander</p>
+            <p><a href="index.php?route=reservation">Réserver</p>
+        </div>
+      </section>
+      <div class="go-top">
+        <div class="up-button">
+          <a href="#" id="up-button-link">
+            <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+          </a>
+        </div>
+      </div>
+      
+
       {% endblock %}
     </main>
 
     {% block footer %} 
     <footer class="footer">
       <section class="footer__logo">
-        <a href="index.php?route=home">
-          <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
-        </a>
+          <a href="index.php?route=home">
+            <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
+          </a>
       </section>
-
+      
       <section class="footer__location">
         <p>101 rue Jules Ferry</p>
         <p>22000 Saint-Brieuc</p>
@@ -73,31 +168,29 @@
       </section>
 
       <section class="footer__social">
-        
-          <a href="https://www.instagram.com/maii.family/?locale=bz-hans&hl=am-et">
-            <img id="js-insta" src="./assets/images/icons/instagram-blue.webp" alt="logo instagram" />
-          </a>
-          <a href="https://www.facebook.com/maiifamily/?locale=fr_FR">
-            <img id="js-facebook" src="./assets/images/icons/facebook-blue.webp" alt="logo facebook" />
-          </a>
-        
+        <a href="https://www.instagram.com/maii.family/?locale=bz-hans&hl=am-et">
+          <img id="js-insta" src="./assets/images/icons/instagram-blue.webp" alt="logo instagram" />
+        </a>
+        <a href="https://www.facebook.com/maiifamily/?locale=fr_FR">
+          <img id="js-facebook" src="./assets/images/icons/facebook-blue.webp" alt="logo facebook" />
+        </a>
       </section>
-      <section class="footer__legal">
 
-          <a href="index.php?route=rgpd">
-            <p>Politique de confidentialité</p>
-          </a>
-          <a href="index.php?route=general-conditions">
-            <p>Conditions générales de vente</p>
-          </a>
-          <a href="index.php?route=legals-mentions">
-            <p>Mentions légales</p>
-          </a>
-      
+      <section class="footer__legal">
+        <a href="index.php?route=rgpd">
+          <p>Politique de confidentialité</p>
+        </a>
+        <a href="index.php?route=general-conditions">
+          <p>Conditions générales de vente</p>
+        </a>
+        <a href="index.php?route=legals-mentions">
+          <p>Mentions légales</p>
+        </a>
       </section>
-      
-      </footer>
-      {% endblock %}
-      <script src="./assets/styles/js/main.js" type="module"></script>
+    </footer>
+    {% endblock %}
+    <script src="./assets/styles/js/main.js" type="module"></script>
   </body>
 </html>
+
+

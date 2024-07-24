@@ -1,8 +1,6 @@
-// En-tête
 header {
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   width: 100vw;
   padding: 2em 1em;
   position: sticky;
@@ -16,7 +14,7 @@ header {
   align-content: center;
   align-items: center;
   background-color: white;
-  width: 60%;
+  width: 63%;
   padding: 0.5rem;
   border-radius: 55px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -43,11 +41,12 @@ header {
   a {
     display: inline-block;
     align-items: center;
+    font-weight: bold;
     transition: background-color 0.3s ease, transform 0.3s ease;
     border-radius: 50px;
     padding: 0.5rem 1rem;
 
-    a:hover {
+    &:hover {
       background-color: $blue-mai;
       color: white;
       transform: scale(1.1);
@@ -66,18 +65,14 @@ header {
   margin-left: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
-
+  text-align: center;
   &:hover {
     background-color: $blue-mai;
     color: white;
     transform: scale(1.1);
   }
 }
-.navbar__button.sign-in {
-  background-color: transparent; /* Pas de couleur de fond */
-  color: $blue-mai; /* Couleur du texte */
-  box-shadow: none;
-}
+
 // Icônes de mode sombre et clair
 .navbar__toggle {
   position: relative;
@@ -88,9 +83,10 @@ header {
   justify-content: center;
 
   .navbar__icon {
-    max-width: 2rem;
-    max-height: 2rem;
+    width: 1.5rem !important; /* Taille originale des icônes */
+    height: 1.5rem !important;
     cursor: pointer;
+
     transition: opacity 0.3s ease;
   }
 
@@ -114,20 +110,106 @@ body.dark-mode {
   background-color: $background-dark;
   color: $cream-mai;
 
-  .navbar {
-    background-color: $blue-mai;
-    color: $cream-mai;
-  }
-
-  a {
-    color: $cream-mai;
-  }
-
   .navbar__moon-icon {
     display: none;
   }
 
   .navbar__sun-icon {
     display: block;
+  }
+}
+
+// Mode clair
+body.light-mode {
+  background: $bg-img-day no-repeat center center fixed;
+  background-size: cover;
+  background-color: $background-light;
+  color: $blue-mai;
+
+  .navbar__moon-icon {
+    display: block;
+  }
+
+  .navbar__sun-icon {
+    display: none;
+  }
+}
+
+// Menu burger
+.burger-menu {
+  display: none;
+  cursor: pointer;
+  padding: 1rem;
+  z-index: 1001;
+
+  img {
+    width: clamp(1rem, 4vw, 2.5rem);
+  }
+}
+
+// Version mobile
+.header__mobile {
+  display: none;
+}
+
+.header__desktop {
+  display: flex;
+}
+
+// Styles pour les écrans mobiles
+@media only screen and (max-width: 768px) {
+  .header__desktop {
+    display: none;
+  }
+
+  .header__mobile {
+    display: flex;
+  }
+
+  .burger-menu {
+    display: flex;
+  }
+
+  .navbar__links {
+    display: none;
+    flex-direction: column;
+    background-color: $cream-mai;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    padding: 1rem;
+    z-index: 1000;
+    overflow-y: auto;
+
+    &.show {
+      display: flex;
+      padding-top: 12rem;
+      justify-content: center;
+      gap: 2rem;
+      background-color: $cream-mai;
+
+      .navbar__button--reserve {
+        display: flex;
+        margin-top: auto;
+      }
+
+      li {
+        margin: 0.5rem 0;
+        text-align: center;
+      }
+
+      a {
+        color: $blue-mai;
+        display: block;
+        font-weight: bold;
+        padding: 1rem;
+      }
+
+      .navbar__button {
+        color: white;
+      }
+    }
   }
 }

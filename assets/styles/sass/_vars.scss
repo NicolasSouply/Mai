@@ -13,8 +13,21 @@ $background-dark: #213f7d;
 
 $bg-img-day: url("../../images/angkor-wat.webp");
 $bg-img-night: url("../../images/angkor-wat2.webp");
+$bg-img-cat: url("../../images/chat.webp");
+$bg-img-vitrine: url("../../images/vitrine.webp");
 
 // logo Maï
 
 $logo-width: 100px;
 $logo-height: auto;
+
+// gallery
+
+$gallery-width: 2rem; // Largeur de chaque image
+$gallery-height: 2rem; // Hauteur de la galerie
+$gap: 1rem; // Espace entre les images
+$animation-duration: 20s; // Durée de l'animation
+
+// Taille du up bouton
+$up-button-img-size-light: 3rem;
+$up-button-img-size-dark: 3rem;

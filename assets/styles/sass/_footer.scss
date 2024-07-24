@@ -1,52 +1,106 @@
 footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: $background-light;
   width: 100vw;
-  padding: 1em 1em;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 1em;
+  position: relative;
+  z-index: 100;
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  position: relative;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
+
   &.js-darkMode {
     background-color: $background-dark;
     color: #fff;
   }
-}
 
-.footer__logo {
-  display: flex;
-  align-items: center;
-  padding: 0;
-  img {
-    width: 15rem;
-    height: auto;
+  .footer__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center; // Centrage sur les petits écrans
+    padding: 0;
+
+    img {
+      width: 10rem; // Réduire la taille du logo en mode mobile
+      height: auto;
+    }
   }
-}
-.footer__location {
-  font-weight: bold;
-}
-.footer__hours {
-  font-weight: bold;
-}
-.footer__social {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  padding: 0;
-  img {
-    width: 3rem;
-    height: auto;
+
+  .footer__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    & > section {
+      margin: 0.5em 0;
+
+      p {
+        margin: 0.2em 0;
+      }
+    }
   }
-  .footer__legal {
+
+  .footer__social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
     a {
-      color: $text-light; /* Couleur des liens en mode clair */
-      text-decoration: none; /* Supprime la décoration par défaut des liens */
-      transition: color 0.3s ease; /* Transition pour une meilleure expérience utilisateur */
+      margin: 0.5em;
     }
 
-    a:hover {
-      color: $text-dark; /* Couleur des liens au survol en mode clair */
+    img {
+      width: 2rem; // Réduire la taille des icônes sociales en mode mobile
+      height: auto;
+    }
+  }
+
+  .footer__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    a {
+      color: $blue-mai;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding: 1rem;
+    }
+
+    p {
+      margin: 0.5em 0;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+
+    .footer__logo,
+    .footer__social,
+    .footer__legal {
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer__info {
+      flex: 1;
+      align-items: stretch;
+
+      & > section {
+        margin: 1em 0;
+      }
+    }
+
+    .footer__social,
+    .footer__legal {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
