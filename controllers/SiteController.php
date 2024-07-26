@@ -46,7 +46,11 @@ class SiteController extends AbstractController
   public function register():void{
     $this->render("register.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
 }
-
+public function someAction()
+{
+    $isUserLoggedIn = isset($_SESSION['client']);
+    $this->render('layout.twig', ['isUserLoggedIn' => $isUserLoggedIn]);
+}
 public function clientZone()
     {
         if (!isset($_SESSION["client"])) {

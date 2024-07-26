@@ -18,12 +18,18 @@ class ClientManager extends AbstractManager
             "email" => $email
         ];
         $query->execute($parameters);
-
+    
         if ($query->rowCount() === 1) {
             $user = $query->fetch(PDO::FETCH_ASSOC);
-            $client = new Clients($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"]);
-            $client->setId($user["id"]);
-            return $client;
+            
+            // Vérifiez si les clés existent dans le tableau $user
+            if (isset($user["id"], $user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"])) {
+                $client = new Clients($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"]);
+                $client->setId($user["id"]);
+                return $client;
+            } else {
+                return null; // Les données ne sont pas complètes
+            }
         } else {
             return null;
         }
@@ -54,21 +60,27 @@ class ClientManager extends AbstractManager
         ];
         return $query->execute($parameters);
     }
-    public function findAll(): array
-    {
-        $query = $this->db->prepare('SELECT * FROM clients');
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $clients = [];
+public function findAll(): array
+{
+    $query = $this->db->prepare('SELECT * FROM clients');
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    $clients = [];
 
-        foreach ($result as $item) {
-            $client = new Clients($item["firstName"], $item["lastName"], $item["email"], $item["phone"], $item["password"]);
+    foreach ($result as $item) {
+        // Vérifiez si les clés nécessaires sont présentes
+        if (isset($item["id"], $item["first_name"], $item["last_name"], $item["email"], $item["phone"], $item["password"])) {
+            $client = new Clients($item["first_name"], $item["last_name"], $item["email"], $item["phone"], $item["password"]);
             $client->setId($item["id"]);
             $clients[] = $client;
+        } else {
+            // Gestion des données manquantes
+            error_log('Données client incomplètes : ' . print_r($item, true));
         }
-
-        return $clients;
     }
+
+    return $clients;
+}
     public function saveClient(Clients $client): bool
     {
         if ($client->getId() === null) {

@@ -3,44 +3,40 @@
 class AuthController extends AbstractController
 {
     private ClientManager $cm;
+    private CSRFTokenManager $csrft;
 
     public function __construct()
     {
         parent::__construct();
         $this->cm = new ClientManager();
+        $this->csrft = new CSRFTokenManager();
     }
 
     public function checkLogin(array $post): ?Clients
     {
-
         if (isset($post["email"]) && isset($post["password"])) {
-            $client = $this->cm->findByEmail($post["email"]);
-            $csrft = new CSRFTokenManager();
-    
-
-            if (!empty($post['csrf-token']) && $csrft->validateCSRFToken($post['csrf-token'])) {
+            if (!empty($post['csrf-token']) && $this->csrft->validateCSRFToken($post['csrf-token'])) {
+                $client = $this->cm->findByEmail($post["email"]);
+                
                 if ($client !== null) {
-                    $password = $post["password"];
-                    $passwordCorrect = password_verify($password, $client->getPassword());
+                    $passwordCorrect = password_verify($post["password"], $client->getPassword());
+                    
                     if ($passwordCorrect) {
                         $_SESSION["client"] = $client;
                         $this->redirect("index.php?route=client-zone&client-id=" . $client->getId());
-                        return $client; 
+                        return $client;
                     } else {
-                        $this->redirect("index.php?route=connexion&error=1"); 
+                        $this->redirect("index.php?route=connexion&error=1"); // Mot de passe incorrect
                     }
                 } else {
-                    $this->redirect("index.php?route=connexion&error=2"); 
+                    $this->redirect("index.php?route=connexion&error=2"); // Email non trouvé
                 }
             } else {
-
-                $this->redirect("index.php?route=connexion&error=3"); 
+                $this->redirect("index.php?route=connexion&error=3"); // Erreur de validation CSRF
             }
         } else {
-     
-            $this->redirect("index.php?route=connexion&error=4"); 
+            $this->redirect("index.php?route=connexion&error=4"); // Données manquantes
         }
-        
         
         return null;
     }
