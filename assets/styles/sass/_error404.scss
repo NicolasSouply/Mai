@@ -1,0 +1,20 @@
+.error404 {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.error404__giant404 {
+  font-size: 5rem;
+}
+.error404__container {
+  justify-content: center;
+  @include modale;
+  h2 {
+    letter-spacing: 0.2rem;
+    color: $blue-mai;
+  }
+  button {
+    @include button;
+  }
+}

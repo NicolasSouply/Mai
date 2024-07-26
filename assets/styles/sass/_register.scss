@@ -1,0 +1,56 @@
+.register {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.register__container {
+  justify-content: center;
+  @include modale;
+  h2 {
+    color: $blue-mai;
+  }
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  label {
+    font-size: 2rem;
+    color: $blue-mai;
+  }
+  input {
+    padding: 2rem;
+    font-size: 2rem;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  fieldset {
+    @include fieldset;
+  }
+  button {
+    @include button;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .register__container {
+    justify-content: center;
+    @include modale;
+    h2 {
+      color: $blue-mai;
+    }
+  }
+  form {
+    label {
+      font-size: 1.6rem;
+    }
+
+    input {
+      padding: 1.5rem;
+      font-size: 1.4rem;
+    }
+  }
+}

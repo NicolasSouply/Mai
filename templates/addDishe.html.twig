@@ -1,0 +1,54 @@
+{% extends 'layout.html.twig' %}
+
+{% block header %}
+{{ parent() }}
+{% endblock %}
+
+{% block main %}
+<main class="addDishe">
+    <section class="addDishe__container">
+        <h2>Formulaire d'ajout de plat</h2>
+        
+        <form action="index.php?route=checkLogin" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf-token" id="csrf-token" value="<?php echo $_SESSION['csrf_token']; ?>" />
+            
+            <fieldset>
+                <label for="name">Nom du plat</label>
+                <input type="text" name="name" id="name" required>
+            </fieldset>
+            
+            <fieldset>
+                <label for="price">Prix</label>
+                <input type="number" step="0.01" name="price" id="price" required>
+            </fieldset>
+            
+            <fieldset>
+                <label for="picture">Choisir une image</label>
+                <input type="file" name="picture" id="picture" accept="image/*" required>
+            </fieldset>
+            
+            <fieldset>
+                <label for="vegetarian">
+                    Végétarien
+                    <input type="checkbox" id="vegetarian" name="vegetarian" value="1">
+                </label>
+            </fieldset>
+            
+            <fieldset>
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" cols="50"></textarea>
+            </fieldset>
+            
+            <fieldset>
+                <button type="submit">Ajouter le plat</button>
+            </fieldset>
+        </form>
+        
+        <p>Pas encore de compte ? <a href="index.php?route=inscription">S'inscrire</a></p>
+    </section>
+</main>
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+{% endblock %}

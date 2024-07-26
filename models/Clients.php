@@ -4,7 +4,7 @@ class Clients
 {
   private ? int $id = null;
 
-  public function __construct(private string $firstName, private string $lastName, private string $email, private string $phone, private string $password)
+  public function __construct(private string $first_name, private string $last_name, private string $email, private string $phone, private string $password)
 {
   
 }
@@ -16,28 +16,28 @@ class Clients
   {
     $this->id = $id;
   }
-  public function getFirstName(): string
+  public function getFirst_name(): string
   {
-    return $this->firstName;
+    return $this->first_name;
   }
-  public function setFirstName($firstName): void
+  public function setFirst_name(string  $first_name): void
   {
-    $this->firstName = $firstName;
+    $this->first_name = $first_name;
   }
 
-  public function getLastName(): string
+  public function getLast_name(): string
   {
-    return $this->lastName;
+    return $this->last_name;
   }
-  public function setLastName($lastName): void
+  public function setLast_name(string  $last_name): void
   {
-    $this->lastName = $lastName;
+    $this->last_name = $last_name;
   }
   public function getEmail(): string
   {
     return $this->email;
   }
-  public function setEmail($email): void
+  public function setEmail(string  $email): void
   {
     $this->email = $email;
   }
@@ -45,7 +45,7 @@ class Clients
   {
     return $this->phone;
   }
-  public function setPhone($phone): void
+  public function setPhone(string  $phone): void
   {
     $this->phone = $phone;
   }
@@ -53,7 +53,7 @@ class Clients
   {
     return $this->password;
   }
-  public function setPassword($password): void
+  public function setPassword(string  $password): void
   {
     $this->password = $password;
   }

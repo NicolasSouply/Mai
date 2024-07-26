@@ -1,1 +1,52 @@
 {% extends 'layout.html.twig' %}
+
+
+{% block header %}
+{{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+<main class="connexion">
+ <section class="connexion__container">
+    <h2>Se connecter</h2>
+
+    {% if get.error is defined %}
+            <div class="error-message">
+                {% if get.error == 1 %}
+                    <p>Mot de passe incorrect. Veuillez réessayer.</p>
+                {% elseif get.error == 2 %}
+                    <p>Email incorrect. Veuillez vérifier votre email.</p>
+                {% elseif get.error == 3 %}
+                    <p>Erreur de token CSRF. Veuillez réessayer.</p>
+                {% elseif get.error == 4 %}
+                    <p>Email et mot de passe requis.</p>
+                {% else %}
+                    <p>Erreur inconnue. Veuillez réessayer.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+    <form action="index.php?route=checkLogin" method="post">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token}}" />
+        <fieldset>
+            <label for="email">email :</label>
+            <input type="email" name="email" id="email">
+        </fieldset>
+        <fieldset>
+            <label for="password">password :</label>
+            <input type="password" name="password" id="password">
+        </fieldset>
+        </fieldset>
+        <fieldset><button type="submit">Se connecter</button></fieldset>
+    
+    </form>
+
+    <p>Pas encore de compte ? <a href="index.php?route=inscription">S'inscrire </a></p>
+  </section>
+</main>
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+{% endblock %}

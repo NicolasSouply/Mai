@@ -33,19 +33,19 @@ public function getId(): ?int
   {
     $this->totalPrice = $totalPrice;
   }
-  public function getDate_order(): dateTime
+  public function getDate_order(): DateTime
   {
     return $this->date_order;
   }
-  public function setDate_order($date_order): void
+  public function setDate_order(DateTime $date_order): void
   {
     $this->date_order = $date_order;
   }
-  public function getHour_order(): dateTime
+  public function getHour_order(): DateTime
   {
     return $this->hour_order;
   }
-  public function setHour_order($hour_order): void
+  public function setHour_order(DateTime $hour_order): void
   {
     $this->hour_order = $hour_order;
   }

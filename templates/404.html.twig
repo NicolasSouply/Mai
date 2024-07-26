@@ -1,7 +1,24 @@
+{% extends "layout.html.twig" %}
 
 
-{% block title %}Page erreur 404{% endblock %}
-{% block body %}
-<h1>Page erreur 404</h1>
-<p>Le chemin que vous avez choisi n'est pas répertorié.</p>
+{% block main %}
+
+<main class="error404">
+  
+<section class="error404__container">
+
+<p class="error404__giant404">404</p>
+
+<h2>Nous avons perdu la page</h2>
+
+  <p> La page que vous recherchez n'exsite pas ou a été enlevée.</p>
+
+<button>Retour à l'accueil</button>
+
+</section>
+</main>
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
 {% endblock %}

@@ -297,7 +297,7 @@ h1 {
 
 @media (max-width: 768px) {
   html {
-    font-size: 56.25%; // 1rem = 9px
+    font-size: 56.25%;
   }
 
   body {
@@ -307,98 +307,98 @@ h1 {
   }
 
   h1 {
-    font-size: 6rem; // Taille réduite pour h1
+    font-size: 6rem;
   }
 
   .main {
-    max-height: auto; // Ajuste la hauteur maximale pour les petits écrans
+    max-height: auto;
     padding: 2rem;
     max-height: 75vh;
   }
 
   .hook {
-    flex-direction: column; // Affiche les éléments en colonne
-    padding: 8rem 1rem; // Réduit le padding pour mieux s'adapter aux petits écrans
+    flex-direction: column;
+    padding: 8rem 1rem;
 
     h2 {
-      font-size: 3rem; // Réduit la taille de h2
-      margin-top: 2rem; // Réduit la marge supérieure
+      font-size: 3rem;
+      margin-top: 2rem;
     }
 
     div {
-      width: 100%; // Ajuste la largeur pour les petits écrans
-      flex-direction: column; // Affiche les éléments en colonne
+      width: 100%;
+      flex-direction: column;
     }
 
     img {
-      width: 80%; // Réduit la largeur des images
+      width: 80%;
     }
   }
 
   .gallery {
-    height: auto; // Ajuste la hauteur pour les petits écrans
+    height: auto;
 
     .gallery__inner {
-      width: 300%; // Ajuste la largeur pour un meilleur défilement
+      width: 300%;
     }
 
     .gallery__container {
-      width: 15rem; // Réduit la largeur des conteneurs
-      height: 15rem; // Réduit la hauteur des conteneurs
+      width: 15rem;
+      height: 15rem;
     }
   }
 
   .card {
-    padding: 5rem; // Réduit le padding
+    padding: 5rem;
     height: auto;
 
     .card__blur {
-      width: 80%; // Réduit la largeur du conteneur flou
-      max-width: 90%; // Ajuste la largeur maximale
+      width: 80%;
+      max-width: 90%;
     }
 
     h3 {
-      font-size: 3rem; // Réduit la taille de h3
+      font-size: 3rem;
     }
 
     button {
-      padding: 0.5rem 1rem; // Réduit le padding du bouton
-      font-size: 1.4rem; // Réduit la taille de la police
+      padding: 0.5rem 1rem;
+      font-size: 1.4rem;
     }
   }
 
   .end-page {
     padding: 2rem;
-    margin-bottom: 0; // Supprime la marge inférieure
+    margin-bottom: 0;
 
     .end-page__container {
-      width: 90%; // Réduit la largeur du conteneur
-      max-width: 100%; // Ajuste la largeur maximale
-      padding: 2rem; // Réduit le padding
-      font-size: 1.6rem; // Réduit la taille de la police
+      width: 90%;
+      max-width: 100%;
+      padding: 2rem;
+      font-size: 1.6rem;
 
       a {
-        font-size: 2rem; // Réduit la taille des liens
+        font-size: 2rem;
       }
 
       h2,
       h3,
       p {
-        font-size: 2rem; // Réduit la taille de la police
+        font-size: 2rem;
       }
     }
   }
 
   .go-top {
-    bottom: 2rem; // Ajuste la position du bouton "Retour en haut"
+    bottom: 2rem;
     right: 2rem;
 
     #up-button-link {
-      width: 2.5rem; // Réduit la taille du lien de retour en haut
+      width: 2.5rem;
     }
 
     #up-button-img {
-      width: 2.5rem; // Réduit la taille de l'image du bouton
+      width: 2.5rem;
       height: 2.5rem;
     }
   }
@@ -406,7 +406,7 @@ h1 {
 
 @media (max-width: 480px) {
   html {
-    font-size: 50%; // 1rem = 8px
+    font-size: 50%;
   }
 
   body {
@@ -414,11 +414,11 @@ h1 {
   }
 
   h1 {
-    font-size: 4rem; // Réduit encore la taille pour les très petits écrans
+    font-size: 4rem;
   }
 
   .main {
-    padding: 1rem; // Réduit le padding
+    padding: 1rem;
   }
 
   .hook {
@@ -476,10 +476,6 @@ h1 {
       width: 100%; // Ajuste la largeur pour les très petits écrans
       padding: 1rem; // Réduit le padding
       font-size: 1.4rem; // Réduit la taille de la police
-
-      a {
-        font-size: 1.6rem; // Réduit la taille des liens
-      }
 
       h2,
       h3,

@@ -3,6 +3,20 @@
 
 class SiteController extends AbstractController
 {
+  private ClientManager $cm;
+  private OrderManager $om;
+  private DetailOrderManager $dom;
+  private DisheManager $dm;
+  private ReservationManager $rm;
+  public function __construct()
+    {
+        parent::__construct();
+        $this->cm = new ClientManager();
+        $this->om = new OrderManager();
+        $this->dom = new DetailOrderManager();
+        $this->dm = new DisheManager();
+        $this->rm = new ReservationManager();
+    }
     public function home() : void
     {
       
@@ -26,6 +40,25 @@ class SiteController extends AbstractController
           "reservations" => $reservations,
         ]);        
     }
+    public function connexion():void{
+      $this->render("connexion.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
+  }
+  public function register():void{
+    $this->render("register.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
+}
+
+public function clientZone()
+    {
+        if (!isset($_SESSION["client"])) {
+            $this->redirect("index.php?route=connexion");
+        } else {
+            $this->render('client-zone.html.twig', ['client' => $_SESSION["client"]]);
+        }
+    }
+public function logout():void{
+  session_destroy();
+  $this->redirect("index.php?route=home");
+}
     public function about(): void
     {
         $this->render('about.html.twig', []);
