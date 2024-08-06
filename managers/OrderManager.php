@@ -6,15 +6,15 @@ class OrderManager extends AbstractManager
   {
       parent::__construct();
   }
-  public function findOrdersByClientId(int $clientId): array
+  public function findOrdersByuserId(int $userId): array
   {
       $query = $this->db->prepare(
           "SELECT *
           FROM orders
-          WHERE client_id = :client_id"
+          WHERE user_id = :user_id"
       );
       $parameters = [
-          'client_id' => $clientId
+          'user_id' => $userId
       ];
       $query->execute($parameters);
 

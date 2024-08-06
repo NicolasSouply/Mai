@@ -29,7 +29,7 @@ abstract class AbstractController
     {
         echo $this->twig->render($template, $data);
     }
-    protected function redirect(string $route) : void
+    public function redirect(string $route) : void
     {
         header("Location: $route");
         exit();

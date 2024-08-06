@@ -2,12 +2,12 @@
 
 class RegisterController extends AbstractController
 {
-    private ClientManager $cm;
+    private UserManager $um;
     private CSRFTokenManager $ct;
     public function __construct()
     {
         parent::__construct();
-        $this->cm = new ClientManager();
+        $this->um = new UserManager();
         $this->ct = new CSRFTokenManager();
     }
 
@@ -24,23 +24,24 @@ class RegisterController extends AbstractController
         isset($post["firstName"]) && isset($post["lastName"]) && 
         isset($post["phone"])) 
         {
-            $existingClient = $this->cm->findByEmail($post["email"]);
-            if ($existingClient !== null) {
+            $existingUser = $this->um->findByEmail($post["email"]);
+            if ($existingUser !== null) {
                 $this->redirect("index.php?route=register&error=6"); // Erreur: Email déjà utilisé
                 return;
             }
 
-            $client = new Clients(
+            $user= new Users(
                 $post["firstName"],
                 $post["lastName"],
                 $post["email"],
                 $post["phone"],
-                password_hash($post["password"], PASSWORD_DEFAULT)
+                password_hash($post["password"], PASSWORD_DEFAULT),
+                $post["role"]
             );
 
-            if ($this->cm->create($client)) {
-                $_SESSION["client"] = $client;
-                $this->redirect("index.php?route=client-zone");
+            if ($this->um->create($user)) {
+                $_SESSION["user"] = $user;
+                $this->redirect("index.php?route=user-zone");
             } else {
                 $this->redirect("index.php?route=register&error=5"); // Erreur d'enregistrement
             }

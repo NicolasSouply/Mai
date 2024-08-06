@@ -3,7 +3,7 @@
 
 class SiteController extends AbstractController
 {
-  private ClientManager $cm;
+  private UserManager $um;
   private OrderManager $om;
   private DetailOrderManager $dom;
   private DisheManager $dm;
@@ -11,7 +11,7 @@ class SiteController extends AbstractController
   public function __construct()
     {
         parent::__construct();
-        $this->cm = new ClientManager();
+        $this->um = new UserManager();
         $this->om = new OrderManager();
         $this->dom = new DetailOrderManager();
         $this->dm = new DisheManager();
@@ -20,20 +20,20 @@ class SiteController extends AbstractController
     public function home() : void
     {
       
-        $cm = new ClientManager();
+        $um = new UserManager();
         $om = new OrderManager();
         $dom = new DetailOrderManager();
         $dm = new DisheManager();
         $rm = new ReservationManager();
 
-        $clients = $cm->findAll();
+        $users = $um->findAll();
         $orders = $om->findAll();
         $detailOrders = $dom->findAll();
         $dishes = $dm->findAll();
         $reservations = $rm->findAll();
         
         $this->render("home.html.twig", [
-          "clients" => $clients,
+          "users" => $users,
           "orders" => $orders,
           "detailOrders" => $detailOrders,
           "dishes" => $dishes,
@@ -43,26 +43,26 @@ class SiteController extends AbstractController
     public function connexion():void{
       $this->render("connexion.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
   }
-  public function register():void{
+    public function register():void{
     $this->render("register.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
 }
-public function someAction()
-{
-    $isUserLoggedIn = isset($_SESSION['client']);
-    $this->render('layout.twig', ['isUserLoggedIn' => $isUserLoggedIn]);
-}
-public function clientZone()
+    public function someAction()
     {
-        if (!isset($_SESSION["client"])) {
+        $isUserLoggedIn = isset($_SESSION['user']);
+        $this->render('layout.twig', ['isUserLoggedIn' => $isUserLoggedIn]);
+    }
+    public function userZone()
+        {
+        if (!isset($_SESSION["user"])) {
             $this->redirect("index.php?route=connexion");
         } else {
-            $this->render('client-zone.html.twig', ['client' => $_SESSION["client"]]);
+            $this->render('user-zone.html.twig', ['user' => $_SESSION["user"]]);
         }
     }
-public function logout():void{
-  session_destroy();
-  $this->redirect("index.php?route=home");
-}
+    public function logout():void{
+      session_destroy();
+      $this->redirect("index.php?route=home");
+    }
     public function about(): void
     {
         $this->render('about.html.twig', []);

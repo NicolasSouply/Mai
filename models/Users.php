@@ -1,10 +1,17 @@
 <?php
 
-class Clients
+class Users
 {
   private ? int $id = null;
 
-  public function __construct(private string $first_name, private string $last_name, private string $email, private string $phone, private string $password)
+  public function __construct(
+      private string $first_name,
+      private string $last_name,
+      private string $email,
+      private string $phone,
+      private string $password,
+      private string $role
+  )
 {
   
 }
@@ -56,5 +63,15 @@ class Clients
   public function setPassword(string  $password): void
   {
     $this->password = $password;
+  }
+
+  public function getRole(): string
+  {
+    return $this->role;
+  }
+  public function setRole(string $role): void
+  {
+    $this->role = $role;
+
   }
 }

@@ -6,6 +6,8 @@ class Router
     private AuthController $ac;
     private DisheController $dc;
     private RegisterController $rc; 
+    private AdminController $adc;
+    
 
     public function __construct()
     {
@@ -13,6 +15,8 @@ class Router
         $this->ac = new AuthController();
         $this->dc = new DisheController();
         $this->rc = new RegisterController(); 
+        $this->adc = new AdminController(); 
+        
     }
 
     public function handleRequest(array $get) : void
@@ -31,23 +35,27 @@ class Router
                 case 'checkLogin':
                     $loginCorrect = $this->ac->checkLogin($_POST);
                     if ($loginCorrect !== null) {
-                        $_SESSION["client"] = $loginCorrect;
-                        $this->ac->redirect("index.php?route=client-zone"); 
+                        $_SESSION["user"] = $loginCorrect;
+                        $this->ac->redirect("index.php?route=user-zone"); 
                     } else {
                         $this->ac->redirect("index.php?route=connexion&error=4"); 
                     }
                     break;
-
-                    case 'logout':
-                        $this->ac->logout(); 
+                    
+                case 'admin-zone':
+                    $this->adc->adminZone();
+                    break;
+                    
+                case 'logout':
+                    $this->ac->logout(); 
                     break;
 
                 case 'register':
                     $this->sc->register();
                     break;
 
-                case 'client-zone':
-                    $this->sc->clientZone();
+                case 'user-zone':
+                    $this->sc->userZone();
                     break;
 
                 case 'card':

@@ -1,24 +1,21 @@
-<?php 
+<?php
 
 class AdminManager extends AbstractManager 
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  public function findAll() : array
-  {
-    $query = $this->db->prepare('SELECT * FROM categories');
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $category = [];
-
-        foreach($result as $item)
-        {
-            $category = new Categories($item["category"]);
-            $category->setId($item["id"]);
-            $categories[] = $category;
-        }
-
-        return $categories;
-  }
-
-
+    public function isAdmin(string $email): bool
+    {
+        $query = $this->db->prepare(
+            "SELECT COUNT(*) FROM admin WHERE email = :email"
+        );
+        $parameters = [
+            "email" => $email
+        ];
+        $query->execute($parameters);
+        return $query->fetchColumn() > 0;
+    }
 }

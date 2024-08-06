@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block main %}
-<main class="client-zone">
-  <section class="client-zone__container">
+<main class="user-zone">
+  <section class="user-zone__container">
 
     <!-- escape est un filtre qui convertit les caractères spéciaux en leur équivalent HTML -->
-    <h2>Bienvenue {{ session.client.getFirstName()|escape }}</h2>
+    <h2>Bienvenue {{ session.user.getFirstName()|escape }}</h2>
 
     <h2>Mes commandes</h2>
 

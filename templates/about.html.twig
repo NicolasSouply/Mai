@@ -1,8 +1,52 @@
 {% extends "layout.html.twig" %}
 
+{% block title %}
+  {{ parent() }}
+{% endblock %}
 
-{% block title %}À propos{% endblock %}
-{% block body %}
-<h1>À propos</h1>
-<p>Bienvenue sur la page à propos du Restaurant Maï. Ici vous pouvez trouver plus d’informations sur notre histoire, notre mission et nos valeurs.</p>
+{% block main %}
+  <!-- Section principale avec le titre et la description -->
+  <section class="about__main">
+    <h2 class="about__title">Découvrez l'histoire de Maï :</h2>
+    <p class="about__main-p">Des racines asiatiques <br> aux saveurs authentiques</p>
+  </section>
+
+  <!-- Section sur l'histoire du restaurant -->
+  <section class="about__story dark-mode">
+    <div class="about__story-text">
+      <h2>L'Histoire de Maï : Un Rêve Familial Devenu Réalité</h2>
+      <p>Le restaurant Maï, anciennement connu sous le nom de Saveurs d'Asie, est le fruit de la passion et de la détermination d'une famille dévouée à faire découvrir une cuisine asiatique et authentique aux habitants de Saint-Brieuc et alentour.</p>
+      <p>La création de ce restaurant a demandé des années de travail acharné, de sacrifices et de persévérance. Les fondateurs, animés par un rêve commun, ont mis tout leur cœur pour offrir une expérience culinaire unique à leurs clients. Leur objectif était de partager les richesses des traditions culinaires asiatiques avec leur communauté, et ils y sont parvenus avec brio.</p>
+      <p>Aujourd'hui, ce rêve continue de vivre grâce à leur fils, qui a repris les rênes du restaurant et l'a renommé Maï, en hommage à ses racines et à l'héritage familial. Sous sa direction, Maï perpétue cette quête d'excellence en alliant tradition et modernité, pour offrir à ses clients une aventure gastronomique inoubliable.</p>
+    </div>
+    <div class="about__story-image">
+      <img src="./assets/images/maï-exterieur.webp" alt="Image de l'histoire de Maï">
+    </div>
+  </section>
+
+  <!-- Section sur le style de vie et l'atmosphère du restaurant -->
+  <section class="about__lifeStyle dark-mode">
+    <div class="about__lifeStyle-image">
+      <img src="./assets/images/vitrine.webp" alt="Image de l'ambiance du restaurant Maï">
+    </div>
+    <div class="about__lifeStyle-text">
+      <h2>Une Atmosphère Chaleureuse et Conviviale :</h2>
+      <p>En entrant chez Maï, vous serez immédiatement transporté dans une ambiance chaleureuse et accueillante, fidèle à l'hospitalité asiatique.</p>
+      <p>Le décor, soigneusement pensé, mêle des éléments traditionnels et contemporains, créant un cadre élégant et apaisant. Les lanternes suspendues, les motifs délicats et les matériaux naturels évoquent la sérénité des paysages asiatiques.</p>
+      <p>Le personnel attentionné et souriant veille à ce que chaque visite soit une expérience mémorable, en offrant un service impeccable et personnalisé.</p>
+    </div>
+  </section>
+
+  <!-- Section sur les saveurs et la carte du restaurant -->
+  <section class="about__taste dark-mode">
+    <div class="about__taste-text">
+      <h2>Une Carte Riche en Saveurs Authentiques :</h2>
+      <p>Le restaurant Maï, anciennement connu sous le nom de Saveurs d'Asie, est le fruit de la passion et de la détermination d'une famille dévouée à faire découvrir une cuisine asiatique et authentique aux habitants de Saint-Brieuc et alentour.</p>
+      <p>La création de ce restaurant a demandé des années de travail acharné, de sacrifices et de persévérance. Les fondateurs, animés par un rêve commun, ont mis tout leur cœur pour offrir une expérience culinaire unique à leurs clients. Leur objectif était de partager les richesses des traditions culinaires asiatiques avec leur communauté, et ils y sont parvenus avec brio.</p>
+      <p>Aujourd'hui, ce rêve continue de vivre grâce à leur fils, qui a repris les rênes du restaurant et l'a renommé Maï, en hommage à ses racines et à l'héritage familial. Sous sa direction, Maï perpétue cette quête d'excellence en alliant tradition et modernité, pour offrir à ses clients une aventure gastronomique inoubliable.</p>
+    </div>
+    <div class="about__taste-image">
+      <img src="./assets/images/porcCaramel.webp" alt="Image de la carte du restaurant Maï">
+    </div>
+  </section>
 {% endblock %}

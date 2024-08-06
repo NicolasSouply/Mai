@@ -6,10 +6,11 @@
 
 
   {% block content %}
-    <h1>Liste des clients</h1>
+    <h1>Liste des users</h1>
     <ul>
-        {% for client in clients %}
-            <li>{{ client.name }} - {{ client.email }}</li>
+        {% for user in users %}
+            <li>{{ user.name }} - {{ user.email }}</li>
         {% endfor %}
+        
     </ul>
 {% endblock %}

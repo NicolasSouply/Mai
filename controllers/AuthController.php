@@ -2,29 +2,38 @@
 
 class AuthController extends AbstractController
 {
-    private ClientManager $cm;
+    private UserManager $um;
+    private AdminManager $am;
     private CSRFTokenManager $csrft;
 
     public function __construct()
     {
         parent::__construct();
-        $this->cm = new ClientManager();
+        $this->um = new UserManager();
+        $this->am = new AdminManager();
         $this->csrft = new CSRFTokenManager();
     }
 
-    public function checkLogin(array $post): ?Clients
+    public function checkLogin(array $post): ?Users
     {
         if (isset($post["email"]) && isset($post["password"])) {
             if (!empty($post['csrf-token']) && $this->csrft->validateCSRFToken($post['csrf-token'])) {
-                $client = $this->cm->findByEmail($post["email"]);
+                $user = $this->um->findByEmail($post["email"]);
                 
-                if ($client !== null) {
-                    $passwordCorrect = password_verify($post["password"], $client->getPassword());
+                if ($user !== null) {
+                    $passwordCorrect = password_verify($post["password"], $user->getPassword());
                     
                     if ($passwordCorrect) {
-                        $_SESSION["client"] = $client;
-                        $this->redirect("index.php?route=client-zone&client-id=" . $client->getId());
-                        return $client;
+                        $_SESSION["user"] = $user;
+                        
+                        if ($this->am->isAdmin($post["email"])) { //vérif si le user est un admin 
+                            $_SESSION["admin"] = $user;
+                            $this->redirect("admin-zone.html.twig");
+                        } else {
+                            $this->redirect("index.php?route=user-zone&user-id=" . $user->getId());
+                        }
+                        
+                        return $user;
                     } else {
                         $this->redirect("index.php?route=connexion&error=1"); // Mot de passe incorrect
                     }

@@ -1,0 +1,93 @@
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.about__main {
+  margin-top: 17rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.about__title {
+  margin: 17rem 0 5rem 0;
+  font-size: 4rem;
+  letter-spacing: 16px;
+  color: inherit; // Utilise la couleur héritée de .about__main
+
+  &.dark-mode {
+    color: $cream-mai;
+  }
+}
+
+.about__main-p {
+  font-family: "Inter", sans-serif;
+  font-size: 4rem;
+  letter-spacing: 5px;
+  color: inherit; // Utilise la couleur héritée de .about__main
+}
+
+.about__story,
+.about__lifeStyle,
+.about__taste {
+  display: flex;
+  align-items: center;
+  background-color: $blue-mai; // Couleur de fond par défaut pour le mode clair
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: $background-light;
+
+  &.dark-mode {
+    background-color: $background-dark; // Assurez-vous que cette ligne est correcte
+    color: $cream-mai;
+  }
+
+  &-text {
+    margin-right: 2rem;
+    flex: 1;
+
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &-image {
+    flex-shrink: 0;
+    max-width: 30rem; // Ajuster la taille maximale de l'image
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about__story,
+  .about__lifeStyle,
+  .about__taste {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &-text,
+    &-image {
+      width: 100%;
+      padding: 0;
+    }
+
+    &-image {
+      margin-top: 2rem;
+      max-width: 15rem; // Réduire la taille de l'image sur mobile
+    }
+  }
+}

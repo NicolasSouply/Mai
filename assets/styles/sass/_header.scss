@@ -3,7 +3,7 @@ header {
   justify-content: space-evenly;
   width: 100vw;
   padding: 2em 1em;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
 }
@@ -45,6 +45,7 @@ header {
     color: $blue-mai;
     transition: background-color 0.3s ease, transform 0.3s ease;
     border-radius: 50px;
+    text-decoration: none;
     padding: 0.5rem 1rem;
 
     &:hover {
@@ -53,7 +54,7 @@ header {
       transform: scale(1.1);
     }
     body.light-mode {
-      color: $blue-mai; // Assurez-vous que la couleur des liens reste la même
+      color: $blue-mai;
     }
   }
 }
@@ -212,6 +213,7 @@ body.light-mode {
         display: block;
         font-weight: bold;
         padding: 1rem;
+        text-decoration: none;
       }
 
       .navbar__button {

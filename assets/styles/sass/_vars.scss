@@ -15,6 +15,7 @@ $bg-img-day: url("../../images/angkor-wat.webp");
 $bg-img-night: url("../../images/angkor-wat2.webp");
 $bg-img-cat: url("../../images/chat.webp");
 $bg-img-vitrine: url("../../images/vitrine.webp");
+$bg-img-card: url("../../images/cardbg.webp");
 
 // logo Maï
 
@@ -23,14 +24,19 @@ $logo-height: auto;
 
 // gallery
 
-$gallery-width: 2rem; // Largeur de chaque image
-$gallery-height: 2rem; // Hauteur de la galerie
-$gap: 1rem; // Espace entre les images
-$animation-duration: 20s; // Durée de l'animation
+$gallery-width: 2rem;
+$gallery-height: 2rem;
+$gap: 1rem;
+$animation-duration: 20s;
 
 // Taille du up bouton
 $up-button-img-size-light: 3rem;
 $up-button-img-size-dark: 3rem;
+
+//Gallerie animation
+$animation-duration: 30s;
+$animation-timing-function: linear;
+$animation-iteration-count: infinite;
 
 //Mixins
 @mixin modale {
@@ -74,6 +80,7 @@ $up-button-img-size-dark: 3rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
   transition: background-color 0.3s ease, transform 0.3s ease;
   border: none;
+  text-decoration: none;
   &:hover {
     background-color: $blue-mai;
     color: white;

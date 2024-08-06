@@ -1,0 +1,72 @@
+.contact-info {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rem;
+  justify-content: space-evenly;
+  gap: 2rem;
+  padding: 2rem;
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  &__block {
+    background-color: $cream-mai;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease, color 0.5s ease;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info__item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      i {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+      }
+
+      p {
+        margin: 0;
+
+        strong {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .contact-info__map {
+      height: 30rem; // Ajuster la hauteur de la carte
+      border-radius: 8px;
+
+      #map {
+        height: 100%;
+        border-radius: 8px;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  }
+
+  // Mode sombre
+  &.dark-mode {
+    background-color: $background-dark;
+    color: $cream-mai;
+
+    &__block {
+      background-color: $background-dark;
+      color: $cream-mai;
+    }
+  }
+}

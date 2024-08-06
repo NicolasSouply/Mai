@@ -1,1 +1,45 @@
 {% extends 'layout.html.twig' %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+<section class="contact-info">
+  <div class="contact-info__block">
+    <h2>Nous sommes là</h2>
+    <div class="contact-info__item">
+      <i class="fas fa-home"></i>
+      <p><strong>Maï Restaurant</strong></p>
+    </div>
+    <div class="contact-info__item">
+      <i class="fas fa-map-marker-alt"></i>
+      <p>101 rue Jules Ferry, 22000 Saint-Brieuc</p>
+    </div>
+    <div class="contact-info__item">
+      <i class="fas fa-phone"></i>
+      <p><strong>02 96 75 62 73</strong></p>
+    </div>
+    <div class="contact-info__map">
+      <!-- Insérer la carte Leaflet ici -->
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <div class="contact-info__block">
+    <h2>Horaires d'ouverture</h2>
+    <p><strong>Lundi :</strong> fermé</p>
+    <p><strong>Mardi :</strong><br>11:00 - 14:00<br>17:00 - 20:00</p>
+    <p><strong>Mercredi :</strong><br>11:00 - 14:00<br>17:00 - 20:00</p>
+    <p><strong>Jeudi :</strong><br>11:00 - 14:00<br>17:00 - 20:00</p>
+    <p><strong>Vendredi :</strong><br>11:00 - 14:00<br>17:00 - 20:00</p>
+    <p><strong>Samedi :</strong><br>11:00 - 14:00<br>17:00 - 20:00</p>
+    <p><strong>Dimanche :</strong> fermé</p>
+  </div>
+
+  <div class="contact-info__block">
+    <img src="./assets/images/maï-exterieur.webp" alt="image extérieur du restaurant" />
+  </div>
+</section>
+{% endblock %}

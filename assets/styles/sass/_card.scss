@@ -1,0 +1,194 @@
+// Page de la carte
+.card-page {
+  background-image: $bg-img-card;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 80vh; // Ajusté pour laisser de l'espace pour la section dishes
+  padding-bottom: 5rem; // Ajoute un padding en bas pour séparer des autres sections
+  position: relative;
+}
+
+// Conteneur de la carte
+.card-page__container {
+  @include modale;
+  margin: 13rem 0 10rem 0;
+  padding: 0;
+  width: 35%;
+  height: auto;
+
+  h3 {
+    font-size: 5rem;
+  }
+}
+
+// Carte avec effet de flou
+.card__blur {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5);
+  padding: 3rem;
+  border-radius: 1rem;
+  width: 50%;
+  max-width: 40rem;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  &.dark-mode {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+// Section des plats
+.dishes-section {
+  display: flex;
+  flex-direction: column;
+  background-color: $cream-mai;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  .filter-section {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .content {
+    display: flex;
+    width: 100%;
+    flex: 1;
+
+    .sidebar {
+      width: 20vw; // Sidebar prend 20% de la largeur de la fenêtre
+      background-color: $blue-mai;
+      height: 100vh; // S'assure que le sidebar occupe toute la hauteur
+      overflow-y: auto; // Permet de faire défiler si nécessaire
+      z-index: 1;
+
+      ul {
+        list-style: none;
+        padding: 2rem;
+        margin: 0;
+
+        li {
+          margin-bottom: 1rem;
+
+          a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.8rem;
+            display: block;
+            padding: 1rem;
+            border-radius: 0.5rem;
+
+            &:hover {
+              background-color: $cream-mai;
+              text-decoration: underline;
+              transition: background-color 0.3s ease;
+            }
+          }
+        }
+
+        &.dark-mode {
+          background-color: $cream-mai;
+        }
+      }
+    }
+
+    .dishes-list {
+      width: 80vw; // Prend 80% de la largeur de la fenêtre
+      background-color: $cream-mai;
+      color: $blue-mai;
+      padding: 2rem;
+      box-sizing: border-box;
+
+      .dish-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+
+        img {
+          width: 100px;
+          height: 100px;
+          margin-right: 20px;
+          border-radius: 10px;
+        }
+
+        p {
+          font-size: 18px;
+        }
+
+        &.dark-mode {
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+// Styles pour les modales
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &.show {
+    display: block;
+  }
+
+  .modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 10px;
+
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+
+      &:hover,
+      &:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    &.dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+  }
+}
