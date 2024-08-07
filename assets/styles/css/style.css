@@ -1188,9 +1188,6 @@ body {
   letter-spacing: 16px;
   color: inherit;
 }
-.about__title.dark-mode {
-  color: rgb(240, 233, 225);
-}
 
 .about__main-p {
   font-family: "Inter", sans-serif;
@@ -1273,7 +1270,7 @@ body {
 .contact-info {
   display: flex;
   flex-direction: row;
-  margin-top: 20rem;
+  margin-top: 15rem;
   justify-content: space-evenly;
   gap: 2rem;
   padding: 2rem;
@@ -1285,6 +1282,7 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  justify-content: space-evenly;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -1309,13 +1307,20 @@ body {
 .contact-info__block .contact-info__item p strong {
   font-weight: bold;
 }
+.contact-info__block .contact-info__item:first-of-type {
+  margin: 0 2rem 0 2rem;
+}
 .contact-info__block .contact-info__map {
-  height: 30rem;
+  width: 100%;
+  height: 40rem; /* Ajuste la hauteur de la carte */
   border-radius: 8px;
 }
 .contact-info__block .contact-info__map #map {
+  width: 100%;
   height: 100%;
   border-radius: 8px;
+  margin-bottom: 1rem; /* Ajoute un espace sous la carte */
+  position: relative;
 }
 .contact-info__block img {
   width: 100%;
@@ -1329,4 +1334,22 @@ body {
 .contact-info.dark-mode__block {
   background-color: #213f7d;
   color: rgb(240, 233, 225);
+}
+@media (max-width: 768px) {
+  .contact-info .contact-info {
+    flex-direction: column; /* Change la direction des éléments en colonne pour les écrans plus petits */
+    margin-top: 5rem;
+  }
+  .contact-info .contact-info__item:first-of-type {
+    flex: none; /* Annule l'agrandissement pour les petits écrans */
+    margin-bottom: 1rem;
+  }
+  .contact-info .contact-info__map {
+    height: 20rem; /* Réduit la hauteur de la carte pour les petits écrans */
+  }
+}
+@media (max-width: 480px) {
+  .contact-info .contact-info__map {
+    height: 15rem; /* Réduit encore plus la hauteur de la carte pour les très petits écrans */
+  }
 }

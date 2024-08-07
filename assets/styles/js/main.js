@@ -1,3 +1,4 @@
+console.log("coucou");
 document.addEventListener("DOMContentLoaded", () => {
   const darkModeToggle = document.getElementById("js-darkMode");
   const moonIcon = document.getElementById("js-moonIcon");
@@ -19,6 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const galleryInner = document.querySelector(".gallery__inner");
   const containers = document.querySelectorAll(".gallery__container");
 
+  const initMap = () => {
+    const lat = 48.501518;
+    const lng = -2.769251;
+    const zoomLvl = 18;
+
+    const map = L.map("map").setView([lat, lng], zoomLvl);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    L.marker([lat, lng]).addTo(map).bindPopup("<b>Maï Restaurant.").openPopup();
+  };
+
+  // Initialiser la carte
+  initMap();
   // Fonction pour activer/désactiver le mode sombre
   const toggleDarkMode = () => {
     const isDarkMode = body.classList.toggle("dark-mode");

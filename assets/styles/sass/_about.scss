@@ -16,10 +16,6 @@ body {
   font-size: 4rem;
   letter-spacing: 16px;
   color: inherit; // Utilise la couleur héritée de .about__main
-
-  &.dark-mode {
-    color: $cream-mai;
-  }
 }
 
 .about__main-p {

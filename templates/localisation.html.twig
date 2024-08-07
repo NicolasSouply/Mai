@@ -2,8 +2,8 @@
 
 {% block title %}
   {{ parent() }}
-{% endblock %}
 
+{% endblock %}
 
 {% block main %}
 <section class="contact-info">
@@ -22,7 +22,6 @@
       <p><strong>02 96 75 62 73</strong></p>
     </div>
     <div class="contact-info__map">
-      <!-- Insérer la carte Leaflet ici -->
       <div id="map"></div>
     </div>
   </div>
@@ -42,4 +41,8 @@
     <img src="./assets/images/maï-exterieur.webp" alt="image extérieur du restaurant" />
   </div>
 </section>
+{% endblock %}
+
+{% block footer %}
+  {{ parent() }}
 {% endblock %}
