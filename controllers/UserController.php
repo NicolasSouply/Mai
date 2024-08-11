@@ -4,13 +4,19 @@ class userController extends AbstractController
 {
     private UserManager $um;
     private OrderManager $om;
+    private CSRFTokenManager $csrfT;
 
     public function __construct()
     {
         parent::__construct();
         $this->um = new UserManager();
         $this->om = new OrderManager(); 
+        $this->csrfT = new CSRFTokenManager();
     }
+
+
+
+    
 
     public function userZone(): void
     {

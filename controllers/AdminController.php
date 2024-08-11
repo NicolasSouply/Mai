@@ -1,8 +1,7 @@
 <?php
 
 class AdminController extends AbstractController
-{
-  private AdminManager $am;
+{private AdminManager $am;
 private DisheManager $dm;
 private UserManager $um;
 
@@ -14,6 +13,20 @@ private UserManager $um;
       $this->dm = new DisheManager();
       $this->um = new UserManager();
   }
+ 
+  public function home() : void {
+    $this->render('home.html.twig', []);
+}
+
+public function connexion():void
+{
+  $this->render("connexion.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
+}
+public function checkLogin() : void {
+    
+}
+
+
     public function adminZone(): void
     {
      
@@ -101,7 +114,7 @@ private UserManager $um;
                 :email,
                 :phone,
                 :password,
-                role
+                :role
             )"
         );
         $parameters = [
@@ -126,7 +139,7 @@ private UserManager $um;
             if (isset($users["id"], $users["first_name"], $users["last_name"], $users["email"], $users["phone"], $users["password"], $users["role"])) {
                 $usersClass = new Users($users["first_name"], $users["last_name"], $users["email"], $users["phone"], $users["password"], $users["role"]);
                 $usersClass->setId($users["id"]);
-                return $usersClass;
+                return $users;
             } else {
                 error_log('Données user incomplètes : ' . print_r($item, true));
             }
@@ -135,7 +148,7 @@ private UserManager $um;
         return $users;
     }
 
-    public function saveuser(Users $user): bool
+    public function saveUser(Users $user): bool
     {
         if ($user->getId() === null) {
             $query = $this->db->prepare('INSERT INTO users (email, password) VALUES (?, ?)');
@@ -146,7 +159,7 @@ private UserManager $um;
         }
     }
 
-    public function modifyuser():void{
+    public function modifyUser():void{
       $query = $this->db->prepare(
           "UPDATE users
           SET last_name = :last_name,

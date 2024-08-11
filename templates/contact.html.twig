@@ -1,16 +1,49 @@
 {% extends 'layout.html.twig' %}
 
 {% block description %}
-  Page contact du restaurant Maï afin de pouvoir demander des renseingments ou organiser des événements.{% endblock %}
+  Page contact du restaurant Maï pour demander des renseignements ou organiser des événements.
+{% endblock %}
 
+{% block title %}Contact{% endblock %}
 
+{% block main %}
+<section class="contact-page">
+    <div class="contact-page__form">
+        <h2>Écrivez-nous</h2>
+        <p>Vous souhaitez des renseignements, organiser un évènement ? Laissez-nous un message avec votre demande et vos coordonnées, et nous vous rappellerons dans les plus brefs délais.</p>
 
-  {% block content %}
-    <h1>Liste des users</h1>
-    <ul>
-        {% for user in users %}
-            <li>{{ user.name }} - {{ user.email }}</li>
-        {% endfor %}
-        
-    </ul>
+        <form action="" method="post">
+            <div class="contact-page__form-group">
+                <input type="text" id="first-name" name="first-name" placeholder="Prénom" required>
+                <input type="text" id="last-name" name="last-name" placeholder="Nom" required>
+            </div>
+            <div class="contact-page__form-group">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="tel" id="phone" name="phone" placeholder="Téléphone" required>
+            </div>
+            <div class="contact-page__form-group">
+                <input type="text" id="subject" name="subject" placeholder="Objet" required>
+            </div>
+            <div class="contact-page__form-group">
+                <textarea id="message" name="message" placeholder="Message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Envoyer</button>
+        </form>
+    </div>
+
+    <div class="contact-page__info">
+        <h2>Contactez-nous</h2>
+        <p><i class="fas fa-home"></i> Maï Restaurant</p>
+        <p><i class="fas fa-map-marker-alt"></i> 101 rue Jules Ferry, 22000 Saint-Brieuc</p>
+        <p><i class="fas fa-phone"></i> 02 96 75 62 73</p>
+        <div class="contact-page__social">
+            <a href="https://www.instagram.com/maii.family/?locale=bz-hans&hl=am-et" target="_blank">
+                <img src="./assets/images/icons/instagram-cream.webp" alt="Instagram" />
+            </a>
+            <a href="https://www.facebook.com/maiifamily/?locale=fr_FR" target="_blank">
+                <img src="./assets/images/icons/facebook-cream.webp" alt="Facebook" />
+            </a>
+        </div>
+    </div>
+</section>
 {% endblock %}

@@ -58,9 +58,10 @@ body {
   h1 {
     font-family: "Sassy Frass", cursive;
     color: white;
+    letter-spacing: 6rem;
     text-align: center;
     font-weight: 400;
-    font-size: 40rem;
+    font-size: 35rem;
     font-style: normal;
   }
   .custom-page .card {
@@ -121,7 +122,6 @@ body {
 
     .gallery__inner {
       display: flex;
-
       animation: scrollLeft 20s linear infinite;
     }
 
@@ -157,7 +157,7 @@ body {
   /* **************************** SECTION CARD ***************************/
 
   .card {
-    background: $bg-img-cat no-repeat center center fixed;
+    background: $bg-img-meals no-repeat center center fixed;
     background-size: cover;
     padding: 10rem;
     display: flex;
@@ -209,6 +209,7 @@ body {
 
   &.dark-mode {
     background-color: $background-dark;
+    color: $cream-mai;
   }
 
   .end-page__container {
@@ -252,38 +253,43 @@ body {
   }
 }
 
+/* Style général pour le bouton */
 .go-top {
   position: fixed;
-  color: $blue-mai;
-  bottom: 1rem;
-  right: 1rem;
-  display: none;
-  justify-content: center;
+  bottom: 1rem; /* Ajustez selon votre besoin */
+  right: 1rem; /* Ajustez selon votre besoin */
+  z-index: 1000; /* Assurez-vous qu'il soit au-dessus des autres éléments */
+  background: none; /* Enlève le fond par défaut du bouton */
+  border: none; /* Enlève la bordure par défaut du bouton */
+  padding: 0;
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  width: 3rem; /* Taille du bouton */
+  height: 3rem; /* Taille du bouton */
+  display: flex;
   align-items: center;
-
-  #up-button-link {
-    display: flex;
-    width: 3rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #up-button-img {
-    width: 3rem;
-    height: 3rem;
-    cursor: pointer;
-    transition: filter 0.5s ease-in-out;
-
-    .dark-mode & {
-      filter: invert(1);
-    }
-  }
+  justify-content: center;
 }
 
-.footer {
-  padding: 1rem 0;
-  text-align: center;
+/* Style pour l'image du bouton */
+#up-button-img {
+  width: 2rem; /* Ajustez la taille de l'image */
+  height: auto;
 }
+
+/* Apparence du bouton lorsqu'il est visible */
+.go-top.show {
+  opacity: 1;
+  transform: scale(
+    1
+  ); /* Assure que le bouton ne bouge pas lorsqu'il devient visible */
+}
+
+/* Appliquer le filtre pour le mode sombre */
+.dark-mode .go-top #up-button-img {
+  filter: invert(1);
+}
+
 /* VERSION MOBILE */
 
 @media (max-width: 768px) {

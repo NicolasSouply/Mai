@@ -1,0 +1,49 @@
+{% extends "layout.html.twig" %}
+
+    {% block header %}
+    <header class="header__mobile">
+      <nav class="navbar">
+        <a class="navbar__logo" href="index.php?route=home">
+          <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
+        </a>
+        
+        <a href="index.php?route=reservation" class="navbar__button navbar__button--reserve">Réserver</a>
+
+        <div class="burger-menu" id="burger-menu">
+          <img src="./assets/images/icons/burger-blue.webp" />
+        </div>
+        <div class="navbar__dark-mode">
+          <button id="js-darkModeMobile" class="navbar__toggle">
+            <img id="js-moonIconMobile" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
+            <img id="js-sunIconMobile" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
+          </button>
+        </div>
+      </nav>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="index.php?route=card">Gestion des profils </a></li>
+        <li><a href="index.php?route=about">Gestion des plats</a></li>
+        <li><a href="index.php?route=localisation">Gestion des commandes</a></li>
+        <li><a href="index.php?route=contact">Notifications</a></li>
+
+    {% if isUserLoggedIn %}
+      <a class="navbar__button" href="index.php?route=logout">Déconnexion</a>
+        {% endif %}
+      </ul>
+    </header>
+
+{% block main %}
+<main class="admin-zone"> 
+
+    <h2 class="admin-zone__title">Espace Admin {{ session.admin.getFirstName()|escape }}</h2>
+
+    <section class="admin-zone__container">
+    <h2 hidden>Chercher un user</h2>
+        <form action="index.php?route=asmin-zone&&admin-id={{session.admin.getId()}}" method="post">
+            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}" />
+            <label for="user-search" class="form-label">Chercher un user (nom, prénom ou email) :</label>
+            <input type="search" name="user-search" id="user-search" class="admin-zone__form-search">
+            <button type="submit">Rechercher</button>
+        </form>
+
+    </section>
+    {%  endblock %}

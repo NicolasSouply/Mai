@@ -1,0 +1,132 @@
+// Styles principaux
+.contact-page {
+  display: flex;
+  margin-top: 15rem;
+  justify-content: center;
+  padding: 2rem;
+
+  .contact-page__form {
+    display: flex;
+    background-color: rgb(240, 233, 225);
+    color: #213f7d;
+    border-radius: 8px;
+    padding: 0 2rem 4rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-content: flex-end;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .contact-page__info {
+    display: flex;
+    background-color: #213f7d;
+    color: rgb(240, 233, 225);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  form {
+    gap: 3rem;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    padding: 1.75rem;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Arrondir les champs */
+    background-color: #fff;
+    color: $background-dark; /* Couleur du texte en mode clair */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  textarea#message {
+    width: 44rem;
+    height: auto;
+  }
+
+  .btn-submit {
+    @include button;
+  }
+
+  .contact-page__info p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: $cream-mai; /* Couleur du texte */
+  }
+
+  .contact-page__info i {
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .contact-page__social {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .contact-page__social img {
+    width: 2.5rem;
+    height: auto;
+    transition: filter 0.3s ease;
+  }
+
+  /* Dark Mode */
+  .dark-mode {
+    .contact-page__form {
+      background-color: $blue-mai; /* Fond en mode sombre */
+      color: $cream-mai; /* Couleur du texte en mode sombre */
+    }
+
+    .contact-page__info {
+      background-color: $cream-mai; /* Fond en mode sombre */
+      color: $blue-mai; /* Couleur du texte en mode sombre */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      background-color: $cream-mai;
+      color: $background-dark; /* Couleur du texte en mode sombre */
+      border: 1px solid $cream-mai;
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-submit {
+      background-color: $cream-mai; /* Changement de couleur en mode sombre */
+      color: $background-dark; /* Couleur du texte du bouton en mode sombre */
+    }
+
+    .contact-page__social img {
+      filter: invert(
+        1
+      ); /* Inversion des couleurs pour les icônes en mode sombre */
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+
+    .contact-page__form,
+    .contact-page__info {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .contact-page__form-row {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,9 +1,12 @@
 console.log("coucou");
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Sélection des éléments du DOM
+  const body = document.body;
   const darkModeToggle = document.getElementById("js-darkMode");
   const moonIcon = document.getElementById("js-moonIcon");
   const sunIcon = document.getElementById("js-sunIcon");
-  const body = document.body;
+
   const footer = document.querySelector(".footer");
   const sections = document.querySelectorAll(
     ".hook, .gallery, .card, .end-page, .about__story, .about__main, .about__title, .about__main-p, .about__lifeStyle, .about__taste, .contact-info__block "
@@ -20,23 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const galleryInner = document.querySelector(".gallery__inner");
   const containers = document.querySelectorAll(".gallery__container");
 
-  const initMap = () => {
-    const lat = 48.501518;
-    const lng = -2.769251;
-    const zoomLvl = 18;
-
-    const map = L.map("map").setView([lat, lng], zoomLvl);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    L.marker([lat, lng]).addTo(map).bindPopup("<b>Maï Restaurant.").openPopup();
-  };
-
-  // Initialiser la carte
-  initMap();
   // Fonction pour activer/désactiver le mode sombre
   const toggleDarkMode = () => {
     const isDarkMode = body.classList.toggle("dark-mode");
@@ -48,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
   };
 
-  // Met à jour les icônes en fonction du mode sombre
+  // Mise à jour des icônes en fonction du mode sombre
   const updateIcons = () => {
     const isDarkMode = body.classList.contains("dark-mode");
     moonIcon?.classList.toggle("js-hidden", isDarkMode);
@@ -63,14 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
       : "./assets/images/icons/instagram-blue.webp";
   };
 
-  // Met à jour la couleur de fond du pied de page
+  // Mise à jour de la couleur de fond du pied de page
   const updateFooterBackground = () => {
     const isDarkMode = body.classList.contains("dark-mode");
     footer.style.backgroundColor = isDarkMode ? "#213F7D" : "#f0e9e1";
     footer.style.color = isDarkMode ? "#fff" : "#213F7D";
   };
 
-  // Met à jour le fond des sections
+  // Mise à jour du fond des sections
   const updateSectionsBackground = () => {
     const isDarkMode = body.classList.contains("dark-mode");
     sections.forEach((section) =>
@@ -78,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   };
 
-  // Met à jour les liens légaux du pied de page
+  // Mise à jour des liens légaux du pied de page
   const updateFooterLegalLinks = () => {
     const isDarkMode = body.classList.contains("dark-mode");
     footerLegalLinks.forEach(
@@ -118,4 +104,31 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFooterLegalLinks();
     updateSectionsBackground();
   }
+  // Initialisation de la carte
+  const initMap = () => {
+    const lat = 48.501518;
+    const lng = -2.769251;
+    const zoomLvl = 18;
+
+    // Vérifiez que Leaflet est disponible
+    if (typeof L === "undefined") {
+      console.error("Leaflet library is not loaded");
+      return;
+    }
+
+    const map = L.map("map").setView([lat, lng], zoomLvl);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    L.marker([lat, lng])
+      .addTo(map)
+      .bindPopup("<b>Maï Restaurant.</b>")
+      .openPopup();
+  };
+
+  // Appel de la fonction d'initialisation de la carte
+  initMap();
 });

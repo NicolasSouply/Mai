@@ -2,10 +2,11 @@
 
 {% block title %}
   {{ parent() }}
-
 {% endblock %}
 
 {% block main %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
 <section class="contact-info">
   <div class="contact-info__block">
     <h2>Nous sommes là</h2>
@@ -38,9 +39,11 @@
   </div>
 
   <div class="contact-info__block">
-    <img src="./assets/images/maï-exterieur.webp" alt="image extérieur du restaurant" />
+    <img src="./assets/images/mai-restaurant2.webp" alt="image extérieur du restaurant" />
   </div>
 </section>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 {% endblock %}
 
 {% block footer %}

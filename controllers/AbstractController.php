@@ -19,6 +19,7 @@ abstract class AbstractController
         $twig->addGlobal('session', $_SESSION);
         $twig->addGlobal("cookie", $_COOKIE);
         $twig->addGlobal("get", $_GET);
+
         $this->twig = $twig;
     }
     protected function generateAndStoreCSRFToken(): string
@@ -31,7 +32,13 @@ abstract class AbstractController
     }
     public function redirect(string $route) : void
     {
-        header("Location: $route");
-        exit();
+        if($route !== null)
+    {
+        header("Location: index.php?route=$route");
+    }
+    else
+    {
+        header("Location: index.php");
+    }
     }
 }

@@ -20,36 +20,59 @@ class SiteController extends AbstractController
     public function home() : void
     {
       
-        $um = new UserManager();
-        $om = new OrderManager();
-        $dom = new DetailOrderManager();
-        $dm = new DisheManager();
-        $rm = new ReservationManager();
-
-        $users = $um->findAll();
-        $orders = $om->findAll();
-        $detailOrders = $dom->findAll();
-        $dishes = $dm->findAll();
-        $reservations = $rm->findAll();
-        
-        $this->render("home.html.twig", [
-          "users" => $users,
-          "orders" => $orders,
-          "detailOrders" => $detailOrders,
-          "dishes" => $dishes,
-          "reservations" => $reservations,
-        ]);        
+      $this->render('home.html.twig', []);
     }
-    public function connexion():void{
-      $this->render("connexion.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
-  }
-    public function register():void{
+
+    public function register():void
+    {
     $this->render("register.html.twig", ['csrf_token'=>$_SESSION['csrf_token']]);
-}
+    }
+    public function showInscriptionForm() : void
+    {
+        $this->render('register.html.twig', []);
+    }
+
+    public function processInscription() : void
+    {
+
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+
+
+        if ($username && $password) {
+
+            header('Location: index.php?route=connexion');
+            exit;
+        }
+
+        
+        $this->render('register.html.twig', ['error' => 'Veuillez remplir tous les champs.']);
+    }
+
+    public function showConnexionForm() : void
+    {
+        $this->render('connexion.html.twig', []);
+    }
     public function someAction()
     {
         $isUserLoggedIn = isset($_SESSION['user']);
         $this->render('layout.twig', ['isUserLoggedIn' => $isUserLoggedIn]);
+    }
+
+    public function processConnexion() : void
+    {
+
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+
+        if ($username && $password) {
+
+            header('Location: index.php?route=home');
+            exit;
+        }
+
+     
+        $this->render('connexion.html.twig', ['error' => 'Veuillez remplir tous les champs.']);
     }
     public function userZone()
         {
@@ -59,26 +82,27 @@ class SiteController extends AbstractController
             $this->render('user-zone.html.twig', ['user' => $_SESSION["user"]]);
         }
     }
-    public function logout():void{
-      session_destroy();
-      $this->redirect("index.php?route=home");
+
+
+  public function processLogout() : void
+    {
+
+        header('Location: index.php?route=home');
+        exit;
     }
     public function about(): void
     {
         $this->render('about.html.twig', []);
     }
-    public function notFound(): void
-    {
-        $this->render('404.html.twig', []);
-    }
+
     
     public function localisation(): void
     {
       $this->render('localisation.html.twig', []);
     }
+
     public function card(): void
     {
-
       $this->render('card.html.twig', []);
     }
 
@@ -91,5 +115,15 @@ class SiteController extends AbstractController
       $this->render('reservation.html.twig', []);
     }
    
+    public function notFound() : void
+    {
+        $this->render('front/error404.html.twig', []);
+    }
 
+    public function logout(): void
+    {
+        session_unset();
+        session_destroy();
+        $this->redirect("index.php?route=home");
+    }
   }

@@ -7,61 +7,9 @@ class UserManager extends AbstractManager
         parent::__construct();
     }
 
-    public function findByEmail(string $email): ?Users
-    {
-        $query = $this->db->prepare(
-            "SELECT *
-            FROM users
-            WHERE email = :email"
-        );
-        $parameters = [
-            "email" => $email
-        ];
-        $query->execute($parameters);
-    
-        if ($query->rowCount() === 1) {
-            $user = $query->fetch(PDO::FETCH_ASSOC);
-            
-   
-            if (isset($user["id"], $user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"])) {
-                $user = new Users($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"]);
-                $user->setId($user["id"]);
-                return $user;
-            } else {
-                return null; 
-            }
-        } else {
-            return null;
-        }
-    }
-    public function findById(string $id): ?Users
-    {
-        $query = $this->db->prepare(
-            "SELECT *
-            FROM users
-            WHERE id = :id"
-        );
-        $parameters = [
-            "id" => $id
-        ];
-        $query->execute($parameters);
-    
-        if ($query->rowCount() === 1) {
-            $user = $query->fetch(PDO::FETCH_ASSOC);
-            
-           
-            if (isset($user["id"], $user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"])) {
-                $user = new Users($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"]);
-                $user->setId($user["id"]);
-                return $user;
-            } else {
-                return null; // Les données ne sont pas complètes
-            }
-        } else {
-            return null;
-        }
-    }
-    public function create(Users $user): bool
+
+    // Créer un nouvel utilisateur
+    public function createUser(Users $user): ?Users
     {
         $query = $this->db->prepare(
             "INSERT INTO users (
@@ -77,7 +25,7 @@ class UserManager extends AbstractManager
                 :email,
                 :phone,
                 :password,
-                role
+                :role
             )"
         );
         $parameters = [
@@ -88,8 +36,107 @@ class UserManager extends AbstractManager
             'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
             'role' => $user->getRole()
         ];
-        return $query->execute($parameters);
+
+        if ($query->execute($parameters)) {
+            $user->setId($this->db->lastInsertId());
+            return $user;
+        } else {
+            $errorInfo = $query->errorInfo();
+            echo "Erreur lors de la création de l'utilisateur : " . implode(", ", $errorInfo);
+            return null;
+        }
     }
+// Modifier un utilisateur
+    public function updateUser(Users $user) : ?Users
+    {
+        $query = $this->db->prepare(
+            "UPDATE users
+            SET first_name = :first_name, last_name = :last_name, email = :email, phone = :phone, password = :password, role = :role
+            WHERE id = :id"
+        );
+        $parameters = [
+            'last_name' => $user->getLast_name(),
+            'first_name' => $user->getFirst_name(),
+            'email' => $user->getEmail(),
+            'phone' => $user->getPhone(),
+            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
+            'role' => $user->getRole()
+        ];
+        if ($query->execute($parameters)) {
+            
+            return $user;
+        } else 
+            {
+            return null;
+            }
+    }
+
+
+// Supprimer un utilisateur 
+public function deleteUser(int $id) : void 
+{
+    $query = $this->db->prepare(
+        "DELETE FROM users WHERE id = :id"
+    );
+
+    $parameters = [
+        'id' => $id
+    ];
+
+    if (!$query->execute($parameters)) {
+
+    }
+
+}
+
+    // Rechercher un utilisateur par ID
+    public function findUserById(string $id): ?Users
+    {
+        $query = $this->db->prepare
+        (
+            "SELECT *
+            FROM users
+            WHERE id = :id"
+        );
+        $query->execute(['id' => $id]);
+   
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user === false) {
+            return null;
+        }
+
+        $users = new Users($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"]);
+        $users->setId($user["id"]);
+
+        return $users;
+        }
+
+
+        
+    // Rechercher un utilisateur par adresse mail
+    public function findUserByEmail(string $email): ?Users
+    {
+        $query = $this->db->prepare(
+            "SELECT *
+            FROM users
+            WHERE email = :email"
+        );
+        $query->execute(["email" => $email]);
+    
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+            
+        if ($user === false) {
+            return null;
+        }
+            $users = new Users($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"]);
+            $users->setId($user["id"]);
+
+            return $users;
+    }
+
+    
+// Rechercher tous les utilisateurs
 public function findAll(): array
 {
     $query = $this->db->prepare('SELECT * FROM users');

@@ -16,6 +16,7 @@ $bg-img-night: url("../../images/angkor-wat2.webp");
 $bg-img-cat: url("../../images/chat.webp");
 $bg-img-vitrine: url("../../images/vitrine.webp");
 $bg-img-card: url("../../images/cardbg.webp");
+$bg-img-meals: url("../../images/plats.webp");
 
 // logo Maï
 
@@ -44,7 +45,6 @@ $animation-iteration-count: infinite;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 50rem;
   height: 75vh;
   backdrop-filter: blur(10px);
