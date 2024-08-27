@@ -3,138 +3,174 @@
 class AuthController extends AbstractController
 {
     private UserManager $um;
-    private AdminManager $am;
-    private CSRFTokenManager $ct;
+    private CSRFTokenManager $csrfT;
 
     public function __construct()
     {
         parent::__construct();
         $this->um = new UserManager();
-        $this->am = new AdminManager();
-        $this->ct = new CSRFTokenManager();
+        $this->csrfT = new CSRFTokenManager(); // Assurez-vous que l'instance est partagée
     }
 
-
-
-    public function checkLogin(array $post): ?Users
-    {
-        if (!isset($post["email"], $post["password"])) {
-            $this->redirectWithError('index.php?route=connexion', 'Email et mot de passe sont obligatoires.');
-            return null;
-        }
-
-        if (empty($post['csrf-token']) || !$this->ct->validateCSRFToken($post['csrf-token'])) {
-            $this->redirectWithError('index.php?route=connexion', 'Token CSRF invalide.');
-            return null;
-        }
-
-        $user = $this->um->findUserByEmail($post["email"]);
-
-        if ($user === null) {
-            $this->redirectWithError('index.php?route=connexion', 'Email non trouvé.');
-            return null;
-        }
-
-        if (!password_verify($post["password"], $user->getPassword())) {
-            $this->redirectWithError('index.php?route=connexion', 'Mot de passe incorrect.');
-            return null;
-        }
-
-        $_SESSION["user"] = $user;
-
-        if ($this->am->isAdmin($post["email"])) {
-            $_SESSION["admin"] = $user;
-            $this->redirect("admin-zone.html.twig");
-        } else {
-            $this->redirect("index.php?route=user-zone&user-id=" . $user->getId());
-        }
-
-        return $user;
-    }
     public function register(array $post): void
     {
-        var_dump($post);
-        
-        if (!$this->ct->validateCSRFToken($post['csrf-token'])) {
-            $this->redirect("index.php?route=register&error=3"); // Erreur de validation CSRF
+        if (!$this->csrfT->validateCSRFToken($post['csrf_token'])) {
+            $this->redirectWithError("index.php?route=register", 'error_csrf');
             return;
         }
 
-        if (isset($post["email"]) && isset($post["password"]) && 
-        isset($post["firstName"]) && isset($post["lastName"]) && 
-        isset($post["phone"])) 
-        {
-            $existingUser = $this->um->findUserByEmail($post["email"]);
-            if ($existingUser !== null) {
-                $this->redirect("index.php?route=register&error=6"); // Erreur: Email déjà utilisé
-                return;
-            }
-
-            $user= new Users(
-                $post["firstName"],
-                $post["lastName"],
+        if ($this->isValidRegistration($post)) {
+            $user = new Users(
+                $post["first_name"],
+                $post["last_name"],
                 $post["email"],
                 $post["phone"],
                 password_hash($post["password"], PASSWORD_DEFAULT),
-                $post["role"]
+                'user'
             );
 
             if ($this->um->createUser($user)) {
                 $_SESSION["user"] = $user;
                 $this->redirect("index.php?route=user-zone");
             } else {
-                $this->redirect("index.php?route=register&error=5"); // Erreur d'enregistrement
+                $this->redirectWithError("index.php?route=register", 'error_create');
             }
         } else {
-            $this->redirect("index.php?route=register&error=1");  // Erreur: Données manquantes
+            $this->redirectWithError("index.php?route=register", 'error_missing');
         }
     }
-    public function checkRegister() : void
+
+    public function checkRegister(): void
     {
-        if (!isset($_POST['email'], $_POST['password'], $_POST['confirm_password'], $_POST['csrf_token'])) {
-            $this->redirectWithError('index.php?route=inscription', 'Tous les champs sont obligatoires.');
-            return;
+        $this->clearSessionMessages();
+
+        if ($this->isPostRequest() && isset($_POST['csrf_token']) && $this->csrfT->validateCSRFToken($_POST['csrf_token'])) {
+            
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+            $confirm_password = $_POST['confirm_password'] ?? '';
+
+            if (empty($email) || empty($password) || empty($confirm_password)) {
+                $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
+                $this->redirect('register');
+                return;
+            }
+
+            $user = $this->um->findUserByEmail($email);
+
+            if ($user) {
+                $_SESSION['error_message'] = "Un compte existe déjà avec cette adresse.";
+                $this->redirect('register');
+            } elseif ($password !== $confirm_password) {
+                $_SESSION['error_message'] = "Les mots de passe ne correspondent pas.";
+                $this->redirect('register');
+            } else {
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+                $user = new Users(
+                    $_POST['first_name'],
+                    $_POST['last_name'],
+                    $email,
+                    $_POST['phone'],
+                    $hashedPassword,
+                    'user'
+                );
+
+                try {
+                    $this->um->createUser($user);
+                    $_SESSION['success_message'] = "Votre compte a bien été créé";
+                    $this->redirect('connexion');
+                } catch (\Exception $e) {
+                    $_SESSION['error_message'] = $e->getMessage();
+                    $this->redirect('register');
+                }
+            }
+        } else {
+            $_SESSION['error_message'] = "Le jeton CSRF est invalide ou la méthode de requête est incorrecte.";
+            $this->redirect('register');
         }
-
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $confirmPassword = $_POST['confirm_password'];
-        $csrfToken = $_POST['csrf_token'];
-        $firstName = $_POST['first_name'] ?? '';
-        $lastName = $_POST['last_name'] ?? '';
-        $phone = $_POST['phone'] ?? '';
-        $role = $_POST['role'] ?? 'USER'; 
-
-        if (!$this->ct->validateCSRFToken($csrfToken)) {
-            $this->redirectWithError('index.php?route=inscription', 'Token CSRF invalide.');
-            return;
-        }
-
-        if ($this->um->findUserByEmail($email)) {
-            $this->redirectWithError('index.php?route=inscription', 'Un compte avec cet email existe déjà.');
-            return;
-        }
-
-        if ($password !== $confirmPassword) {
-            $this->redirectWithError('index.php?route=inscription', 'Les mots de passe ne correspondent pas.');
-            return;
-        }
-
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $user = new Users($firstName, $lastName, $email, $phone, $hashedPassword, $role);
-
-        $this->um->createUser($user);
-
-        $this->redirect('index.php?route=connexion');
     }
 
+    public function login(): void
+    {
+        $this->render('login.html.twig', [
+            'csrf_token' => $this->generateAndStoreCSRFToken()
+        ]);
+    }
+
+    public function checkLogin(): void
+    {
+        // Réinitialiser les messages d'erreur et de succès
+        if (isset($_SESSION['error_message'])) {
+            unset($_SESSION['error_message']);
+        }
+    
+        if (isset($_SESSION['success_message'])) {
+            unset($_SESSION['success_message']);
+        }
+    
+        // Vérifier que tous les champs requis sont présents
+        if (isset($_POST['email'], $_POST['password'], $_POST['csrf_token'])) {
+            // Créer une instance de CSRFTokenManager
+            $csrfTokenManager = new CSRFTokenManager();
+    
+            // Vérifier la validité du token CSRF
+            if ($csrfTokenManager->validateCSRFToken($_POST['csrf_token'])) {
+                // Trouver l'utilisateur par email
+                $user = $this->um->findUserByEmail($_POST['email']);
+    
+                if ($user !== null) {
+                    // Vérifier si le mot de passe est correct
+                    if (password_verify($_POST['password'], $user->getPassword())) {
+                        $_SESSION['user'] = $user;
+    
+                        // Rediriger en fonction du rôle de l'utilisateur
+                        if ($user->getRole() === 'admin') {
+                            $this->redirect("admin-zone");
+                        } else {
+                            $this->redirect("user-zone");
+                        }
+                    } else {
+                        $_SESSION['error_message'] = "Identifiant ou mot de passe incorrect.";
+                        $this->redirect('connexion&error=1');
+                    }
+                } else {
+                    $_SESSION['error_message'] = "Identifiant ou mot de passe incorrect.";
+                    $this->redirect('connexion&error=1');
+                }
+            } else {
+                $_SESSION['error_message'] = "Le jeton CSRF est invalide.";
+                $this->redirect('connexion&error=3');
+            }
+        } else {
+            $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
+            $this->redirect('connexion&error=4');
+        }
+    }
     
 
+    private function isValidRegistration(array $post): bool
+    {
+        return !empty($post["email"]) && !empty($post["password"]) && !empty($post["first_name"]) && !empty($post["last_name"]) && !empty($post["phone"]);
+    }
 
-    private function redirectWithError(string $url, string $errorMessage) : void {
-        // Stocker le message d'erreur dans la session pour l'afficher après la redirection
-        $_SESSION['error'] = $errorMessage;
-        header("Location: $url");
-        exit();
+    private function isPostRequest(): bool
+    {
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
+    }
+
+    private function clearSessionMessages(): void
+    {
+        if (isset($_SESSION['error_message'])) {
+            unset($_SESSION['error_message']);
+        }
+        if (isset($_SESSION['success_message'])) {
+            unset($_SESSION['success_message']);
+        }
+    }
+    
+    public function logout() : void
+    {
+        session_destroy();
+        $this->redirect(null);
     }
 }

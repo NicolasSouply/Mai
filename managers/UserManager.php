@@ -137,7 +137,7 @@ public function deleteUser(int $id) : void
 
     
 // Rechercher tous les utilisateurs
-public function findAll(): array
+public function findAllUsers(): array
 {
     $query = $this->db->prepare('SELECT * FROM users');
     $query->execute();

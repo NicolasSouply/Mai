@@ -117,7 +117,7 @@ class SiteController extends AbstractController
    
     public function notFound() : void
     {
-        $this->render('front/error404.html.twig', []);
+        $this->render('error404.html.twig', []);
     }
 
     public function logout(): void

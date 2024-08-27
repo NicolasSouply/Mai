@@ -6,64 +6,65 @@
 
 {% block main %}
 <main class="register">
+    <section class="register__container">
+        <h2>Inscription</h2>
 
-  <section class="register__container">
+        {# Vérification des erreurs passées par le paramètre GET #}
+        {% if get.error is defined %}
+            {% set error_message = '' %}
+            {% if get.error == '1' %}
+                {% set error_message = 'Veuillez remplir tous les champs.' %}
+            {% elseif get.error == '2' or get.error == '6' %}
+                {% set error_message = 'L\'email est déjà utilisé.' %}
+            {% elseif get.error == '3' %}
+                {% set error_message = 'Erreur de validation CSRF.' %}
+            {% elseif get.error == '4' %}
+                {% set error_message = 'Erreur lors de la connexion.' %}
+            {% elseif get.error == '5' %}
+                {% set error_message = 'Erreur lors de l\'enregistrement.' %}
+            {% else %}
+                {% set error_message = 'Une erreur inconnue est survenue.' %}
+            {% endif %}
+            {# Afficher le message d'erreur #}
+            <div class="error-message">{{ error_message }}</div>
+        {% endif %}
 
-    <h2>Inscription</h2>
-
-    {% if get.error is defined %}
-      {% set error_message = '' %}
-      {% if get.error == '1' %}
-        {% set error_message = 'Veuillez remplir tous les champs.' %}
-      {% elseif get.error == '2' %}
-        {% set error_message = 'L\'email est déjà utilisé.' %}
-      {% elseif get.error == '3' %}
-        {% set error_message = 'Erreur de validation CSRF.' %}
-      {% elseif get.error == '4' %}
-        {% set error_message = 'Erreur lors de la connexion.' %}
-      {% elseif get.error == '5' %}
-        {% set error_message = 'Erreur lors de l\'enregistrement.' %}
-      {% elseif get.error == '6' %}
-        {% set error_message = 'L\'email est déjà utilisé.' %}
-      {% endif %}
-      <div class="error-message">{{ error_message }}</div>
-    {% endif %}
-
-    <form action="index.php?route=checkSignUp" method="post">
-        <input type="hidden" name="csrf-token" value="{{ csrf_token }}">
-        <fieldset>
-            <label for="first_name">Prénom :</label>
-            <input type="text" name="firstName" id="first_name" required>
-        </fieldset>
-        <fieldset>
-            <label for="last_name">Nom de famille :</label>
-            <input type="text" name="lastName" id="last_name" required>
-        </fieldset>
-        <fieldset>
-            <label for="phone">Téléphone :</label>
-            <input type="tel" name="phone" id="phone" required>
-        </fieldset>
-        <fieldset>
-            <label for="email">Email :</label>
-            <input type="email" name="email" id="email" required>
-        </fieldset>
-        <fieldset>
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" id="password" required>
-        </fieldset>
-        <fieldset>
-            <label for="checkPassword">Vérification du mot de passe :</label>
-            <input type="password" name="checkPassword" id="checkPassword" required>
-        </fieldset>
-        <fieldset>
-            <button type="submit">S'inscrire</button>
-        </fieldset>
-        <p>Déjà un compte ? <a href="index.php?route=connexion">Se connecter</a></p>
-    </form>
-  </section>
+        <form action="index.php?route=checkSignUp" method="post">
+            <input type="hidden" name="csrf-token" value="{{ csrf_token }}">
+            <fieldset>
+                <label for="first_name">Prénom :</label>
+                <input type="text" name="firstName" id="first_name" required>
+            </fieldset>
+            <fieldset>
+                <label for="last_name">Nom de famille :</label>
+                <input type="text" name="lastName" id="last_name" required>
+            </fieldset>
+            <fieldset>
+                <label for="phone">Téléphone :</label>
+                <input type="tel" name="phone" id="phone" required>
+            </fieldset>
+            <fieldset>
+                <label for="email">Email :</label>
+                <input type="email" name="email" id="email" required>
+            </fieldset>
+            <fieldset>
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password" required>
+            </fieldset>
+            <fieldset>
+                <label for="checkPassword">Vérification du mot de passe :</label>
+                <input type="password" name="checkPassword" id="checkPassword" required>
+            </fieldset>
+            <fieldset>
+                <button type="submit">S'inscrire</button>
+            </fieldset>
+            <p>Déjà un compte ? <a href="index.php?route=connexion">Se connecter</a></p>
+        </form>
+    </section>
 </main>
 {% endblock %}
 
 {% block footer %}
 {{ parent() }}
 {% endblock %}
+

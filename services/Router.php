@@ -1,20 +1,18 @@
-<?php
+<?php 
 
 class Router 
-{
+{ 
     private SiteController $sc;
     private AuthController $ac;
     private DisheController $dc;
     private AdminController $adc;
     
-
     public function __construct()
     {
         $this->sc = new SiteController();
         $this->ac = new AuthController();
         $this->dc = new DisheController();
         $this->adc = new AdminController(); 
-        
     }
 
     public function handleRequest(?array $get) : void
@@ -22,45 +20,67 @@ class Router
         if (isset($get['route'])) {
             $route = $get['route'];
         
-            if ($route === 'home') {
+            if ($route === 'home') 
+            {
                 $this->sc->home();
-            } elseif ($route === 'checkSignUp') {
+            } 
+            elseif ($route === 'checkSignUp') 
+            {
                 $this->ac->register($_POST);
-            } elseif ($route === 'connexion') {
-                $this->adc->connexion();
-            } elseif ($route === 'checkLogin') {
-                $loginCorrect = $this->ac->checkLogin($_POST);
-                if ($loginCorrect !== null) {
-                    $_SESSION["user"] = $loginCorrect;
-                    $this->ac->redirect("index.php?route=user-zone");
-                } else {
-                    $this->ac->redirect("index.php?route=connexion&error=4");
-                }
-            } elseif ($route === 'admin-zone') {
+            } 
+            elseif ($route === 'connexion') 
+            {
+                $this->ac->login();
+            } 
+            elseif ($route === 'checkLogin') 
+            {
+                $this->ac->checkLogin();
+            } 
+            elseif ($route === 'admin-zone') 
+            {
                 $this->adc->adminZone();
-            } elseif ($route === 'logout') {
+            } 
+            elseif ($route === 'logout') 
+            {
                 $this->sc->logout();
-            } elseif ($route === 'register') {
+            } 
+            elseif ($route === 'register') 
+            {
                 $this->sc->register();
-            } elseif ($route === 'user-zone') {
+            } 
+            elseif ($route === 'user-zone') 
+            {
                 $this->sc->userZone();
-            } elseif ($route === 'card') {
+            } 
+            elseif ($route === 'card') 
+            {
                 $this->sc->card();
-            } elseif ($route === 'about') {
+            } 
+            elseif ($route === 'about') 
+            {
                 $this->sc->about();
-            } elseif ($route === 'localisation') {
+            } 
+            elseif ($route === 'localisation') 
+            {
                 $this->sc->localisation();
-            } elseif ($route === 'contact') {
+            } 
+            elseif ($route === 'contact') 
+            {
                 $this->sc->contact();
-            } elseif ($route === 'reservation') {
+            } 
+            elseif ($route === 'reservation') 
+            {
                 $this->sc->reservation();
-            } elseif ($route === 'addDishe') {
+            } 
+            elseif ($route === 'addDishe') {
                 $this->dc->addDishe();
-            } else {
+            } 
+            else {
                 $this->sc->notFound();
             }
         } else {
             $this->sc->home();
         }
     }
+
 }

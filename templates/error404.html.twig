@@ -1,0 +1,36 @@
+{% extends "layout.html.twig" %}
+
+
+{% block main %}
+<main class="error404">
+  <section class="error404__container">
+    <p class="error404__giant404">404</p>
+
+    <h2>Nous avons perdu la page</h2>
+
+  {# Afficher le message d'erreur en fonction du code d'erreur #}
+  {% if error_code %}
+            {% if error_code == 'error1' %}
+                <p>Erreur : Email et mot de passe sont obligatoires.</p>
+            {% elseif error_code == 'error2' %}
+                <p>Erreur : Token CSRF invalide.</p>
+            {% elseif error_code == 'error3' %}
+                <p>Erreur : Email non trouvé.</p>
+            {% elseif error_code == 'error4' %}
+                <p>Erreur : Mot de passe incorrect.</p>
+            {% else %}
+                <p>Une erreur inconnue s'est produite.</p>
+            {% endif %}
+        {% else %}
+            <p>La page que vous recherchez n'existe pas ou a été enlevée.</p>
+        {% endif %}
+
+        <button><a href="index.php?route=home">Retour à l'accueil</a></button>
+
+  </section>
+</main>
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+{% endblock %}

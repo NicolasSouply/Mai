@@ -165,6 +165,10 @@ body .card .card__blur h3 {
   font-size: 5rem;
   text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
 }
+body .card .card__blur a {
+  text-decoration: none;
+  color: white;
+}
 body .card button {
   text-align: center;
   background-color: #213f7d;
@@ -241,37 +245,33 @@ body .card button:hover {
   color: #213f7d;
 }
 
-/* Style général pour le bouton */
 .go-top {
   position: fixed;
-  bottom: 1rem; /* Ajustez selon votre besoin */
-  right: 1rem; /* Ajustez selon votre besoin */
-  z-index: 1000; /* Assurez-vous qu'il soit au-dessus des autres éléments */
-  background: none; /* Enlève le fond par défaut du bouton */
-  border: none; /* Enlève la bordure par défaut du bouton */
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background: none;
+  border: none;
   padding: 0;
-  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+  cursor: pointer;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  width: 3rem; /* Taille du bouton */
-  height: 3rem; /* Taille du bouton */
+  width: 3rem;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Style pour l'image du bouton */
 #up-button-img {
-  width: 2rem; /* Ajustez la taille de l'image */
+  width: 2rem;
   height: auto;
 }
 
-/* Apparence du bouton lorsqu'il est visible */
 .go-top.show {
   opacity: 1;
-  transform: scale(1); /* Assure que le bouton ne bouge pas lorsqu'il devient visible */
+  transform: scale(1);
 }
 
-/* Appliquer le filtre pour le mode sombre */
 .dark-mode .go-top #up-button-img {
   filter: invert(1);
 }
@@ -1004,6 +1004,10 @@ form button:hover {
   background-color: #213f7d;
   color: white;
   transform: scale(1.1);
+}
+.error404__container a {
+  text-decoration: none;
+  color: white;
 }
 
 .card-page {
