@@ -15,62 +15,58 @@
             </div>
         </section>
     </section>
-        <section class="dishes-section">
-
-            <div class="content">
-                <aside class="sidebar">
-                    <ul>
-                        <li><a href="#entrees">Nos entrées</a></li>
-                        <li><a href="#main-courses">Nos plats</a></li>
-                        <li><a href="#desserts">Nos desserts</a></li>
-                        <li><a href="#drinks">Nos boissons</a></li>
-                         <button class="filter-button" id="filter-vegetarian">
-                            Filter by Vegetarian
-                        </button>
-                
-
-                    </ul>
-                </aside>
-                <div class="dishes-list">
-                    <div id="entrees">
-                        <h3>Nos entrées</h3>
-                        {% for dish in entrees %}
-                            <div class="dish-item" data-description="{{ dish.description }}">
-                                <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                                <p>{{ dish.name }} - {{ dish.price }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div id="main-courses">
-                        <h3>Nos plats</h3>
-                        {% for dish in main_courses %}
-                            <div class="dish-item" data-description="{{ dish.description }}">
-                                <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                                <p>{{ dish.name }} - {{ dish.price }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div id="desserts">
-                        <h3>Nos desserts</h3>
-                        {% for dish in desserts %}
-                            <div class="dish-item" data-description="{{ dish.description }}">
-                                <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                                <p>{{ dish.name }} - {{ dish.price }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div id="drinks">
-                        <h3>Nos boissons</h3>
-                        {% for dish in drinks %}
-                            <div class="dish-item" data-description="{{ dish.description }}">
-                                <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                                <p>{{ dish.name }} - {{ dish.price }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
+    <section class="dishes-section">
+        <div class="content">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#entrees">Nos entrées</a></li>
+                    <li><a href="#main-courses">Nos plats</a></li>
+                    <li><a href="#desserts">Nos desserts</a></li>
+                    <li><a href="#drinks">Nos boissons</a></li>
+                    <button class="filter-button" id="filter-vegetarian">
+                        Filter by Vegetarian
+                    </button>
+                </ul>
+            </aside>
+            <div class="dishes-list">
+                <div id="entrees">
+                    <h3>Nos entrées</h3>
+                    {% for dish in entrees %}
+                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
+                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
+                            <p>{{ dish.name }} - {{ dish.price }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="main-courses">
+                    <h3>Nos plats</h3>
+                    {% for dish in main_courses %}
+                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
+                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
+                            <p>{{ dish.name }} - {{ dish.price }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="desserts">
+                    <h3>Nos desserts</h3>
+                    {% for dish in desserts %}
+                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
+                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
+                            <p>{{ dish.name }} - {{ dish.price }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="drinks">
+                    <h3>Nos boissons</h3>
+                    {% for dish in drinks %}
+                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
+                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
+                            <p>{{ dish.name }} - {{ dish.price }}</p>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        </section>
+        </div>
     </section>
 </main>
 
@@ -81,6 +77,7 @@
         <h3 id="modal-title"></h3>
         <img id="modal-image" src="" alt="">
         <p id="modal-description"></p>
+        <p id="modal-composition"></p> <!-- Ajout pour afficher la composition -->
     </div>
 </div>
 

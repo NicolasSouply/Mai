@@ -33,7 +33,7 @@ class UserManager extends AbstractManager
             'first_name' => $user->getFirst_name(),
             'email' => $user->getEmail(),
             'phone' => $user->getPhone(),
-            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
+            'password' => $user->getPassword(),
             'role' => $user->getRole()
         ];
 
@@ -59,7 +59,7 @@ class UserManager extends AbstractManager
             'first_name' => $user->getFirst_name(),
             'email' => $user->getEmail(),
             'phone' => $user->getPhone(),
-            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
+            'password' => $user->getPassword(),
             'role' => $user->getRole()
         ];
         if ($query->execute($parameters)) {
@@ -92,6 +92,7 @@ public function deleteUser(int $id) : void
     // Rechercher un utilisateur par ID
     public function findUserById(string $id): ?Users
     {
+        
         $query = $this->db->prepare
         (
             "SELECT *
@@ -106,7 +107,14 @@ public function deleteUser(int $id) : void
             return null;
         }
 
-        $users = new Users($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"]);
+        $users = new Users
+        (
+        $user["first_name"],
+        $user["last_name"], 
+        $user["email"], 
+        $user["phone"], 
+        $user["password"], 
+        $user["role"]);
         $users->setId($user["id"]);
 
         return $users;
@@ -116,25 +124,36 @@ public function deleteUser(int $id) : void
         
     // Rechercher un utilisateur par adresse mail
     public function findUserByEmail(string $email): ?Users
-    {
-        $query = $this->db->prepare(
-            "SELECT *
-            FROM users
-            WHERE email = :email"
-        );
+    {   var_dump('UserManager.findUserByEmail.start');
+        echo "<script>alert('$email');</script>";
+        var_dump($email);
+        $query = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+        var_dump($query);
         $query->execute(["email" => $email]);
     
         $user = $query->fetch(PDO::FETCH_ASSOC);
-            
-        if ($user === false) {
+        var_dump($user);
+
+    
+        if ($user === false || !isset($user['user_id'])) {
+            var_dump($user);
+            var_dump('UserManager.findUserByEmail.null.end');
             return null;
         }
-            $users = new Users($user["first_name"], $user["last_name"], $user["email"], $user["phone"], $user["password"], $user["role"]);
-            $users->setId($user["id"]);
-
-            return $users;
+    
+        $users = new Users(
+            $user["first_name"],
+            $user["last_name"],
+            $user["email"],
+            $user["phone"],
+            $user["password"],
+            $user["role"]
+        );
+        $users->setId($user["user_id"]);
+        //var_dump('UserManager.findUserByEmail.end');
+        return $users;
     }
-
+    
     
 // Rechercher tous les utilisateurs
 public function findAllUsers(): array

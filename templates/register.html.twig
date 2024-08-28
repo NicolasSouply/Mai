@@ -30,14 +30,14 @@
         {% endif %}
 
         <form action="index.php?route=checkSignUp" method="post">
-            <input type="hidden" name="csrf-token" value="{{ csrf_token }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
             <fieldset>
                 <label for="first_name">Prénom :</label>
-                <input type="text" name="firstName" id="first_name" required>
+                <input type="text" name="first_name" id="first_name" required>
             </fieldset>
             <fieldset>
                 <label for="last_name">Nom de famille :</label>
-                <input type="text" name="lastName" id="last_name" required>
+                <input type="text" name="last_name" id="last_name" required>
             </fieldset>
             <fieldset>
                 <label for="phone">Téléphone :</label>

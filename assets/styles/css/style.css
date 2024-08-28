@@ -1395,6 +1395,7 @@ body {
   background-color: rgb(240, 233, 225);
   color: #213f7d;
   border-radius: 8px;
+  max-width: 60rem;
   padding: 0 2rem 4rem 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-direction: column;

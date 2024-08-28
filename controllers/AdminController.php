@@ -19,36 +19,6 @@ private UserManager $um;
 }
 
 
-public function checkLogin(): void
-{
-    if (isset($_SESSION['error_message'])) unset($_SESSION['error_message']);
-    if (isset($_SESSION['success_message'])) unset($_SESSION['success_message']);
-
-    if (isset($_POST['email'], $_POST['password'], $_POST['csrf-token'])) {
-        if ($this->csrfTokenManager->validateCSRFToken($_POST['csrf-token'])) {
-            $user = $this->um->findUserByEmail($_POST['email']);
-            if ($user && password_verify($_POST['password'], $user->getPassword())) {
-                $_SESSION['user'] = $user;
-                
-                if ($user->getRole() === 'admin') {
-                    $this->redirect("index.php?route=admin-zone");
-                } else {
-                    $this->redirect("index.php?route=user-zone");
-                }
-            } else {
-                $_SESSION['error_message'] = "Identifiant ou mot de passe incorrect.";
-                $this->redirect('index.php?route=connexion&error=1');
-            }
-        } else {
-            $_SESSION['error_message'] = "Le jeton CSRF est invalide.";
-            $this->redirect('index.php?route=connexion&error=3');
-        }
-    } else {
-        $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
-        $this->redirect('index.php?route=connexion&error=4');
-    }
-}
-
 public function checkCreate() : void {
     if(isset($_SESSION['error_message'])) {
         unset($_SESSION['error_message']);
@@ -59,51 +29,44 @@ public function checkCreate() : void {
     }
 
     if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm_password']) && isset($_POST['csrf_token']) && isset($_POST["role"])) {
+        // Debugging: Afficher les données POST
+        var_dump($_POST);
 
         $tm = new CSRFTokenManager();
 
         if($tm->validateCSRFToken($_POST['csrf_token'])) {
-
             $user = $this->um->findUserByEmail($_POST['email']);
 
-            if($user === null)
-            {
-                if($_POST['password'] === $_POST['confirm_password'])
-                {
+            if($user === null) {
+                if($_POST['password'] === $_POST['confirm_password']) {
                     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-                    $user = new Users($_POST['first-name'], $_POST['last_name'], $_POST['phone'], $_POST['email'], $password, $_POST["role"]);
+                    $user = new Users($_POST['first_name'], $_POST['last_name'], $_POST['phone'], $_POST['email'], $password, $_POST["role"]);
+
+                    // Debugging: Afficher l'objet utilisateur
+                    var_dump($user);
 
                     try {
                         $this->um->createUser($user);
                         $_SESSION['success_message'] = "L'utilisateur a bien été créé";
                         $this->redirect('admin-list-users');
                     }
-                    catch(\Exception $e)
-                    {
+                    catch(\Exception $e) {
                         $_SESSION['error_message'] = $e->getMessage();
                         $this->redirect('admin-create-user');
                     }
-                }
-                else
-                {
+                } else {
                     $_SESSION['error_message'] = "Les mots de passe ne correspondent pas.";
                     $this->redirect('admin-create-user');
                 }
-            }
-            else
-            {
+            } else {
                 $_SESSION['error_message'] = "Un compte existe déjà avec cette adresse.";
                 $this->redirect('admin-create-user');
             }
-        }
-        else
-        {
+        } else {
             $_SESSION['error_message'] = "Le jeton CSRF est invalide.";
             $this->redirect('admin-create-user');
         }
-    }
-    else
-    {
+    } else {
         $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
         $this->redirect('admin-create-user');
     }

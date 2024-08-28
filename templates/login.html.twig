@@ -1,17 +1,15 @@
 {% extends 'layout.html.twig' %}
 
-
 {% block header %}
 {{ parent() }}
 {% endblock %}
 
-
 {% block main %}
 <main class="connexion">
- <section class="connexion__container">
-    <h2>Se connecter</h2>
+    <section class="connexion__container">
+        <h2>Se connecter</h2>
 
-    {% if get.error is defined %}
+        {% if get.error is defined %}
             <div class="error-message">
                 {% if get.error == 1 %}
                     <p>Mot de passe incorrect. Veuillez réessayer.</p>
@@ -28,7 +26,7 @@
         {% endif %}
         
         <form action="index.php?route=checkLogin" method="post">
-            <input type="hidden" name="csrf-token" value="{{ session.csrf_token }}" />
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
             <fieldset>
                 <label for="email">Email :</label>
                 <input type="email" name="email" id="email" required />
@@ -42,8 +40,8 @@
             </fieldset>
         </form>
 
-    <p>Pas encore de compte ? <a href="index.php?route=register">S'inscrire </a></p>
-  </section>
+        <p>Pas encore de compte ? <a href="index.php?route=register">S'inscrire </a></p>
+    </section>
 </main>
 {% endblock %}
 

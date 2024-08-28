@@ -33,7 +33,7 @@ class Router
                 $this->ac->login();
             } 
             elseif ($route === 'checkLogin') 
-            {
+            {echo "<script>alert('tata');</script>";
                 $this->ac->checkLogin();
             } 
             elseif ($route === 'admin-zone') 

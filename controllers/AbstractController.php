@@ -31,21 +31,21 @@ abstract class AbstractController
 
     protected function redirect(?string $route): void
     {
-        // Si la route est nulle ou vide, redirige vers la page d'accueil
-        if (empty($route)) {
-            header("Location: index.php");
-        } else {
-            // Redirige vers l'URL spécifiée
-            header("Location: index.php?route=" . $route);
+        if (headers_sent($file, $line)) {
+            die("Headers already sent in $file on line $line. Cannot redirect.");
         }
-        exit(); // Assurez-vous que le script ne continue pas après la redirection
+    
+        if ($route !== null && $route !== '') {
+            header("Location: index.php?route=$route");
+        } else {
+            header("Location: index.php");
+        }
+        exit();
     }
     
-    
-    
-
-    protected function redirectWithError(string $route, string $errorCode): void
+    protected function redirectWithError(string $url, string $errorCode): void
     {
-        $this->redirect("$route?error=$errorCode");
+        $_SESSION['error_code'] = $errorCode;
+        $this->redirect($url);
     }
 }

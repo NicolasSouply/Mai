@@ -2,7 +2,7 @@
 
 class CSRFTokenManager
 {
-    private $token;
+   
     public function generateCSRFToken(): string
     {
         if(!isset($_SESSION['csrf_token'])) {
@@ -14,8 +14,16 @@ class CSRFTokenManager
         return $token;
     }
 
-    public function validateCSRFToken($token): bool
+    public function validateCSRFToken($token) : bool
     {
-        return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+
+        if (isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

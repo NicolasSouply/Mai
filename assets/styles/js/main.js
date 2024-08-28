@@ -1,6 +1,8 @@
 console.log("coucou");
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Votre code existant pour la gestion du mode sombre, du footer, etc.
+
   // Sélection des éléments du DOM
   const body = document.body;
   const darkModeToggle = document.getElementById("js-darkMode");
@@ -104,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFooterLegalLinks();
     updateSectionsBackground();
   }
+
   // Initialisation de la carte
   const initMap = () => {
     const lat = 48.501518;
@@ -131,4 +134,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Appel de la fonction d'initialisation de la carte
   initMap();
+
+  // === AJOUT : Gestion de la modale des plats ===
+  const modal = document.getElementById("dish-modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalImage = document.getElementById("modal-image");
+  const modalDescription = document.getElementById("modal-description");
+  const modalComposition = document.getElementById("modal-composition");
+  const closeButton = document.getElementById("close-modal");
+
+  document.querySelectorAll(".dish-item").forEach((item) => {
+    item.addEventListener("click", function () {
+      // Remplir la modale avec les informations du plat
+      modalTitle.textContent = this.querySelector("p").textContent;
+      modalImage.src = this.dataset.image;
+      modalDescription.textContent = this.dataset.description;
+      modalComposition.textContent = this.dataset.composition;
+
+      // Afficher la modale
+      modal.classList.add("show");
+    });
+  });
+
+  closeButton.addEventListener("click", function () {
+    modal.classList.remove("show");
+  });
+
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      modal.classList.remove("show");
+    }
+  });
+  // === FIN DE L'AJOUT ===
 });
