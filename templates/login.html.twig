@@ -5,42 +5,38 @@
 {% endblock %}
 
 {% block main %}
-<main class="connexion">
-    <section class="connexion__container">
-        <h2>Se connecter</h2>
-
-        {% if get.error is defined %}
-            <div class="error-message">
-                {% if get.error == 1 %}
-                    <p>Mot de passe incorrect. Veuillez réessayer.</p>
-                {% elseif get.error == 2 %}
-                    <p>Email incorrect. Veuillez vérifier votre email.</p>
-                {% elseif get.error == 3 %}
-                    <p>Erreur de token CSRF. Veuillez réessayer.</p>
-                {% elseif get.error == 4 %}
-                    <p>Email et mot de passe requis.</p>
-                {% else %}
-                    <p>Erreur inconnue. Veuillez réessayer.</p>
-                {% endif %}
+   <main class="container py-5">
+        {% if session.error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ session.error_message }}
+            </div>
+        {% endif %}
+        {% if session.success_message %}
+            <div class="alert alert-success" role="alert">
+                {{ session.success_message }}
             </div>
         {% endif %}
         
-        <form action="index.php?route=checkLogin" method="post">
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+
+        <form action="index.php?route=check-connexion" method="post">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token }}" />
             <fieldset>
-                <label for="email">Email :</label>
-                <input type="email" name="email" id="email" required />
+                <label for="email" class="form-label">
+                    Email
+                </label>
+                <input type="email" name="email" id="email" required class="form-control"/>
             </fieldset>
             <fieldset>
-                <label for="password">Mot de passe :</label>
-                <input type="password" name="password" id="password" required />
+                <label for="password" class="form-label">
+                    Mot de passe
+                </label>
+                <input type="password" name="password" id="password" required class="form-control"/>
             </fieldset>
-            <fieldset>
-                <button type="submit">Se connecter</button>
+            <fieldset class="mt-3">
+                <button type="submit" class="btn btn-primary">Connexion</button>
             </fieldset>
         </form>
-
-        <p>Pas encore de compte ? <a href="index.php?route=register">S'inscrire </a></p>
+        <p>Pas encore de compte ? <a href="index.php?route=inscription">S'inscrire </a></p>
     </section>
 </main>
 {% endblock %}

@@ -11,7 +11,7 @@ class OrderManager extends AbstractManager
       $query = $this->db->prepare(
           "SELECT *
           FROM orders
-          WHERE user_id = :user_id"
+          WHERE id = :id"
       );
       $parameters = [
           'user_id' => $userId

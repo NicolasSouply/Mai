@@ -10,7 +10,7 @@
         <h2>Formulaire d'ajout de plat</h2>
         
         <form action="index.php?route=checkLogin" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="csrf-token" id="csrf-token" value="{{$_SESSION['csrf_token']}} $_SESSION['csrf_token']; ?>" />
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{$_SESSION['csrf_token']}} $_SESSION['csrf_token']; ?>" />
             
             <fieldset>
                 <label for="name">Nom du plat</label>

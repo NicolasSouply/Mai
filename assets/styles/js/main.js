@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Sélection des éléments du DOM
   const body = document.body;
   const darkModeToggle = document.getElementById("js-darkMode");
+
   const moonIcon = document.getElementById("js-moonIcon");
   const sunIcon = document.getElementById("js-sunIcon");
 
