@@ -2,13 +2,14 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 9rem;
 }
 .register__container {
   justify-content: center;
-  margin-top: 14rem;
+  margin-top: 10rem;
   @include modale;
   h2 {
+    letter-spacing: 0.2rem;
     color: $blue-mai;
   }
 }
@@ -19,6 +20,7 @@ form {
 
   label {
     font-size: 2rem;
+    text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
     color: $blue-mai;
   }
   input {
@@ -47,6 +49,8 @@ form {
   form {
     label {
       font-size: 1.6rem;
+      text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
+      color: $blue-mai;
     }
 
     input {

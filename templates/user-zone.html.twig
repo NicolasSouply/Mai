@@ -9,7 +9,7 @@
   <section class="user-zone__container">
 
     <!-- escape est un filtre qui convertit les caractères spéciaux en leur équivalent HTML -->
-    <h2>Bienvenue {{ session.user.getFirstName()|escape }}</h2>
+    <h2>Bienvenue {{ user.first_name|escape }}</h2>
 
     <h2>Mes commandes</h2>
 

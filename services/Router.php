@@ -18,21 +18,18 @@ class Router
 
         //var_dump($this->ac);
     }
-    private function checkAdmin() : void {
-        if(!isset($_SESSION['user']))
-        {
-            header('Location: index.php?route=admin-connexion'); 
-        }
-
-        if($_SESSION['user']->getRole() !== "ADMIN")
-        {
+    private function checkAdmin(): void
+    {
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'ADMIN') {
             header('Location: index.php?route=admin-connexion');
+            exit(); 
         }
     }
+    
 
     public function handleRequest(? string $route) : void
     {
-        if ($route === null) 
+        if ($route === null || $route === 'home')  
         {
         var_dump($route); 
             // le code si il n'y a pas de route ( === la page d'accueil)
@@ -48,7 +45,7 @@ class Router
         }
         else if($route === "connexion")
         {
-            var_dump('start');
+            //var_dump('start');
             $this->ac->login();
         }
         else if($route === "check-connexion")
@@ -59,10 +56,15 @@ class Router
         {
             $this->ac->logout();
         }
-        else if($route === "admin")
+        else if ($route === 'user-zone')
         {
+            $this->uc->userZone();
+        }
+        else if($route === "admin-zone")
+        {        var_dump('Route: admin-zone'); // Vérifie que la route admin est bien appelée
+
             $this->checkAdmin();
-            $this->adc->home();
+            $this->adc->adminZone();
         }
         else if($route === "admin-connexion")
         {
@@ -102,6 +104,38 @@ class Router
             $this->checkAdmin();
             $this->uc->list();
         }
+        // Routes pour la gestion des plats
+    else if($route === "admin-listDishes")
+    {
+        $this->checkAdmin();
+        $this->dc->listDishes();
+    }
+    else if($route === "admin-addDishe")
+    {
+        $this->checkAdmin();
+        $this->dc->addDishe();
+    }
+    else if($route === "admin-check-addDishe")
+    {
+        $this->checkAdmin();
+        $this->dc->checkAddDishe();
+    }
+    else if($route === "admin-editDishe" && isset($_GET["dishe_id"]))
+    {
+        $this->checkAdmin();
+        $this->dc->editDishe(intval($_GET["dishe_id"]));
+    }
+    else if ($route === "admin-check-editDishe" && isset($_GET["dishe_id"]))
+    {
+        $this->checkAdmin();
+        $this->dc->checkEditDishe(intval($_GET["dishe_id"]));
+    }
+    
+    else if($route === "admin-deleteDishe" && isset($_GET["dishe_id"]))
+    {
+        $this->checkAdmin();
+        $this->dc->deleteDishe(intval($_GET["dishe_id"]));
+    }
         elseif ($route === 'card') 
         {
             $this->sc->card();
@@ -128,6 +162,8 @@ class Router
             $this->uc->show(intval($_GET["user_id"]));
         }
         else {
+            var_dump('Route non trouvée : ' . $route); // Vérifie si la route est inconnue
+
             $this->sc->notFound();
         }
     }

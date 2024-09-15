@@ -1,11 +1,10 @@
 {% extends 'layout.html.twig' %}
 
-{% block header %}
-{{ parent() }}
-{% endblock %}
-
 {% block main %}
-   <main class="container py-5">
+
+<main class="connexion">
+ <section class="connexion__container py-5">
+
         {% if session.error_message %}
             <div class="alert alert-danger" role="alert">
                 {{ session.error_message }}
@@ -16,7 +15,7 @@
                 {{ session.success_message }}
             </div>
         {% endif %}
-        
+            <h2>Connexion</h2>
 
         <form action="index.php?route=check-connexion" method="post">
             <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token }}" />
@@ -41,6 +40,3 @@
 </main>
 {% endblock %}
 
-{% block footer %}
-{{ parent() }}
-{% endblock %}

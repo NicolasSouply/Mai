@@ -2,7 +2,7 @@
 
 {% block main %}
     <main class="container py-5">
-        <h1 class="mb-4">Liste des utilisateurs</h1>
+        <h2 class="mb-4">Liste des utilisateurs</h2>
         {% if session.success_message %}
             <div class="alert alert-success" role="alert">
                 {{ session.success_message }}
@@ -12,32 +12,18 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Role
-                    </th>
-                    <th>
-                        Actions
-                    </th>
+                    <th>#</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                     <tr>
-                        <td>
-                            {{ user.id }}
-                        </td>
-                        <td>
-                            {{ user.email }}
-                        </td>
-                        <td>
-                            {{ user.role }}
-                        </td>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
                         <td>
                             <a class="btn btn-primary" href="index.php?route=admin-show-user&user_id={{ user.id }}" title="Voir l'utilisateur"><span class="bi bi-eye-fill" aria-hidden="true"></span></a>
                             <a class="btn btn-success" href="index.php?route=admin-edit-user&user_id={{ user.id }}" title="Modifier l'utilisateur"><span class="bi bi-pencil-fill" aria-hidden="true"></span></a>
@@ -51,7 +37,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteModalTitle">Spprimer un utilisateur</h1>
+                        <h1 class="modal-title fs-5" id="deleteModalTitle">Supprimer un utilisateur</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -69,31 +55,4 @@
         </div>
     </main>
 {% endblock %}
-{% block javascript %}
-    {{ parent() }}
-    <script type="application/javascript">
-        window.addEventListener("DOMContentLoaded", function(){
-            const modal = document.getElementById('deleteUserModal');
-            if (modal) {
-              modal.addEventListener('show.bs.modal', event => {
-                // Button that triggered the modal
-                const button = event.relatedTarget;
-                // Extract info from data-bs-* attributes
-                const email = button.getAttribute('data-bs-user');
-                const id = button.getAttribute('data-bs-id');
 
-                // Update the modal's content.
-                const modalP = modal.querySelector('.modal-body p');
-
-                modalP.innerHTML = email;
-                const deleteBtn = modal.querySelector('.modal-footer .btn-danger');
-
-                deleteBtn.addEventListener('click', () => {
-                    window.location.href = `index.php?route=admin-delete-user&user_id=${id}`;
-                });
-
-              })
-            }
-        });
-    </script>
-{% endblock %}

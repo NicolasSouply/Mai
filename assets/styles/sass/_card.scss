@@ -10,8 +10,8 @@
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 80vh; // Ajusté pour laisser de l'espace pour la section dishes
-  padding-bottom: 5rem; // Ajoute un padding en bas pour séparer des autres sections
+  height: 80vh;
+  padding-bottom: 5rem;
   position: relative;
 }
 
@@ -54,25 +54,19 @@
   flex-direction: column;
   background-color: $cream-mai;
   width: 100%;
-
   box-sizing: border-box;
 
-  .filter-section {
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
-  }
-
+  // Styles pour le sidebar
   .content {
     display: flex;
     width: 100%;
     flex: 1;
 
     .sidebar {
-      width: 20vw; // Sidebar prend 20% de la largeur de la fenêtre
+      width: 20vw;
       background-color: $blue-mai;
-      height: 100vh; // S'assure que le sidebar occupe toute la hauteur
-      overflow-y: auto; // Permet de faire défiler si nécessaire
+      height: 100vh;
+      overflow-y: auto;
       z-index: 1;
 
       ul {
@@ -98,97 +92,140 @@
             }
           }
         }
-
-        &.dark-mode {
-          background-color: $cream-mai;
-        }
-      }
-    }
-
-    .dishes-list {
-      width: 80vw; // Prend 80% de la largeur de la fenêtre
-      background-color: $cream-mai;
-      color: $blue-mai;
-      padding: 2rem;
-      box-sizing: border-box;
-
-      .dish-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        cursor: pointer;
-
-        img {
-          width: 100px;
-          height: 100px;
-          margin-right: 20px;
-          border-radius: 10px;
-        }
-
-        p {
-          font-size: 18px;
-        }
-
-        &.dark-mode {
-          background: rgba(255, 255, 255, 0.1);
-          color: white;
-        }
       }
     }
   }
-}
 
-// Styles pour les modales
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  // Grille pour la liste des plats
+  .dishes-list {
+    display: grid;
+    grid-template-rows: repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    ); // Grille réactive
+    gap: 20px;
+    width: 80vw;
+    background-color: $cream-mai;
+    color: $blue-mai;
+    padding: 2rem;
+    box-sizing: border-box;
 
-  &.show {
-    display: block;
-  }
-
-  .modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    border-radius: 10px;
-
-    .close-button {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-
-      &:hover,
-      &:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
+    // Style des plats individuels
+    .dish-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 1rem;
+      background-color: white;
       border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+
+      p {
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      span {
+        font-size: 1.6rem;
+        color: gray;
+      }
+    }
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .dish-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .dish-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .dish-info {
+    margin-top: 0.5rem;
+  }
+
+  .price {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .order-button {
+    margin-top: 0.5rem;
+  }
+
+  // Styles pour les modales
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &.show {
+      display: block;
     }
 
-    h3 {
-      margin-top: 0;
-    }
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      border-radius: 10px;
 
-    &.dark-mode {
-      background-color: #121212;
-      color: white;
+      .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+
+        &:hover,
+        &:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      h3 {
+        margin-top: 0;
+      }
     }
   }
 }

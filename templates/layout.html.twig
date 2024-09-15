@@ -36,12 +36,20 @@
         <li><a href="index.php?route=localisation">Localiser</a></li>
         <li><a href="index.php?route=contact">Contact</a></li>
 
-    {% if isUserLoggedIn %}
-      <a class="navbar__button" href="index.php?route=logout">Déconnexion</a>
-    {% else %}
-          <li><a href="index.php?route=connexion" class="navbar__button">Connexion</a></li>
-          <li><a href="index.php?route=inscription" class="navbar__button">Inscription</a></li>
+  {% if isUserLoggedIn %}
+    <!-- Bouton de retour selon le rôle de l'utilisateur -->
+    {% if userRole == 'ADMIN' %}
+        <li><a class="navbar__button" href="index.php?route=admin-zone">Espace admin</a></li>
+    {% elseif userRole == 'USER' %}
+        <li><a class="navbar__button" href="index.php?route=user-zone">Espace utilisateur</a></li>
     {% endif %}
+
+    <!-- Bouton de déconnexion -->
+    <a class="navbar__button" href="index.php?route=deconnexion">Déconnexion</a>
+{% else %}
+    <li><a href="index.php?route=connexion" class="navbar__button">Connexion</a></li>
+    <li><a href="index.php?route=inscription" class="navbar__button">Inscription</a></li>
+{% endif %}
       </ul>
     </header>
 
@@ -67,12 +75,20 @@
       </nav>
         
       <div class="navbar__login">
-    {% if isUserLoggedIn %}
-      <a class="navbar__button" href="index.php?route=logout">Déconnexion</a>
-    {% else %}
-          <a class="navbar__button sign-in" href="index.php?route=connexion">Connexion</a>
-          <a class="navbar__button" href="index.php?route=inscription">Inscription</a>
-        {% endif %}
+  {% if isUserLoggedIn %}
+    <!-- Bouton de retour selon le rôle de l'utilisateur -->
+    {% if userRole == 'ADMIN' %}
+        <li><a class="navbar__button" href="index.php?route=admin-zone">Espace admin</a></li>
+    {% elseif userRole == 'USER' %}
+        <li><a class="navbar__button" href="index.php?route=user-zone">Espace utilisateur</a></li>
+    {% endif %}
+
+    <!-- Bouton de déconnexion -->
+    <a class="navbar__button" href="index.php?route=deconnexion">Déconnexion</a>
+{% else %}
+    <li><a href="index.php?route=connexion" class="navbar__button">Connexion</a></li>
+    <li><a href="index.php?route=inscription" class="navbar__button">Inscription</a></li>
+{% endif %}
       </div>
     </header>
 

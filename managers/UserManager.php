@@ -19,9 +19,9 @@ class UserManager extends AbstractManager
             phone,
             password, 
             role) 
-            VALUES (
-            :last_name, 
+            VALUES ( 
             :first_name, 
+            :last_name,
             :email, 
             :phone, 
             :password, 
@@ -36,6 +36,10 @@ class UserManager extends AbstractManager
             ':role' => $user->getRole()
         ];
     
+    // Debugging
+    var_dump($parameters);  // Check values being inserted
+
+
             $query->execute($parameters);
             $user->setId($this->db->lastInsertId());
             return $user;
@@ -99,10 +103,10 @@ class UserManager extends AbstractManager
 
         $user = new Users(
             $result["first_name"],
-            $result["last_name"], 
-            $result["email"], 
-            $result["phone"], 
-            $result["password"], 
+            $result["last_name"],
+            $result["email"],
+            $result["phone"],
+            $result["password"],
             $result["role"]
         );
         $user->setId($result["id"]);
@@ -112,15 +116,17 @@ class UserManager extends AbstractManager
     }
     // Rechercher un utilisateur par adresse mail
     public function findUserByEmail(string $email): ?Users
-    {   
+    {   var_dump($email);
 
         $query = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $parameters = [
             "email" => $email
         ];
         $query->execute($parameters);
+
         $result = $query->fetch(PDO::FETCH_ASSOC);
-       
+       var_dump($result);
+
         $user = null;
 
         if($result)

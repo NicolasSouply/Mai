@@ -142,29 +142,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalImage = document.getElementById("modal-image");
   const modalDescription = document.getElementById("modal-description");
   const modalComposition = document.getElementById("modal-composition");
-  const closeButton = document.getElementById("close-modal");
+  const modalPrice = document.getElementById("modal-price");
+  const closeModal = document.getElementById("close-modal");
 
   document.querySelectorAll(".dish-item").forEach((item) => {
     item.addEventListener("click", function () {
-      // Remplir la modale avec les informations du plat
-      modalTitle.textContent = this.querySelector("p").textContent;
-      modalImage.src = this.dataset.image;
-      modalDescription.textContent = this.dataset.description;
-      modalComposition.textContent = this.dataset.composition;
+      const name = this.querySelector("p").textContent.split(" - ")[0];
+      const image = this.querySelector("img").src;
+      const price = this.querySelector("p.price").textContent;
+      const description = this.getAttribute("data-description");
+      const vegetarian =
+        this.getAttribute("data-vegetarian") === "true"
+          ? "Végétarien"
+          : "Non Végétarien";
 
-      // Afficher la modale
-      modal.classList.add("show");
+      modalTitle.textContent = name;
+      modalImage.src = image;
+      modalPrice.textContent = "Prix : " + price;
+      modalDescription.textContent = description;
+      modalComposition.textContent = vegetarian;
+      modal.style.display = "flex";
     });
   });
 
-  closeButton.addEventListener("click", function () {
-    modal.classList.remove("show");
+  closeModal.addEventListener("click", function () {
+    modal.style.display = "none";
   });
 
   window.addEventListener("click", function (event) {
     if (event.target === modal) {
-      modal.classList.remove("show");
+      modal.style.display = "none";
     }
   });
-  // === FIN DE L'AJOUT ===
+
+  // === Filtrage végétarien ===
+  document.getElementById("filter-vegetarian").addEventListener("click", () => {
+    document.querySelectorAll(".dish-item").forEach((item) => {
+      const isVegetarian = item.getAttribute("data-vegetarian") === "true";
+      item.style.display = isVegetarian ? "block" : "none";
+    });
+  });
 });

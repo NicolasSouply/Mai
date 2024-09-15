@@ -1,0 +1,48 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block main %}
+    <main class="container py-5">
+        <h2>Liste des Plats</h2>
+        {% if app.session.flashBag.get('message') is not empty %}
+            <div class="alert alert-success">
+            {% for message in app.session.flashBag.get('message') %}
+                {{ message }}
+            {% endfor %}
+    </div>
+        {% endif %}
+    <a href="index.php?route=admin-addDishe">Ajouter un plat</a>
+
+    {% if dishes is empty %}
+        <p>Aucun plat n'est disponible pour le moment.</p>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>catégorie</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Végétarien</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dish in dishes %}
+                    <tr>
+                        <td>{{dish.category}}</td>
+                        <td>{{ dish.name }}</td>
+                        <td>{{ dish.description }}</td>
+                        <td>{{ dish.price }} €</td>
+                        <td>{% if dish.isVegetarian %}Oui{% else %}Non{% endif %}</td>
+                        <td><img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100"></td>
+                        <td>
+                            <a class="btn btn-success" href="index.php?route=admin-editDishe&dishe_id={{ dish.id }}">Modifier</a>
+                            <a class="btn btn-danger" href="index.php?route=admin-deleteDishe&dishe_id={{ dish.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce plat ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

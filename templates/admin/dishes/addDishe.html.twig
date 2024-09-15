@@ -1,17 +1,27 @@
-{% extends 'layout.html.twig' %}
+{% extends 'admin/layout.html.twig' %}
 
-{% block header %}
-{{ parent() }}
-{% endblock %}
 
 {% block main %}
 <main class="addDishe">
     <section class="addDishe__container">
         <h2>Formulaire d'ajout de plat</h2>
-        
-        <form action="index.php?route=checkLogin" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="csrf_token" id="csrf_token" value="{{$_SESSION['csrf_token']}} $_SESSION['csrf_token']; ?>" />
+
+{% if app.session.get('message') %}
+    <div class="alert alert-success">
+        {{ app.session.get('message') }}
+    </div>
+    {% do app.session.remove('message') %}
+{% endif %}
+
+
+        <form action="index.php?route=admin-check-addDishe" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}" />
             
+            <fieldset>
+                <label for="category">catégorie</label>
+                <input type="text" name="category" id="category" required>
+            </fieldset>
+
             <fieldset>
                 <label for="name">Nom du plat</label>
                 <input type="text" name="name" id="name" required>
@@ -43,12 +53,6 @@
                 <button type="submit">Ajouter le plat</button>
             </fieldset>
         </form>
-        
-        <p>Pas encore de compte ? <a href="index.php?route=inscription">S'inscrire</a></p>
     </section>
 </main>
-{% endblock %}
-
-{% block footer %}
-{{ parent() }}
 {% endblock %}

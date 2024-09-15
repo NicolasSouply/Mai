@@ -2,12 +2,11 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 4rem;
 }
 .connexion__container {
   justify-content: center;
   margin-top: 14rem;
-
   @include modale;
   h2 {
     letter-spacing: 0.2rem;

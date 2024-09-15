@@ -1,0 +1,55 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block main %}
+<main class="editDishe">
+    <section class="editDishe__container">
+        <h2>Modifier le plat</h2>
+        
+        <form action="index.php?route=checkEditDish" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+            <input type="hidden" name="id" value="{{ dish.id }}" />
+            
+            <fieldset>
+                <label for="category">catégorie</label>
+                <input type="text" name="category" id="category" required>
+            </fieldset>
+            
+            <fieldset>
+                <label for="name">Nom du plat</label>
+                <input type="text" name="name" id="name" value="{{ dish.name }}" required>
+            </fieldset>
+            
+            <fieldset>
+                <label for="price">Prix</label>
+                <input type="number" step="0.01" name="price" id="price" value="{{ dish.price }}" required>
+            </fieldset>
+            
+            <fieldset>
+                <label for="picture">Choisir une nouvelle image (laisser vide pour conserver l'ancienne)</label>
+                <input type="file" name="picture" id="picture" accept="image/*">
+                {% if dish.picture %}
+                    <img src="/uploads/{{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                {% endif %}
+            </fieldset>
+            
+            <fieldset>
+                <label for="vegetarian">
+                    Végétarien
+                    <input type="checkbox" id="vegetarian" name="vegetarian" value="1" {% if dish.isVegetarian %}checked{% endif %}>
+                </label>
+            </fieldset>
+            
+            <fieldset>
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" cols="50">{{ dish.description }}</textarea>
+            </fieldset>
+            
+            <fieldset>
+                <button type="submit">Sauvegarder les modifications</button>
+            </fieldset>
+        </form>
+        
+        <p><a href="index.php?route=admin-listDishes">Retour à la liste des plats</a></p>
+    </section>
+</main>
+{% endblock %}

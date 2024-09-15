@@ -1,11 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-{% block body_class 'custom-page' %}
-
-{% block header %}
-    {{ parent() }}
-{% endblock %}
-
 {% block main %}
 <main class="content">
     <section class="card-page">
@@ -15,55 +9,98 @@
             </div>
         </section>
     </section>
+
     <section class="dishes-section">
         <div class="content">
             <aside class="sidebar">
                 <ul>
-                    <li><a href="#entrees">Nos entrées</a></li>
+                    <li><a href="#starter">Nos entrées</a></li>
                     <li><a href="#main-courses">Nos plats</a></li>
                     <li><a href="#desserts">Nos desserts</a></li>
                     <li><a href="#drinks">Nos boissons</a></li>
-                    <button class="filter-button" id="filter-vegetarian">
-                        Filter by Vegetarian
-                    </button>
+                    <button class="filter-button" id="filter-vegetarian">Filtre pour les plats végétariens</button>
                 </ul>
             </aside>
+
             <div class="dishes-list">
-                <div id="entrees">
+                <!-- Entrées -->
+                <div id="starter" class="dish-category">
                     <h3>Nos entrées</h3>
-                    {% for dish in entrees %}
-                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
-                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                            <p>{{ dish.name }} - {{ dish.price }}</p>
-                        </div>
-                    {% endfor %}
+                    <div class="grid-container">
+                        {% for dish in dishes %}
+                            {% if dish.category == 'entrée' %}
+                                <div class="dish-item">
+                                    <p>Nom : {{ dish.name }}</p>
+                                    <p>Description : {{ dish.description }}</p>
+                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
+                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>Aucune entrée disponible pour le moment.</p>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div id="main-courses">
+
+                <!-- Plats -->
+                <div id="main-courses" class="dish-category">
                     <h3>Nos plats</h3>
-                    {% for dish in main_courses %}
-                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
-                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                            <p>{{ dish.name }} - {{ dish.price }}</p>
-                        </div>
-                    {% endfor %}
+                    <div class="grid-container">
+                        {% for dish in dishes %}
+                            {% if dish.category == 'plat' %}
+                                <div class="dish-item">
+                                    <p>Nom : {{ dish.name }}</p>
+                                    <p>Description : {{ dish.description }}</p>
+                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
+                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>Aucun plat disponible pour le moment.</p>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div id="desserts">
+
+                <!-- Desserts -->
+                <div id="desserts" class="dish-category">
                     <h3>Nos desserts</h3>
-                    {% for dish in desserts %}
-                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
-                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                            <p>{{ dish.name }} - {{ dish.price }}</p>
-                        </div>
-                    {% endfor %}
+                    <div class="grid-container">
+                        {% for dish in dishes %}
+                            {% if dish.category == 'dessert' %}
+                                <div class="dish-item">
+                                    <p>Nom : {{ dish.name }}</p>
+                                    <p>Description : {{ dish.description }}</p>
+                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
+                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>Aucun dessert disponible pour le moment.</p>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div id="drinks">
+
+                <!-- Boissons -->
+                <div id="drinks" class="dish-category">
                     <h3>Nos boissons</h3>
-                    {% for dish in drinks %}
-                        <div class="dish-item" data-description="{{ dish.description }}" data-composition="{{ dish.composition }}" data-image="{{ dish.image }}">
-                            <img src="{{ dish.image }}" alt="{{ dish.name }}">
-                            <p>{{ dish.name }} - {{ dish.price }}</p>
-                        </div>
-                    {% endfor %}
+                    <div class="grid-container">
+                        {% for dish in dishes %}
+                            {% if dish.category == 'boisson' %}
+                                <div class="dish-item">
+                                    <p>Nom : {{ dish.name }}</p>
+                                    <p>Description : {{ dish.description }}</p>
+                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
+                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>Aucune boisson disponible pour le moment.</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,13 +113,10 @@
         <span class="close-button" id="close-modal">&times;</span>
         <h3 id="modal-title"></h3>
         <img id="modal-image" src="" alt="">
+        <p id="modal-category"></p>
         <p id="modal-description"></p>
-        <p id="modal-composition"></p> <!-- Ajout pour afficher la composition -->
+        <p id="modal-price"></p>
+        <p id="modal-vegetarian"></p>
     </div>
 </div>
-
-{% endblock %}
-
-{% block footer %}
-{{ parent() }}
 {% endblock %}

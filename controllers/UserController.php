@@ -12,6 +12,23 @@ class UserController extends AbstractController
         $this->dm = new DisheManager();
     }
 
+    public function userZone(): void
+    {
+        if (isset($_SESSION['user']) && $_SESSION['user'] instanceof Users) {
+            $user = $_SESSION['user'];
+            // Debug: Vérifie les données de l'utilisateur
+            var_dump($user);
+            $this->render('user-zone.html.twig', [
+                'user' => $user
+            ]);
+        } else {
+            $_SESSION['error_message'] = "Vous devez être connecté pour accéder à cette page.";
+            header('Location: index.php?route=connexion');
+            exit();
+        }
+    }
+    
+
     public function create() : void {
         $this->render("admin/users/create.html.twig", []);
     }

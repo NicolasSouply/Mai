@@ -5,7 +5,7 @@ class Dishes
   
 private ? int $id = null;
 
-public function __construct(private string $name, private string $description, private int $price, private bool $vegetarian, private string $picture )
+public function __construct(private string $category, private string $name, private string $description, private float $price, private bool $isVegetarian, private string $picture )
 {
 
 }
@@ -13,10 +13,19 @@ public function getId(): ?int
   {
     return $this->id;
   }
-  public function setId(?int $id) : void
+public function setId(?int $id) : void
+{
+$this->id = $id;
+}
+public function getCategory(): string
+{
+return $this->category;
+}
+
+public function setCategory($category): void
   {
-    $this->id = $id;
-  }
+    $this->category = $category;
+}
 public function getName(): string
 {
 return $this->name;
@@ -33,23 +42,23 @@ public function setDescription($description) :void
 {
 $this->description = $description;
 }
-public function getPrice() : int
+public function getPrice() :  float
 {
   return $this->price;
 }
-public function setPrice(int $price): void
+public function setPrice(float $price): void
 {
     $this->price = $price;
 }
 
-public function getVegetarian(): bool
+public function getIsVegetarian(): bool
 {
-    return $this->vegetarian;
+    return $this->isVegetarian;
 }
 
-public function setVegetarian(bool $vegetarian): void
+public function setIsVegetarian(bool $isVegetarian): void
 {
-    $this->vegetarian = $vegetarian;
+    $this->isVegetarian = $isVegetarian;
 }
 
 public function getPicture(): string
