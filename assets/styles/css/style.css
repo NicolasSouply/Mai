@@ -36,10 +36,12 @@ body.dark-mode {
   color: rgb(240, 233, 225);
 }
 body ul {
+  list-style-type: none;
   padding: 0;
   margin-left: 0;
 }
 body li {
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -642,6 +644,7 @@ body.light-mode .navbar__sun-icon {
     margin-top: auto;
   }
   .navbar__links.show li {
+    list-style: none;
     margin: 0.5rem 0;
     text-align: center;
   }
@@ -1110,8 +1113,8 @@ form button:hover {
 }
 .dishes-section .dishes-list {
   display: grid;
-  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
   width: 80vw;
   background-color: rgb(240, 233, 225);
   color: #213f7d;
@@ -1135,8 +1138,8 @@ form button:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 .dishes-section .dishes-list .dish-item img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: auto;
   margin-bottom: 10px;
   border-radius: 10px;
 }
@@ -1148,32 +1151,18 @@ form button:hover {
   font-size: 1.6rem;
   color: gray;
 }
-.dishes-section .grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+.dishes-section .details-button {
+  background-color: #213f7d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: background-color 0.3s ease;
 }
-.dishes-section .dish-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  background-color: #fff;
-  text-align: center;
-}
-.dishes-section .dish-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-.dishes-section .dish-info {
-  margin-top: 0.5rem;
-}
-.dishes-section .price {
-  font-weight: bold;
-  color: #333;
-}
-.dishes-section .order-button {
-  margin-top: 0.5rem;
+.dishes-section .details-button:hover {
+  background-color: #162b55;
 }
 .dishes-section .modal {
   display: none;
@@ -1191,10 +1180,11 @@ form button:hover {
 }
 .dishes-section .modal .modal-content {
   background-color: white;
-  margin: 10% auto;
+  margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  max-width: 600px;
   border-radius: 10px;
 }
 .dishes-section .modal .modal-content .close-button {
@@ -1215,6 +1205,10 @@ form button:hover {
 }
 .dishes-section .modal .modal-content h3 {
   margin-top: 0;
+}
+.dishes-section .modal .modal-content p {
+  margin: 0.5rem 0;
+  font-size: 1.6rem;
 }
 
 body {

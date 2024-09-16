@@ -99,11 +99,11 @@
   // Grille pour la liste des plats
   .dishes-list {
     display: grid;
-    grid-template-rows: repeat(
+    grid-template-columns: repeat(
       auto-fill,
-      minmax(200px, 1fr)
-    ); // Grille réactive
-    gap: 20px;
+      minmax(250px, 1fr)
+    ); // Ajuste la taille minimale des colonnes
+    gap: 2rem; // Espace entre les plats
     width: 80vw;
     background-color: $cream-mai;
     color: $blue-mai;
@@ -129,8 +129,8 @@
       }
 
       img {
-        width: 100px;
-        height: 100px;
+        width: 150px; // Agrandir l'image
+        height: auto;
         margin-bottom: 10px;
         border-radius: 10px;
       }
@@ -146,37 +146,21 @@
       }
     }
   }
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
 
-  .dish-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1rem;
-    background-color: #fff;
-    text-align: center;
-  }
+  // Styles pour le bouton Détails
+  .details-button {
+    background-color: $blue-mai;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    transition: background-color 0.3s ease;
 
-  .dish-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-
-  .dish-info {
-    margin-top: 0.5rem;
-  }
-
-  .price {
-    font-weight: bold;
-    color: #333;
-  }
-
-  .order-button {
-    margin-top: 0.5rem;
+    &:hover {
+      background-color: darken($blue-mai, 10%);
+    }
   }
 
   // Styles pour les modales
@@ -197,10 +181,11 @@
 
     .modal-content {
       background-color: white;
-      margin: 10% auto;
+      margin: 5% auto;
       padding: 20px;
       border: 1px solid #888;
       width: 80%;
+      max-width: 600px; // Largeur maximale de la modale
       border-radius: 10px;
 
       .close-button {
@@ -225,6 +210,11 @@
 
       h3 {
         margin-top: 0;
+      }
+
+      p {
+        margin: 0.5rem 0;
+        font-size: 1.6rem;
       }
     }
   }

@@ -138,7 +138,9 @@ class Router
     }
         elseif ($route === 'card') 
         {
+            $this->dc->showDishesByCategory();
             $this->sc->card();
+            
         }
         elseif ($route === 'about') 
         {

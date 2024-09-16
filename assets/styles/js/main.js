@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Sélection des éléments du DOM
   const body = document.body;
+  const burgerMenu = document.getElementById("burger-menu");
+  const navLinks = document.getElementById("navLinks");
   const darkModeToggle = document.getElementById("js-darkMode");
 
   const moonIcon = document.getElementById("js-moonIcon");
@@ -15,10 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ".hook, .gallery, .card, .end-page, .about__story, .about__main, .about__title, .about__main-p, .about__lifeStyle, .about__taste, .contact-info__block "
   );
   const footerLegalLinks = document.querySelectorAll(".footer__legal a");
+
   const instaIcon = document.getElementById("js-insta");
   const facebookIcon = document.getElementById("js-facebook");
-  const burgerMenu = document.getElementById("burger-menu");
-  const navLinks = document.getElementById("navLinks");
+
   const darkModeToggleMobile = document.getElementById("js-darkModeMobile");
   const moonIconMobile = document.getElementById("js-moonIconMobile");
   const sunIconMobile = document.getElementById("js-sunIconMobile");
@@ -135,44 +137,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Appel de la fonction d'initialisation de la carte
   initMap();
+  document.addEventListener("DOMContentLoaded", () => {
+    const openModalButtons = document.querySelectorAll(".details-button");
+    const modal = document.getElementById("details-modal");
+    const closeButton = modal.querySelector(".close-button");
+    const modalTitle = modal.querySelector("#modal-title");
+    const modalImage = modal.querySelector("#modal-image");
+    const modalDescription = modal.querySelector("#modal-description");
+    const modalPrice = modal.querySelector("#modal-price");
+    const modalVegetarian = modal.querySelector("#modal-vegetarian");
 
-  // === AJOUT : Gestion de la modale des plats ===
-  const modal = document.getElementById("dish-modal");
-  const modalTitle = document.getElementById("modal-title");
-  const modalImage = document.getElementById("modal-image");
-  const modalDescription = document.getElementById("modal-description");
-  const modalComposition = document.getElementById("modal-composition");
-  const modalPrice = document.getElementById("modal-price");
-  const closeModal = document.getElementById("close-modal");
+    openModalButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const description = button.getAttribute("data-description");
+        const dishId = button.getAttribute("data-modal-id");
 
-  document.querySelectorAll(".dish-item").forEach((item) => {
-    item.addEventListener("click", function () {
-      const name = this.querySelector("p").textContent.split(" - ")[0];
-      const image = this.querySelector("img").src;
-      const price = this.querySelector("p.price").textContent;
-      const description = this.getAttribute("data-description");
-      const vegetarian =
-        this.getAttribute("data-vegetarian") === "true"
-          ? "Végétarien"
-          : "Non Végétarien";
+        // Remplir la modale avec les informations du plat
+        modalTitle.textContent = `Détails du plat ${dishId}`; // Tu peux personnaliser cela
+        modalDescription.textContent = description;
+        modalImage.src = `ServeurFichiers.php?file=${dishId}.webp`; // Assure-toi que l'URL est correcte
+        modalPrice.textContent = `Prix : ${button.getAttribute("data-price")}€`;
+        modalVegetarian.textContent = button.getAttribute("data-vegetarian")
+          ? "Végétarien : Oui"
+          : "Végétarien : Non";
 
-      modalTitle.textContent = name;
-      modalImage.src = image;
-      modalPrice.textContent = "Prix : " + price;
-      modalDescription.textContent = description;
-      modalComposition.textContent = vegetarian;
-      modal.style.display = "flex";
+        modal.classList.add("show");
+      });
     });
-  });
 
-  closeModal.addEventListener("click", function () {
-    modal.style.display = "none";
-  });
+    closeButton.addEventListener("click", () => {
+      modal.classList.remove("show");
+    });
 
-  window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("show");
+      }
+    });
   });
 
   // === Filtrage végétarien ===

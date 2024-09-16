@@ -1,3 +1,0 @@
-# Interdire l'accès direct aux fichiers
-Order deny,allow
-Deny from all

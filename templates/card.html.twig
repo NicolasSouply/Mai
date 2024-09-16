@@ -27,19 +27,24 @@
                 <div id="starter" class="dish-category">
                     <h3>Nos entrées</h3>
                     <div class="grid-container">
+                        {% set hasEntries = false %}
                         {% for dish in dishes %}
                             {% if dish.category == 'entrée' %}
                                 <div class="dish-item">
-                                    <p>Nom : {{ dish.name }}</p>
-                                    <p>Description : {{ dish.description }}</p>
-                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Nom : {{ dish.name|e }}</p>
+                                    <p>Description : {{ dish.description|e }}</p>
+                                    <p>Prix : {{ dish.price|e }}€</p>
                                     <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
-                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <!-- Bouton pour ouvrir la modale -->
+                                    <button class="details-button" data-modal-id="modal-{{ dish.id }}" data-description="{{ dish.description|e }}">Détails</button>
                                 </div>
+                                {% set hasEntries = true %}
                             {% endif %}
-                        {% else %}
-                            <p>Aucune entrée disponible pour le moment.</p>
                         {% endfor %}
+                        {% if not hasEntries %}
+                            <p>Aucune entrée disponible pour le moment.</p>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -47,19 +52,24 @@
                 <div id="main-courses" class="dish-category">
                     <h3>Nos plats</h3>
                     <div class="grid-container">
+                        {% set hasMainCourses = false %}
                         {% for dish in dishes %}
                             {% if dish.category == 'plat' %}
                                 <div class="dish-item">
-                                    <p>Nom : {{ dish.name }}</p>
-                                    <p>Description : {{ dish.description }}</p>
-                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Nom : {{ dish.name|e }}</p>
+                                    <p>Description : {{ dish.description|e }}</p>
+                                    <p>Prix : {{ dish.price|e }}€</p>
                                     <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
-                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <!-- Bouton pour ouvrir la modale -->
+                                    <button class="details-button" data-modal-id="modal-{{ dish.id }}" data-description="{{ dish.description|e }}">Détails</button>
                                 </div>
+                                {% set hasMainCourses = true %}
                             {% endif %}
-                        {% else %}
-                            <p>Aucun plat disponible pour le moment.</p>
                         {% endfor %}
+                        {% if not hasMainCourses %}
+                            <p>Aucun plat disponible pour le moment.</p>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -67,19 +77,24 @@
                 <div id="desserts" class="dish-category">
                     <h3>Nos desserts</h3>
                     <div class="grid-container">
+                        {% set hasDesserts = false %}
                         {% for dish in dishes %}
                             {% if dish.category == 'dessert' %}
                                 <div class="dish-item">
-                                    <p>Nom : {{ dish.name }}</p>
-                                    <p>Description : {{ dish.description }}</p>
-                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Nom : {{ dish.name|e }}</p>
+                                    <p>Description : {{ dish.description|e }}</p>
+                                    <p>Prix : {{ dish.price|e }}€</p>
                                     <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
-                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <!-- Bouton pour ouvrir la modale -->
+                                    <button class="details-button" data-modal-id="modal-{{ dish.id }}" data-description="{{ dish.description|e }}">Détails</button>
                                 </div>
+                                {% set hasDesserts = true %}
                             {% endif %}
-                        {% else %}
-                            <p>Aucun dessert disponible pour le moment.</p>
                         {% endfor %}
+                        {% if not hasDesserts %}
+                            <p>Aucun dessert disponible pour le moment.</p>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -87,36 +102,40 @@
                 <div id="drinks" class="dish-category">
                     <h3>Nos boissons</h3>
                     <div class="grid-container">
+                        {% set hasDrinks = false %}
                         {% for dish in dishes %}
                             {% if dish.category == 'boisson' %}
                                 <div class="dish-item">
-                                    <p>Nom : {{ dish.name }}</p>
-                                    <p>Description : {{ dish.description }}</p>
-                                    <p>Prix : {{ dish.price }}€</p>
+                                    <p>Nom : {{ dish.name|e }}</p>
+                                    <p>Description : {{ dish.description|e }}</p>
+                                    <p>Prix : {{ dish.price|e }}€</p>
                                     <p>Végétarien : {{ dish.isVegetarian ? 'Oui' : 'Non' }}</p>
-                                    <img src="/private/uploads/{{ dish.picture }}" alt="{{ dish.name }}" class="dish-image">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <!-- Bouton pour ouvrir la modale -->
+                                    <button class="details-button" data-modal-id="modal-{{ dish.id }}" data-description="{{ dish.description|e }}">Détails</button>
                                 </div>
+                                {% set hasDrinks = true %}
                             {% endif %}
-                        {% else %}
-                            <p>Aucune boisson disponible pour le moment.</p>
                         {% endfor %}
+                        {% if not hasDrinks %}
+                            <p>Aucune boisson disponible pour le moment.</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </section>
-</main>
 
-<!-- Modal -->
-<div class="modal" id="dish-modal">
-    <div class="modal-content">
-        <span class="close-button" id="close-modal">&times;</span>
-        <h3 id="modal-title"></h3>
-        <img id="modal-image" src="" alt="">
-        <p id="modal-category"></p>
-        <p id="modal-description"></p>
-        <p id="modal-price"></p>
-        <p id="modal-vegetarian"></p>
+    <!-- Modale pour les détails des plats -->
+    <div class="modal" id="details-modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modal-title"></h3>
+            <img id="modal-image" src="" alt="">
+            <p id="modal-description"></p>
+            <p id="modal-price"></p>
+            <p id="modal-vegetarian"></p>
+        </div>
     </div>
-</div>
+</main>
 {% endblock %}

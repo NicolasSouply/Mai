@@ -29,16 +29,16 @@ class DisheController extends AbstractController
     public function showDishesByCategory(): void
     {
         $dishes = $this->dm->findAll();
-        error_log('Dishes retrieved for showDishesByCategory: ' . print_r($dishes, true)); // Debug: vérifier le contenu de $dishes
+   
     
         if (is_array($dishes) && !empty($dishes)) {
             $this->render('card.html.twig', ['dishes' => $dishes]);
         } else {
-            // Gère le cas où $dishes est NULL ou pas un tableau
-            error_log('Dishes for showDishesByCategory is empty or not an array: ' . print_r($dishes, true)); // Debug: vérifier ce qui est renvoyé
+
             $this->render('card.html.twig', ['dishes' => []]);
         }
     }
+    
 
     public function editDishe(int $disheId): void
     {

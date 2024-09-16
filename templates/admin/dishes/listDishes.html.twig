@@ -35,7 +35,8 @@
                         <td>{{ dish.description }}</td>
                         <td>{{ dish.price }} €</td>
                         <td>{% if dish.isVegetarian %}Oui{% else %}Non{% endif %}</td>
-                        <td><img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100"></td>
+                        <td>
+                        <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100"></td>                        </td>
                         <td>
                             <a class="btn btn-success" href="index.php?route=admin-editDishe&dishe_id={{ dish.id }}">Modifier</a>
                             <a class="btn btn-danger" href="index.php?route=admin-deleteDishe&dishe_id={{ dish.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce plat ?');">Supprimer</a>
