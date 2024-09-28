@@ -17,6 +17,10 @@
   background: $cream-mai;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  &.dark-mode {
+    background-color: $background-dark; // Assurez-vous que cette ligne est correcte
+    color: $cream-mai;
+  }
 
   .form-header {
     display: flex;
@@ -34,6 +38,7 @@
     }
 
     label {
+      font-size: 1.5rem;
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
@@ -78,7 +83,7 @@
   }
 
   .form-header h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 
   .submit-btn {

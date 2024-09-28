@@ -18,8 +18,8 @@ abstract class AbstractController
     protected function render(string $template, array $data): void
     {     
         
-        var_dump("Rendering template: " . $template); // Vérifie le fichier Twig qui est appelé
-        var_dump($data); // Vérifie les données passées au template
+        //var_dump("Rendering template: " . $template); // Vérifie le fichier Twig qui est appelé
+        //var_dump($data); // Vérifie les données passées au template
 
 
         $isUserLoggedIn = isset($_SESSION['user']);

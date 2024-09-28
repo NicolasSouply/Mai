@@ -19,4 +19,5 @@ class DetailOrderManager extends AbstractManager
 
         return $detailOrders;
   }
+
 }

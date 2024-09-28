@@ -1,3 +1,11 @@
+.navbar-expand-lg {
+  margin: 2rem 0 2rem 2rem;
+  font-size: 2rem;
+}
+.navbar-brand {
+  font-size: 2rem;
+}
+
 .addDishe {
   display: flex;
   align-content: center;
@@ -11,18 +19,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 57rem;
+  width: 40%;
   padding: 2rem;
   backdrop-filter: blur(10px);
   border-radius: 1rem;
-  background: rgba(252, 251, 251, 0.299);
+  background: $background-light;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 
   h2 {
+    font-size: 3rem;
     letter-spacing: 0.2rem;
     color: $blue-mai;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 
   button {
@@ -39,19 +48,27 @@
 
     fieldset {
       border: none;
-      margin-bottom: 1rem;
       padding: 0;
     }
 
     label {
+      font-size: 2rem;
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    #picture {
+      padding: 2.5rem;
+      font-size: 1.5rem;
+    }
+    select {
+      font-size: larger;
+      margin-bottom: 1.5rem;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 0.5rem;
+      padding: 1.5rem;
       box-sizing: border-box;
     }
 

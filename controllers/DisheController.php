@@ -3,11 +3,13 @@
 class DisheController extends AbstractController
 {
     private DisheManager $dm;
+    private OrderManager $om;
 
     public function __construct()
     {
         parent::__construct();
         $this->dm = new DisheManager();
+        $this->om = new OrderManager();
     }
 
     public function listDishes(string $context = 'admin'): void
@@ -33,15 +35,12 @@ class DisheController extends AbstractController
     
         if (is_array($dishes) && !empty($dishes)) {
             $this->render('card.html.twig', ['dishes' => $dishes]);
-        } else {
-
-            $this->render('card.html.twig', ['dishes' => []]);
-        }
+        } 
     }
     
 
     public function editDishe(int $disheId): void
-    {
+    { var_dump('start editDishe');
         $dishe = $this->dm->findById($disheId); // Trouve le plat à modifier
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -57,8 +56,13 @@ class DisheController extends AbstractController
                 return;
             }
 
-            $picture = $this->handleFileUpload() ?? $dishe->getPicture();
-
+           
+        // Gestion de l'image
+        $picture = $dishe->getPicture(); // Gardez l'ancienne image par défaut
+        if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
+            $picture = $this->handleFileUpload(); // Tentez de télécharger la nouvelle image
+        }
+        
             // Mise à jour des données du plat
             $dishe->setCategory($category);
             $dishe->setName($name);
@@ -68,10 +72,13 @@ class DisheController extends AbstractController
             $dishe->setPicture($picture);
 
             // Sauvegarde des modifications
+            
             if ($this->dm->updateDishe($dishe)) {
-                $_SESSION['message'] = 'Le plat a bien été modifié';
+                $_SESSION['success_message'] = 'Le plat a bien été modifié';
                 $this->redirect('admin-listDishes');
             } else {
+                    var_dump("Erreur lors de la mise à jour du plat : " . json_encode($dishe)); // Log des détails du plat
+
                 $this->render('admin/dishes/editDishe.html.twig', ['dishe' => $dishe, 'error' => 'Erreur lors de la modification du plat.']);
             }
         } else {
@@ -105,7 +112,7 @@ class DisheController extends AbstractController
                 $dishe = new Dishes($category, $name, $description, $price, $isVegetarian, $picture);
 
                 if ($this->dm->saveDishe($dishe)) {
-                    $_SESSION['message'] = 'Le plat a bien été ajouté';
+                    $_SESSION['success_message'] = 'Le plat a bien été ajouté';
                     $this->redirect('admin-listDishes');
                 } else {
                     $this->render('admin/dishes/addDishe.html.twig', ['error' => 'Erreur lors de l\'enregistrement du plat.']);
@@ -147,7 +154,7 @@ class DisheController extends AbstractController
             $dishe = new Dishes($category, $name, $description, $price, $isVegetarian, $picture);
 
             if ($this->dm->saveDishe($dishe)) {
-                $_SESSION['message'] = 'Le plat a bien été ajouté';
+                $_SESSION['success_message'] = 'Le plat a bien été ajouté';
                 $this->redirect('admin-listDishes');
             } else {
                 $this->render('admin/dishes/addDishe.html.twig', ['error' => 'Erreur lors de l\'enregistrement du plat.']);
@@ -158,52 +165,81 @@ class DisheController extends AbstractController
     }
 
     public function checkEditDishe(int $disheId): void
-    {
+
+    {var_dump('start checkEditDishe');
+
+          if(isset($_SESSION['error_message'])) {
+            unset($_SESSION['error_message']);
+        }
+
+        if(isset($_SESSION['success_message'])) {
+            unset($_SESSION['success_message']);
+        }
         // Récupération du plat à modifier par son ID
         $dishe = $this->dm->findById($disheId);
-
+    
         if ($dishe === null) {
             $this->render('admin/dishes/listDishes.html.twig', ['error' => 'Plat non trouvé.']);
             return;
         }
-
+    
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Récupération et validation des données du formulaire
-            $category = $_POST['category'] ?? ''; 
-            $name = $_POST['name'] ?? '';
-            $price = $_POST['price'] ?? '';
-            $isVegetarian = isset($_POST['vegetarian']) ? true : false;
-            $description = $_POST['description'] ?? '';
+            $this->handlePostRequest($dishe);
 
-            // Validation simple des champs
-            if (empty($name) || empty($price) || !is_numeric($price)) {
-                $this->render('admin/dishes/editDishe.html.twig', ['dishe' => $dishe, 'error' => 'Veuillez remplir tous les champs correctement.']);
-                return;
-            }
+                  // Ajouter un message de confirmation dans la session
+        $_SESSION['flash_message'] = 'Le plat a bien été modifié';
 
-            // Gestion du fichier uploadé
-            $picture = $this->handleFileUpload() ?? $dishe->getPicture();
-
-            // Mise à jour des données du plat
-            $dishe->setCategory($category);
-            $dishe->setName($name);
-            $dishe->setPrice($price);
-            $dishe->setIsVegetarian($isVegetarian);
-            $dishe->setDescription($description);
-            $dishe->setPicture($picture);
-
-            // Sauvegarde des modifications
-            if ($this->dm->updateDishe($dishe)) {
-                $_SESSION['message'] = 'Le plat a bien été modifié';
-                $this->redirect('admin-listDishes');
-            } else {
-                $this->render('admin/dishes/editDishe.html.twig', ['dishe' => $dishe, 'error' => 'Erreur lors de la modification du plat.']);
-            }
+        // Rediriger vers la liste des plats
+        header('Location: index.php?route=admin-listDishes');
+        exit;
+        
         } else {
             // Affiche le formulaire avec les données actuelles du plat
             $this->render('admin/dishes/editDishe.html.twig', ['dishe' => $dishe]);
         }
     }
+    
+    private function handlePostRequest($dishe): void
+    {
+        // Récupération et validation des données du formulaire
+        $category = $_POST['category'] ?? ''; 
+        $name = $_POST['name'] ?? '';
+        $price = $_POST['price'] ?? '';
+        $isVegetarian = isset($_POST['vegetarian']);
+        $description = $_POST['description'] ?? '';
+    
+        // Validation des champs
+        if (empty($name) || empty($price) || !is_numeric($price) || $price <= 0) {
+            $this->render('admin/dishes/editDishe.html.twig', [
+                'dishe' => $dishe, 
+                'error' => 'Veuillez remplir tous les champs correctement.'
+            ]);
+            return;
+        }
+    
+        // Gestion du fichier uploadé
+        /*$picture = $this->handleFileUpload() ?? $dishe->getPicture();*/
+    
+        // Mise à jour des données du plat
+        $dishe->setCategory($category);
+        $dishe->setName($name);
+        $dishe->setPrice($price);
+        $dishe->setIsVegetarian($isVegetarian);
+        $dishe->setDescription($description);
+        //$dishe->setPicture($picture);
+    
+        // Sauvegarde des modifications
+        if ($this->dm->updateDishe($dishe)) {
+            $_SESSION['success_message'] = 'Le plat a bien été modifié';
+            $this->redirect('admin-listDishes');
+        } else {
+            $this->render('admin/dishes/editDishe.html.twig', [
+                'dishe' => $dishe, 
+                'error' => 'Erreur lors de la modification du plat.'
+            ]);
+        }
+    }
+    
 
     private function handleFileUpload(): ?string
     {
@@ -240,4 +276,29 @@ class DisheController extends AbstractController
             return null;
         }
     }
+public function confirmerCommande()
+{
+    // Vérifie si le panier est vide
+    if (empty($_SESSION['cartItems'])) {
+        $_SESSION['error'] = 'Votre panier est vide';
+        $this->redirect('panier');
+        return;
+    }
+
+    $cartItems = $_SESSION['cartItems'];
+    $cartTotal = $_SESSION['cartTotal'];
+
+    // Enregistre la commande dans la base de données
+    if ($this->om->storeOrder(cartItems: $cartItems, userId: $_SESSION['user']['id'])) {
+        // Redirection vers la page de confirmation avec les détails de la commande
+        return $this->render('confirmation.html.twig', [
+            'cartItems' => $cartItems,
+            'cartTotal' => $cartTotal
+        ]);
+    } else {
+        $_SESSION['error'] = 'Une erreur est survenue lors de la confirmation de la commande.';
+        $this->redirect('panier');
+    }
+}
+
 }

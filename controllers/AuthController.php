@@ -118,11 +118,11 @@ class AuthController extends AbstractController
                         $_SESSION['user'] = $user;
                           // Vérifier le rôle de l'utilisateur et rediriger
                     if ($user->getRole() === 'ADMIN') {
-                        var_dump("Redirection vers admin-zone"); // Vérifie si la redirection vers admin-zone est correcte
+                        //var_dump("Redirection vers admin-zone"); // Vérifie si la redirection vers admin-zone est correcte
 
                         $this->redirect('admin-zone');  // Rediriger vers la zone admin
                     } else {
-                        var_dump("Redirection vers user-zone");
+                        //var_dump("Redirection vers user-zone");
 
                         $this->redirect('user-zone');   // Rediriger vers la zone utilisateur
                     }

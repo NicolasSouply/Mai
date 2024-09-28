@@ -91,6 +91,9 @@
       margin-bottom: 2rem; /* Ajoute de l'espace entre les blocs */
       width: 100%; /* Assure que les blocs prennent toute la largeur disponible */
     }
+    h2 {
+      font-size: 3rem;
+    }
     .contact-info__item {
       align-items: center;
     }
@@ -103,7 +106,7 @@
     }
     @media (max-width: 480px) {
       .contact-info__map {
-        height: 15rem; /* Réduit encore plus la hauteur de la carte pour les très petits écrans */
+        height: 30rem; /* Réduit encore plus la hauteur de la carte pour les très petits écrans */
       }
     }
   }

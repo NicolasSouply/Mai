@@ -161,11 +161,12 @@ body {
   .card {
     background: $bg-img-meals no-repeat center center fixed;
     background-size: cover;
-    padding: 10rem;
+    padding: 27rem 0 27rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: 100vw;
+    height: auto;
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
     .card__blur {
@@ -176,8 +177,6 @@ body {
       padding: 3rem;
       backdrop-filter: blur(10px);
       border-radius: 1rem;
-      width: 50%;
-      max-width: 40rem;
       background: rgba(255, 255, 254, 0.3);
       text-align: center;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -193,6 +192,7 @@ body {
     }
     button {
       @include button;
+      font-size: 2rem;
     }
   }
 }
@@ -208,9 +208,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  width: 100vw;
+  height: auto;
   background-color: $cream-mai;
-  padding: 2rem;
+  padding: 27rem 0 27rem 0;
   margin-bottom: -3rem;
 
   &.dark-mode {
@@ -229,9 +230,9 @@ body {
     background: $bg-img-vitrine no-repeat center center;
     background-size: cover;
     width: 50%;
+    height: auto;
     backdrop-filter: blur(10px);
     z-index: 1;
-    max-width: 40rem;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
@@ -244,7 +245,8 @@ body {
       transition: color 0.3s;
 
       &:hover {
-        color: darken($blue-mai, 10%);
+        transform: scale(1.1);
+        color: darken($golden-button, 10%);
       }
     }
 
@@ -277,7 +279,7 @@ body {
 }
 
 #up-button-img {
-  width: 2rem;
+  width: 4rem;
   height: auto;
 }
 
@@ -349,11 +351,6 @@ body {
     padding: 5rem;
     height: auto;
 
-    .card__blur {
-      width: 80%;
-      max-width: 90%;
-    }
-
     h3 {
       font-size: 3rem;
     }
@@ -369,10 +366,7 @@ body {
     margin-bottom: 0;
 
     .end-page__container {
-      width: 90%;
       max-width: 100%;
-      padding: 2rem;
-      font-size: 1.6rem;
 
       a {
         font-size: 2rem;
@@ -395,15 +389,15 @@ body {
     }
 
     #up-button-img {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 4.5rem;
+      height: 4.5rem;
     }
   }
 }
 
 @media (max-width: 480px) {
   html {
-    font-size: 50%;
+    font-size: 33%;
   }
 
   body {
@@ -443,18 +437,12 @@ body {
     }
 
     .gallery__container {
-      width: 12rem; // Réduit davantage la largeur des conteneurs
-      height: 12rem; // Réduit davantage la hauteur des conteneurs
+      height: 35rem; // Réduit davantage la hauteur des conteneurs
     }
   }
 
   .card {
     padding: 3rem; // Réduit le padding pour les petits écrans
-
-    .card__blur {
-      width: 90%; // Ajuste la largeur du conteneur flou
-      max-width: 100%;
-    }
 
     h3 {
       font-size: 2rem; // Réduit la taille de h3
@@ -462,7 +450,7 @@ body {
 
     button {
       padding: 0.5rem 0.5rem; // Ajuste le padding du bouton
-      font-size: 1.2rem; // Réduit la taille de la police
+      font-size: 3.2rem; // Réduit la taille de la police
     }
   }
 
@@ -471,13 +459,14 @@ body {
 
     .end-page__container {
       width: 100%; // Ajuste la largeur pour les très petits écrans
-      padding: 1rem; // Réduit le padding
+      padding: 22rem;
       font-size: 1.4rem; // Réduit la taille de la police
 
       h2,
       h3,
-      p {
-        font-size: 1.6rem; // Réduit la taille de la police
+      p,
+      a {
+        font-size: 5rem; // Réduit la taille de la police
       }
     }
   }

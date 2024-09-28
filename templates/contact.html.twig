@@ -4,7 +4,9 @@
   Page contact du restaurant Maï pour demander des renseignements ou organiser des événements.
 {% endblock %}
 
-{% block title %}Contact{% endblock %}
+{% block title %}Contact
+{{ parent() }}
+{% endblock %}
 
 {% block main %}
 <section class="contact-page">

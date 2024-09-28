@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Conditions Générales de Vente
+{{ parent() }}
+{% endblock %}
+
+{% block main %}
+<section class="cgv">
+
+    <h2 >Conditions Générales de Vente</h2>
+    <h3>1. Introduction</h3>
+    <p>Bienvenue sur notre site de Maï restaurant. </br>
+    Les présentes conditions générales de vente régissent l'ensemble des ventes effectuées par notre établissement.</p>
+    
+    <h3>2. Commandes</h3>
+    <p>Les commandes peuvent être passées via notre site Internet. Toutes les commandes doivent être confirmées par nos soins.</p>
+    
+    <h3>3. Prix</h3>
+    <p>Les prix indiqués sur notre site incluent toutes les taxes en vigueur. Nous nous réservons le droit de modifier nos prix à tout moment.</p>
+  
+    <h3>4. Paiement</h3>
+    <p>Le paiement doit être fait au restaurant en venant retirer votre commande, soit en espèces, carte ou chèques.</p>
+    
+    <h3>5. Livraison</h3>
+    <p>Les commandes sont à retirer à notre établissement. Nous ne proposons pas de service de livraison.</p>
+    
+    <h3>6. Contact</h3>
+    <p>Pour toute question, vous pouvez nous contacter via notre formulaire dans l'onglet "contact"  ou par téléphone.</p>
+  </section>
+
+    <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
+        <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+    </button>
+
+{% endblock %}

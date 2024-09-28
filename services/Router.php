@@ -7,6 +7,7 @@ class Router
     private DisheController $dc;
     private AdminController $adc;
     private UserController $uc;
+    private OrderController $oc;
     
     public function __construct()
     {
@@ -15,8 +16,8 @@ class Router
         $this->dc = new DisheController();
         $this->adc = new AdminController(); 
         $this->uc = new UserController();
-
-        //var_dump($this->ac);
+        $this->oc = new OrderController();
+        
     }
     private function checkAdmin(): void
     {
@@ -31,7 +32,6 @@ class Router
     {
         if ($route === null || $route === 'home')  
         {
-        var_dump($route); 
             // le code si il n'y a pas de route ( === la page d'accueil)
             $this->sc->homepage(); 
         }
@@ -45,7 +45,6 @@ class Router
         }
         else if($route === "connexion")
         {
-            //var_dump('start');
             $this->ac->login();
         }
         else if($route === "check-connexion")
@@ -61,8 +60,7 @@ class Router
             $this->uc->userZone();
         }
         else if($route === "admin-zone")
-        {        var_dump('Route: admin-zone'); // Vérifie que la route admin est bien appelée
-
+        {   
             $this->checkAdmin();
             $this->adc->adminZone();
         }
@@ -120,10 +118,10 @@ class Router
         $this->checkAdmin();
         $this->dc->checkAddDishe();
     }
-    else if($route === "admin-editDishe" && isset($_GET["dishe_id"]))
+    else if($route === "admin-editDishe")
     {
         $this->checkAdmin();
-        $this->dc->editDishe(intval($_GET["dishe_id"]));
+        $this->dc->editDishe(intval($_GET["id"]));
     }
     else if ($route === "admin-check-editDishe" && isset($_GET["dishe_id"]))
     {
@@ -131,16 +129,21 @@ class Router
         $this->dc->checkEditDishe(intval($_GET["dishe_id"]));
     }
     
-    else if($route === "admin-deleteDishe" && isset($_GET["dishe_id"]))
+    else if($route === "admin-deleteDishe" && isset($_GET["id"]))
     {
         $this->checkAdmin();
-        $this->dc->deleteDishe(intval($_GET["dishe_id"]));
+        $this->dc->deleteDishe(intval($_GET["id"]));
     }
         elseif ($route === 'card') 
         {
             $this->dc->showDishesByCategory();
-            $this->sc->card();
-            
+        }
+        else if ($route === "create-order") {
+            $this->oc->createOrder();
+        }
+        elseif ($route === 'confirmation' && isset($_GET['order_id'])) 
+        {
+            $this->oc->orderConfirmation(intval($_GET['order_id']));
         }
         elseif ($route === 'about') 
         {
@@ -163,8 +166,20 @@ class Router
             $this->checkAdmin();
             $this->uc->show(intval($_GET["user_id"]));
         }
+        elseif ($route === "privacy-policy")
+        {
+            $this->sc->privacyPolicy();
+        }
+        elseif ($route === "cgv")
+        {
+            $this->sc->cgv();
+        }
+        elseif ($route === 'legals-mentions') 
+        {
+                $this->sc->legalsMentions();
+        }
         else {
-            var_dump('Route non trouvée : ' . $route); // Vérifie si la route est inconnue
+            //var_dump('Route non trouvée : ' . $route); // Vérifie si la route est inconnue
 
             $this->sc->notFound();
         }

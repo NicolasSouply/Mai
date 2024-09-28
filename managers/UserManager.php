@@ -37,7 +37,7 @@ class UserManager extends AbstractManager
         ];
     
     // Debugging
-    var_dump($parameters);  // Check values being inserted
+    //var_dump($parameters);  // Check values being inserted
 
 
             $query->execute($parameters);
@@ -116,7 +116,7 @@ class UserManager extends AbstractManager
     }
     // Rechercher un utilisateur par adresse mail
     public function findUserByEmail(string $email): ?Users
-    {   var_dump($email);
+    {   //var_dump($email);
 
         $query = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $parameters = [

@@ -122,12 +122,17 @@
 
     .contact-page__form,
     .contact-page__info {
+      font-size: 3rem;
       width: 100%;
       margin-bottom: 2rem;
     }
 
     .contact-page__form-row {
       flex-direction: column;
+    }
+    form input {
+      padding: 1.5rem;
+      font-size: 2.4rem;
     }
   }
 }

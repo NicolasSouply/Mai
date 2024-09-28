@@ -1,0 +1,33 @@
+.privacy-policy {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  background-color: $background-light;
+  margin: 18rem auto;
+  padding: 5rem 3rem;
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  &.dark-mode {
+    background-color: $background-dark; // Assurez-vous que cette ligne est correcte
+    color: $cream-mai;
+  }
+
+  /* Media query pour les tablettes (à partir de 768px) */
+  @media (max-width: 768px) {
+    width: 80%; /* Réduire la largeur à 80% sur tablette */
+    font-size: 1.8rem;
+    margin: 14rem auto;
+    padding: 4rem 2rem;
+  }
+
+  /* Media query pour les écrans de bureau (à partir de 1024px) */
+  @media (max-width: 480px) {
+    width: 80%;
+    font-size: 2rem;
+    margin: 18rem auto;
+    padding: 5rem 3rem;
+  }
+}

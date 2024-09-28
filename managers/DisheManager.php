@@ -24,40 +24,47 @@ class DisheManager extends AbstractManager
         return null;
     }
     
-    public function saveDishe(Dishes $dishe) 
+    public function saveDishe(Dishes $dishe): bool
     {
-        if ($dishe->getId()) {
-            // Mise à jour
-            $query = $this->db->prepare('
-                UPDATE dishes 
-                SET category = ?, name = ?, description = ?, price = ?, vegetarian = ?, picture = ? 
-                WHERE dishe_id = ?
-            ');
-            $query->execute([
-                $dishe->getCategory(),
-                $dishe->getName(), 
-                $dishe->getDescription(), 
-                $dishe->getPrice(), 
-                $dishe->getIsVegetarian(), 
-                $dishe->getPicture(),
-                $dishe->getId()
-            ]);
-        } else {
-            // Insertion
-            $query = $this->db->prepare('
-                INSERT INTO dishes (category, name, description, price, vegetarian, picture) 
-                VALUES (?, ?, ?, ?, ?, ?)
-            ');
-            $query->execute([
-                $dishe->getCategory(),
-                $dishe->getName(), 
-                $dishe->getDescription(), 
-                $dishe->getPrice(), 
-                $dishe->getIsVegetarian(), 
-                $dishe->getPicture()
-            ]);
+        try {
+            if ($dishe->getId()) {
+                // Mise à jour
+                $query = $this->db->prepare('
+                    UPDATE dishes 
+                    SET category = ?, name = ?, description = ?, price = ?, vegetarian = ?, picture = ? 
+                    WHERE dishe_id = ?
+                ');
+                return $query->execute([
+                    $dishe->getCategory(),
+                    $dishe->getName(), 
+                    $dishe->getDescription(), 
+                    $dishe->getPrice(), 
+                    $dishe->getIsVegetarian(), 
+                    $dishe->getPicture(),
+                    $dishe->getId()
+                ]);
+            } else {
+                // Insertion
+                $query = $this->db->prepare('
+                    INSERT INTO dishes (category, name, description, price, vegetarian, picture) 
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ');
+                return $query->execute([
+                    $dishe->getCategory(),
+                    $dishe->getName(), 
+                    $dishe->getDescription(), 
+                    $dishe->getPrice(), 
+                    $dishe->getIsVegetarian(), 
+                    $dishe->getPicture()
+                ]);
+            }
+        } catch (PDOException $e) {
+            error_log("Erreur lors de la sauvegarde du plat : " . $e->getMessage());
+            return false;
         }
     }
+    
+    
     public function findAll(): array
     {
         
@@ -79,7 +86,7 @@ class DisheManager extends AbstractManager
                 $dishe->setId($item['dishe_id']);
                 $dishes[] = $dishe;
             }
-        var_dump($dishes); // Vérifie les données récupérées
+        //var_dump($dishes); // Vérifie les données récupérées
 
             return $dishes;
         
@@ -87,27 +94,54 @@ class DisheManager extends AbstractManager
     
 
 
-public function updateDishe(Dishes $dishe): bool
-{
-    if ($dishe->getId()) {
-        $query = $this->db->prepare('
-            UPDATE dishes 
-            SET category = ?, name = ?, description = ?, price = ?, vegetarian = ?, picture = ? 
-            WHERE dishe_id = ?
-        ');
-        return $query->execute([
-            $dishe->getCategory(),
-            $dishe->getName(), 
-            $dishe->getDescription(), 
-            $dishe->getPrice(), 
-            $dishe->getIsVegetarian(),
-            $dishe->getPicture(),
-            $dishe->getId()
-        ]);
+    public function updateDishe(Dishes $dishe): bool
+    {
+        if ($dishe->getId()) {
+            $query = $this->db->prepare("
+                UPDATE dishes SET 
+                    category = :category, 
+                    name = :name, 
+                    price = :price, 
+                    vegetarian = :vegetarian, 
+                    description = :description, 
+                    picture = :picture 
+                WHERE dishe_id = :dishe_id
+            ");
+    
+            if (!$query) {
+                var_dump("Erreur de préparation de la requête : " . implode(", ", $this->db->errorInfo()));
+                return false;
+            }
+    
+            var_dump("Exécution de la requête de mise à jour pour l'ID : " . $dishe->getId());
+    
+            $success = $query->execute([
+                'category' => $dishe->getCategory(),
+                'name' => $dishe->getName(),
+                'price' => $dishe->getPrice(),
+                'vegetarian' => $dishe->getIsVegetarian(),
+                'description' => $dishe->getDescription(),
+                'picture' => $dishe->getPicture(),
+                'dishe_id' => $dishe->getId()
+            ]);
+    
+            if ($success) {
+                if ($query->rowCount() > 0) {
+                    return true; // Mise à jour réussie
+                } else {
+                    var_dump("Aucune ligne mise à jour pour l'ID : " . $dishe->getId());
+                    return false; // Pas de changement
+                }
+            } else {
+                var_dump("Erreur lors de l'exécution de la mise à jour : " . implode(", ", $query->errorInfo()));
+            }
+        }
+        
+        return false; // Aucun ID fourni
     }
-
-    return false;
-}
+    
+    
+    
 
 public function deleteDishe(int $id): bool
 {

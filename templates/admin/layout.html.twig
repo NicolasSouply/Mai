@@ -16,21 +16,27 @@
     </head>
     <body class="container-fluid p-0">
         <header class="navbar navbar-expand-lg bg-primary px-3" data-bs-theme="dark">
-            <a class="navbar-brand" href="index.php?route=admin-zone">Espace Admin</a>
+            <a class="navbar-brand" href="index.php?route=admin-zone">Espace Admin |</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?route=home">Retour à l'accueil</a>
+                        <a class="nav-link active" aria-current="page" href="index.php?route=home">Retour à l'accueil |</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?route=admin-list-users">Utilisateurs</a>
+                        <a class="nav-link active" aria-current="page" href="index.php?route=admin-list-users">Utilisateurs |</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?route=admin-listDishes">Plats</a>
+                        <a class="nav-link active" aria-current="page" href="index.php?route=admin-listDishes">Plats |</a>
                     </li>
+                    <li class="nav-item">
+                        <div class="navbar__dark-mode">
+                            <button id="js-darkModeMobile" class="navbar__toggle">
+                                <img id="js-moonIconMobile" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
+                                <img id="js-sunIconMobile" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
+                            </button>
                 </ul>
             </nav>
         </header>

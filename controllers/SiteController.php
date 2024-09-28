@@ -17,12 +17,6 @@ class SiteController extends AbstractController
     {
       $this->render('localisation.html.twig', []);
     }
-
-    public function card(): void
-    {
-      $this->render('card.html.twig', []);
-    }
-
     public function contact(): void
     {
       $this->render('contact.html.twig', []);
@@ -40,9 +34,21 @@ class SiteController extends AbstractController
         $this->render('home.html.twig', ['isUserLoggedIn' => $isUserLoggedIn]);  // modif de deco
     }
   
+    public function privacyPolicy(): void
+    {
+      $this->render('privacy-policy.html.twig', []);
+    }
+    public function cgv(): void
+    {
+      $this->render('cgv.html.twig', []);
+    }
+    public function legalsMentions(): void
+    {
+      $this->render('legals-mentions.html.twig', []);
+    }
       public function notFound() : void
       {
-        var_dump("404 - Page non trouvée"); // Vérifie si c'est bien la page 404 qui est appelée
+        //var_dump("404 - Page non trouvée"); // Vérifie si c'est bien la page 404 qui est appelée
 
           $this->render('error404.html.twig', []);
       }

@@ -13,6 +13,8 @@ body {
 
 .about__title {
   margin: 17rem 0 5rem 0;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
   font-size: 4rem;
   letter-spacing: 16px;
   color: inherit; // Utilise la couleur héritée de .about__main
@@ -21,6 +23,8 @@ body {
 .about__main-p {
   font-family: "Inter", sans-serif;
   font-size: 4rem;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
   letter-spacing: 5px;
   color: inherit; // Utilise la couleur héritée de .about__main
 }
@@ -71,6 +75,7 @@ body {
   .about__story,
   .about__lifeStyle,
   .about__taste {
+    font-size: 2rem;
     flex-direction: column;
     align-items: center;
     text-align: center;

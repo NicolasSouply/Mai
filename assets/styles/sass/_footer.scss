@@ -67,6 +67,12 @@ footer {
       text-decoration: none;
       transition: color 0.3s ease;
       padding: 1rem;
+      transition: color 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+        color: darken($golden-button, 10%);
+      }
     }
 
     p {
@@ -74,12 +80,15 @@ footer {
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     flex-direction: column;
 
     .footer__logo,
     .footer__social,
-    .footer__legal {
+    .footer__legal,
+    .footer__location,
+    .footer__hours {
+      font-size: small;
       margin: 0;
       padding: 0;
     }

@@ -3,30 +3,35 @@
 class UserController extends AbstractController
 {
     private UserManager $um;
-    private DisheManager $dm;
+    private OrderManager $om;
 
     public function __construct()
     {
         parent::__construct();
         $this->um = new UserManager();
-        $this->dm = new DisheManager();
+        $this->om = new OrderManager();
     }
 
     public function userZone(): void
     {
         if (isset($_SESSION['user']) && $_SESSION['user'] instanceof Users) {
             $user = $_SESSION['user'];
-            // Debug: Vérifie les données de l'utilisateur
-            var_dump($user);
+            
+            // Récupérer les commandes de l'utilisateur
+            $orders = $this->om->getOrdersByUserId($user->getId());  // Assure-toi que cette méthode existe dans ton OrderManager
+    
+            // Rendre la vue avec les commandes et l'utilisateur
             $this->render('user-zone.html.twig', [
-                'user' => $user
+                'user' => $user,
+                'orders' => $orders // Passe les commandes à la vue
             ]);
         } else {
-            $_SESSION['error_message'] = "Vous devez être connecté pour accéder à cette page.";
+            $_SESSION['error_message'] = "Pour faire une commande à emporter vous devez vous connecter.";
             header('Location: index.php?route=connexion');
             exit();
         }
     }
+    
     
 
     public function create() : void {
@@ -201,6 +206,18 @@ class UserController extends AbstractController
 
         $this->render("admin/users/show.html.twig", [
             "user" => $user
+        ]);
+    }
+    public function showOrder()
+    {
+        $userId = $_SESSION['user']->getId();
+    
+        // Récupérer les commandes de l'utilisateur
+        $orders = $this->om->getOrderById($userId);
+    
+        // Passer les commandes à la vue
+        return $this->render('user_zone/orders.html.twig', [
+            'orders' => $orders
         ]);
     }
 

@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Confimation de commande
+{{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+  <div class="container__confirmation py-5">
+    <h2>Commande confirmée</h2>
+    <p>Merci ! Votre commande a bien été enregistrée et est en cours de préparation.</p>
+
+
+
+
+
+    <a href="index.php?route=user-zone" class="btn btn-primary">Accéder à votre espace utilisateur</a>
+  </div>
+  {% block scripts %}
+  <script src="assets/styles/js/card.js" type="module"></script>
+{% endblock %}
+{% endblock %}

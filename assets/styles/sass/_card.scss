@@ -14,7 +14,6 @@
   padding-bottom: 5rem;
   position: relative;
 }
-
 // Conteneur de la carte
 .card-page__container {
   @include modale;
@@ -47,7 +46,6 @@
     background: rgba(0, 0, 0, 0.5);
   }
 }
-
 // Section des plats
 .dishes-section {
   display: flex;
@@ -58,14 +56,18 @@
 
   // Styles pour le sidebar
   .content {
+    background-color: $blue-mai;
     display: flex;
     width: 100%;
     flex: 1;
 
     .sidebar {
+      position: sticky;
       width: 20vw;
       background-color: $blue-mai;
       height: 100vh;
+      position: sticky;
+      top: 30%;
       overflow-y: auto;
       z-index: 1;
 
@@ -87,7 +89,8 @@
 
             &:hover {
               background-color: $cream-mai;
-              text-decoration: underline;
+              color: $blue-mai;
+              font-weight: bold;
               transition: background-color 0.3s ease;
             }
           }
@@ -95,16 +98,33 @@
       }
     }
   }
+  // Styles pour le bouton de filtre
+  #filter-vegetarian {
+    @include button;
+    color: $blue-mai;
+    background-color: $cream-mai;
+    &:hover {
+      background-color: $cream-mai;
+      color: $blue-mai;
+      transform: scale(1.1);
+    }
+  }
+
+  // Styles pour le bouton de détails
+  .details-button,
+  .add-button,
+  .close-button {
+    @include button;
+  }
 
   // Grille pour la liste des plats
   .dishes-list {
-    display: grid;
-    grid-template-columns: repeat(
+    grid-template-rows: repeat(
       auto-fill,
-      minmax(250px, 1fr)
-    ); // Ajuste la taille minimale des colonnes
-    gap: 2rem; // Espace entre les plats
-    width: 80vw;
+      minmax(200px, 1fr)
+    ); // Grille réactive
+    gap: 12rem;
+    width: 100%;
     background-color: $cream-mai;
     color: $blue-mai;
     padding: 2rem;
@@ -116,8 +136,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       padding: 1rem;
+      margin: 1rem;
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -127,9 +147,15 @@
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       }
+      .vegetarian-icon {
+        margin-left: 5px;
+        vertical-align: middle;
+        width: 2rem;
+        height: auto;
+      }
 
       img {
-        width: 150px; // Agrandir l'image
+        width: 10rem;
         height: auto;
         margin-bottom: 10px;
         border-radius: 10px;
@@ -146,26 +172,43 @@
       }
     }
   }
-
-  // Styles pour le bouton Détails
-  .details-button {
-    background-color: $blue-mai;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-size: 1.6rem;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: darken($blue-mai, 10%);
-    }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    border-bottom: 2px solid #ccc; /* Bordure de séparation */
   }
 
-  // Styles pour les modales
+  .dish-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .dish-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .dish-info {
+    margin-top: 0.5rem;
+  }
+
+  .price {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .add-button {
+    margin-top: 0.5rem;
+  }
+
+  /* Styles de base pour la modale */
   .modal {
-    display: none;
+    display: none; /* Masquer la modale par défaut */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -174,48 +217,170 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0; /* Initialement invisible */
+    transition: opacity 0.3s ease; /* Transition de l'opacité */
+  }
 
-    &.show {
-      display: block;
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    transition: transform 0.3s ease; /* Transition de la transformation */
+    transform: scale(0.9);
+  }
+  .modal img {
+    max-width: 100%;
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .modal.show {
+    display: block;
+    opacity: 1; /* Rendre la modale visible */
+  }
+
+  .modal.show .modal-content {
+    transform: scale(1); /* Rétablir la taille originale lors de l'ouverture */
+  }
+  .add-button {
+    @include button;
+    background-color: $golden-button; // Couleur pour le bouton de commande
+    &:hover {
+      background-color: $golden-button; // Couleur au survol pour le bouton de commande
     }
+  }
 
-    .modal-content {
-      background-color: white;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 600px; // Largeur maximale de la modale
-      border-radius: 10px;
+  .validate-button {
+    @include button;
+    background-color: $golden-button; // Couleur pour le bouton valider
+    &:hover {
+      background-color: $golden-button; // Couleur au survol
+    }
+  }
+  @media (max-width: 768px) {
+    .content {
+      flex-direction: column; // Changer la direction en colonne pour les petits écrans
 
-      .close-button {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
+      .sidebar {
+        position: static; // Retirer le positionnement fixe pour les petits écrans
+        width: 100%;
+        height: auto;
+        margin-bottom: 2rem; // Espacement en bas de la sidebar
 
-        &:hover,
-        &:focus {
-          color: black;
-          text-decoration: none;
-          cursor: pointer;
+        ul {
+          display: flex;
+          flex-direction: row;
+          li a {
+            font-size: 3rem;
+          }
         }
       }
+    }
+    .main-content {
+      padding: 1rem;
+    }
 
-      img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-      }
+    .card-page__container {
+      width: 90%;
+      padding: 10px;
+    }
 
+    .dishes-list {
+      grid-template-columns: 1fr;
       h3 {
-        margin-top: 0;
+        font-size: 3rem;
       }
-
-      p {
-        margin: 0.5rem 0;
-        font-size: 1.6rem;
+      .dish-item p {
+        font-size: 3rem;
       }
     }
+  }
+  .hidden {
+    display: none; /* Masquer le contenu */
+  }
+
+  .show {
+    display: block; /* Afficher le contenu */
+  }
+  .fixed-cart {
+    position: fixed;
+    bottom: 5.6rem;
+    right: 2rem;
+    width: 27rem;
+    padding: 1.5rem;
+    background-color: $blue-mai;
+    color: white;
+    border: 1px solid #dee2e6;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 999;
+    h4 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    p {
+      font-size: 16px;
+      margin: 0;
+    }
+    #cartItems {
+      margin-bottom: 10px; /* Espace entre les articles et le total */
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc; /* Optionnel: une ligne pour mieux séparer les articles du total */
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+        padding: 5px 0;
+        font-size: 1.6rem;
+
+        .remove-item {
+          cursor: pointer;
+          font-size: 20px;
+          margin-left: 10px;
+          color: lightcoral;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: darken(lightcoral, 10%);
+          }
+        }
+      }
+    }
+
+    #cartTotal {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+  .btn-commander {
+    background-color: $golden-button;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    text-align: center;
+
+    &:hover {
+      background-color: darken($golden-button, 10%);
+    }
+  }
+
+  .modal-header {
+    font-size: 3rem;
+  }
+  .modal-body p {
+    font-size: 2.5rem;
   }
 }

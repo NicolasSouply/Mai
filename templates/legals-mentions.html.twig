@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Mentions Légales 
+{{ parent() }}
+{% endblock %}
+
+{% block main %}
+<section class="legals">
+ 
+    <h2>Mentions Légales</h2>
+
+
+    <h3>1. Éditeur du site</h3>
+    <p>Le présent site est édité par Nicolas Souply développeur web.</p>
+    
+    <h3>2. Hébergement</h3>
+    <p>Le site est hébergé par la société ABC, dont le siège social est à Lyon.</p>
+    
+    <h3>3. Propriété intellectuelle</h3>
+    <p>Tous les contenus présents sur ce site sont protégés par le droit d'auteur.</p>
+    
+    <h3>4. Données personnelles</h3>
+    <p>Les données personnelles collectées sur ce site sont traitées conformément à notre politique de confidentialité.</p>
+    
+    <h3>5. Contact</h3>
+    <p>Pour toute question, vous pouvez nous contacter via notre formulaire de contact.</p>
+</section>
+
+     <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
+        <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+      </button>
+{% endblock %}

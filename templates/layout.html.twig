@@ -5,7 +5,6 @@
     <meta name="description" content="{% block description %} Bienvenue au Restaurant Maï, un restaurant asiatique en Bretagne dans les Côtes-d'armor dans la ville de Saint-Brieuc où nous servons des plats délicieux et authentiques. Nous vous attendons avec impatience. {% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/styles/css/style.css" />
-
     <script src="https://kit.fontawesome.com/84e325796e.js" crossorigin="anonymous"></script> <!-- a DL les icones -->
     <title>{% block title %}Restaurant Maï{% endblock %}</title>
   </head>
@@ -18,7 +17,7 @@
           <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
         </a>
         
-        <a href="index.php?route=reservation" class="navbar__button navbar__button--reserve">Réserver</a>
+        <a href="index.php?route=reservation" class="navbar__button">Réserver</a>
 
         <div class="burger-menu" id="burger-menu">
           <img src="./assets/images/icons/burger-blue.webp" />
@@ -139,7 +138,7 @@
       </section>
       <!--Bouton up -->
       <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
-        <img src="/assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+        <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
       </button>
       {% endblock %}
     </main>
@@ -174,10 +173,10 @@
       </section>
 
       <section class="footer__legal">
-        <a href="index.php?route=rgpd">
+        <a href="index.php?route=privacy-policy">
           <p>Politique de confidentialité</p>
         </a>
-        <a href="index.php?route=general-conditions">
+        <a href="index.php?route=cgv">
           <p>Conditions générales de vente</p>
         </a>
         <a href="index.php?route=legals-mentions">

@@ -4,16 +4,19 @@
   Page de réservation du restaurant Maï pour demander réserver une table dans le résaurant ou des évènement.
 {% endblock %}
 
-{% block title %}Réservation{% endblock %}
+{% block title %}Réservation
+{{ parent() }}
+{% endblock %}
 
 {% block main %}
-<section class="form">
- <div class="form-container">
+<section class="form ">
+ <div class="form-container ">
         <div class="form-header">
             <i class="fa fa-calendar"></i>
             <h2>Réserver votre table chez Maï</h2>
         </div>
 
+    
         <form>
             <div class="form-grid">
                 <div>

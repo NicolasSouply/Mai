@@ -13,13 +13,22 @@
     {% do app.session.remove('message') %}
 {% endif %}
 
+{% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
 
         <form action="index.php?route=admin-check-addDishe" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}" />
             
             <fieldset>
-                <label for="category">catégorie</label>
-                <input type="text" name="category" id="category" required>
+                <label for="category">Catégorie</label>
+                <select type="text" name="category" id="category" required>
+                    <option value="" disabled {% if not dishe.category %}selected{% endif %}>Choisir une catégorie</option>
+                    <option value="entrée" {% if dishe.category == 'entrée' %}selected{% endif %}>Entrée</option>
+                    <option value="plat" {% if dishe.category == 'plat' %}selected{% endif %}>Plat</option>
+                    <option value="dessert" {% if dishe.category == 'dessert' %}selected{% endif %}>Dessert</option>
+                    <option value="boisson" {% if dishe.category == 'boisson' %}selected{% endif %}>Boisson</option>
+                </select>
             </fieldset>
 
             <fieldset>

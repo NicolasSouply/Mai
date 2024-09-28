@@ -4,44 +4,63 @@
 <main class="editDishe">
     <section class="editDishe__container">
         <h2>Modifier le plat</h2>
+
+
+        {# Afficher les messages d'erreur ou de succès #}
+        {% if error is defined %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
         
-        <form action="index.php?route=checkEditDish" method="post" enctype="multipart/form-data">
+        {% if app.session.flashBag.has('message') %}
+            {% for message in app.session.flashBag.get('message') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="index.php?route=admin-editDishe&id={{ dishe.id }}"  method="post" enctype="multipart/form-data">
+
             <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
-            <input type="hidden" name="id" value="{{ dish.id }}" />
+            <input type="hidden" name="id" value="{{ dishe.id }}" />
             
             <fieldset>
-                <label for="category">catégorie</label>
-                <input type="text" name="category" id="category" required>
+                <label for="category">Catégorie</label>
+                <select type="text" name="category" id="category" required>
+                    <option value="" disabled {% if not dishe.category %}selected{% endif %}>Choisir une catégorie</option>
+                    <option value="entrée" {% if dishe.category == 'entrée' %}selected{% endif %}>Entrée</option>
+                    <option value="plat" {% if dishe.category == 'plat' %}selected{% endif %}>Plat</option>
+                    <option value="dessert" {% if dishe.category == 'dessert' %}selected{% endif %}>Dessert</option>
+                    <option value="boisson" {% if dishe.category == 'boisson' %}selected{% endif %}>Boisson</option>
+                </select>
             </fieldset>
             
             <fieldset>
                 <label for="name">Nom du plat</label>
-                <input type="text" name="name" id="name" value="{{ dish.name }}" required>
+                <input type="text" name="name" id="name" value="{{ dishe.name }}" required>
             </fieldset>
             
             <fieldset>
                 <label for="price">Prix</label>
-                <input type="number" step="0.01" name="price" id="price" value="{{ dish.price }}" required>
+                <input type="number" step="0.01" name="price" id="price" value="{{ dishe.price }}" required>
             </fieldset>
             
             <fieldset>
                 <label for="picture">Choisir une nouvelle image (laisser vide pour conserver l'ancienne)</label>
                 <input type="file" name="picture" id="picture" accept="image/*">
-                {% if dish.picture %}
-                    <img src="/uploads/{{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                {% if dishe.picture %}
+                    <img src="private/uploads/{{ dishe.picture }}" alt="{{ dishe.name }}" width="100">
                 {% endif %}
             </fieldset>
             
             <fieldset>
                 <label for="vegetarian">
                     Végétarien
-                    <input type="checkbox" id="vegetarian" name="vegetarian" value="1" {% if dish.isVegetarian %}checked{% endif %}>
+                    <input type="checkbox" id="vegetarian" name="vegetarian" value="1" {% if dishe.isVegetarian %}checked{% endif %}>
                 </label>
             </fieldset>
             
             <fieldset>
                 <label for="description">Description</label>
-                <textarea id="description" name="description" rows="4" cols="50">{{ dish.description }}</textarea>
+                <textarea id="description" name="description" rows="4" cols="50">{{ dishe.description }}</textarea>
             </fieldset>
             
             <fieldset>

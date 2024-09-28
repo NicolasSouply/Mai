@@ -1,49 +1,38 @@
 {% extends "layout.html.twig" %}
 
-{% block header %}
-    {{ parent() }}
+{% block title %}Page de {{ user.first_name|escape }}
+{{ parent() }}
 {% endblock %}
 
 {% block main %}
 <main class="user-zone">
   <section class="user-zone__container">
 
-    <!-- escape est un filtre qui convertit les caractères spéciaux en leur équivalent HTML -->
-    <h2>Bienvenue {{ user.first_name|escape }}</h2>
+    <h2>Bienvenue {{ user.first_name|escape }} </br></br>
 
-    <h2>Mes commandes</h2>
+    Mes commandes</h2>
 
-    {% if orders is defined and orders|length > 0 %}
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Heure</th>
-            <th>Montant</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for order in orders %}
-            <tr>
-              <td>{{ order.getId() }}</td>
-              <td>{{ order.getDate_order()|date('d/m/Y') }}</td>
-              <td>{{ order.getHour_order()|date('H:i') }}</td>
-              <td>{{ order.getTotalPrice() }} {{ euros }}</td>
-              <td>{{ order.getStatus() }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    {% if orders is empty %}
+      <p>Vous n'avez encore passé aucune commande.</p>
     {% else %}
-      <p>Aucune commande trouvée.</p>
+      <ul class="order-list">
+        {% for order in orders %}
+          <li class="order-item">
+            <div class="order-header">
+              <h3>Commande du {{ order.getDate_order().format('d/m/Y H:i') }}</h3>
+              <p>Total : {{ order.getTotalPrice()|number_format(2, ',', ' ') }} €</p>
+            </div>
+            <ul class="order-details">
+              {% for item in order.getItems() %}
+                <li class="order-detail">
+                  <p>{{ item.getName() }} - {{ item.getPrice()|number_format(2, ',', ' ') }} € (Quantité: {{ item.getQuantity() }})</p>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ul>
     {% endif %}
-
   </section>
 </main>
-{% endblock %}
-
-{% block footer %}
-    {{ parent() }}
 {% endblock %}

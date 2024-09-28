@@ -1,8 +1,6 @@
 console.log("coucou");
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Votre code existant pour la gestion du mode sombre, du footer, etc.
-
   // Sélection des éléments du DOM
   const body = document.body;
   const burgerMenu = document.getElementById("burger-menu");
@@ -14,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const footer = document.querySelector(".footer");
   const sections = document.querySelectorAll(
-    ".hook, .gallery, .card, .end-page, .about__story, .about__main, .about__title, .about__main-p, .about__lifeStyle, .about__taste, .contact-info__block "
+    ".hook, .gallery, .card, .end-page, .about__story, .about__main, .about__title, .about__main-p, .about__lifeStyle, .about__taste, .contact-info__block"
   );
   const footerLegalLinks = document.querySelectorAll(".footer__legal a");
 
@@ -28,6 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const galleryInner = document.querySelector(".gallery__inner");
   const containers = document.querySelectorAll(".gallery__container");
 
+  // Sélection spécifique à la page des CGV
+  const cgvSections = document.querySelectorAll(
+    ".cgv__content h2, .cgv__content p"
+  );
+
   // Fonction pour activer/désactiver le mode sombre
   const toggleDarkMode = () => {
     const isDarkMode = body.classList.toggle("dark-mode");
@@ -36,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFooterBackground();
     updateFooterLegalLinks();
     updateSectionsBackground();
+    updateCgvSections(); // Ajout spécifique pour CGV
     localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
   };
 
@@ -46,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sunIcon?.classList.toggle("js-hidden", !isDarkMode);
     moonIconMobile?.classList.toggle("js-hidden", isDarkMode);
     sunIconMobile?.classList.toggle("js-hidden", !isDarkMode);
+
     facebookIcon.src = isDarkMode
       ? "./assets/images/icons/facebook-cream.webp"
       : "./assets/images/icons/facebook-blue.webp";
@@ -64,9 +69,25 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mise à jour du fond des sections
   const updateSectionsBackground = () => {
     const isDarkMode = body.classList.contains("dark-mode");
-    sections.forEach((section) =>
-      section.classList.toggle("dark-mode", isDarkMode)
+    sections.forEach((section) => {
+      section.classList.toggle("dark-mode", isDarkMode);
+    });
+
+    const darkColor = document.querySelector(
+      ".privacy-policy, .legals, .cgv, .form-container, .editDishe__container, .container__confirmation"
     );
+    if (darkColor) {
+      darkColor.classList.toggle("dark-mode", isDarkMode);
+      console.log("Privacy Policy dark mode:", isDarkMode);
+    }
+  };
+
+  // Mise à jour spécifique aux sections CGV
+  const updateCgvSections = () => {
+    const isDarkMode = body.classList.contains("dark-mode");
+    cgvSections.forEach((section) => {
+      section.classList.toggle("dark-mode", isDarkMode);
+    });
   };
 
   // Mise à jour des liens légaux du pied de page
@@ -84,14 +105,18 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks?.classList.toggle("show")
   );
 
-  window.addEventListener("scroll", () => {
-    upButtonLink.style.display = window.scrollY > 300 ? "block" : "none";
-  });
+  if (upButtonLink) {
+    window.addEventListener("scroll", () => {
+      upButtonLink.style.display = window.scrollY > 300 ? "block" : "none";
+    });
 
-  upButtonLink?.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+    upButtonLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  } else {
+    console.error('L\'élément "up-button" est introuvable.');
+  }
 
   // Gestion de la largeur de la galerie
   if (containers.length > 0 && galleryInner) {
@@ -108,79 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFooterBackground();
     updateFooterLegalLinks();
     updateSectionsBackground();
+    updateCgvSections(); // Ajout spécifique pour CGV
   }
-
-  // Initialisation de la carte
-  const initMap = () => {
-    const lat = 48.501518;
-    const lng = -2.769251;
-    const zoomLvl = 18;
-
-    // Vérifiez que Leaflet est disponible
-    if (typeof L === "undefined") {
-      console.error("Leaflet library is not loaded");
-      return;
-    }
-
-    const map = L.map("map").setView([lat, lng], zoomLvl);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    L.marker([lat, lng])
-      .addTo(map)
-      .bindPopup("<b>Maï Restaurant.</b>")
-      .openPopup();
-  };
-
-  // Appel de la fonction d'initialisation de la carte
-  initMap();
-  document.addEventListener("DOMContentLoaded", () => {
-    const openModalButtons = document.querySelectorAll(".details-button");
-    const modal = document.getElementById("details-modal");
-    const closeButton = modal.querySelector(".close-button");
-    const modalTitle = modal.querySelector("#modal-title");
-    const modalImage = modal.querySelector("#modal-image");
-    const modalDescription = modal.querySelector("#modal-description");
-    const modalPrice = modal.querySelector("#modal-price");
-    const modalVegetarian = modal.querySelector("#modal-vegetarian");
-
-    openModalButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const description = button.getAttribute("data-description");
-        const dishId = button.getAttribute("data-modal-id");
-
-        // Remplir la modale avec les informations du plat
-        modalTitle.textContent = `Détails du plat ${dishId}`; // Tu peux personnaliser cela
-        modalDescription.textContent = description;
-        modalImage.src = `ServeurFichiers.php?file=${dishId}.webp`; // Assure-toi que l'URL est correcte
-        modalPrice.textContent = `Prix : ${button.getAttribute("data-price")}€`;
-        modalVegetarian.textContent = button.getAttribute("data-vegetarian")
-          ? "Végétarien : Oui"
-          : "Végétarien : Non";
-
-        modal.classList.add("show");
-      });
-    });
-
-    closeButton.addEventListener("click", () => {
-      modal.classList.remove("show");
-    });
-
-    window.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.classList.remove("show");
-      }
-    });
-  });
-
-  // === Filtrage végétarien ===
-  document.getElementById("filter-vegetarian").addEventListener("click", () => {
-    document.querySelectorAll(".dish-item").forEach((item) => {
-      const isVegetarian = item.getAttribute("data-vegetarian") === "true";
-      item.style.display = isVegetarian ? "block" : "none";
-    });
-  });
 });

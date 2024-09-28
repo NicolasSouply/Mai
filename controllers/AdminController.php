@@ -46,7 +46,7 @@ class AdminController extends AbstractController
             }
         } else {
             // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
-            $_SESSION['error_message'] = "Vous devez être connecté pour accéder à cette page.";
+            $_SESSION['error_message'] = "Pour faire une commande à emporter vous devez vous connecter.";
             header('Location: index.php?route=admin-connexion');
             exit();
         }
