@@ -3,23 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterButton = document.getElementById("filter-vegetarian");
   let isFilteringVegetarian = false;
 
-  filterButton?.addEventListener("click", () => {
-    isFilteringVegetarian = !isFilteringVegetarian;
-    const dishes = document.querySelectorAll(".dish-item");
+  if (filterButton) {
+    filterButton.addEventListener("click", () => {
+      isFilteringVegetarian = !isFilteringVegetarian;
+      const dishes = document.querySelectorAll(".dish-item");
 
-    dishes.forEach((dish) => {
-      if (dish instanceof HTMLElement) {
-        const isVegetarian = dish.dataset.vegetarian === "true";
-        dish.style.display =
-          isFilteringVegetarian && !isVegetarian ? "none" : "block";
-      }
+      dishes.forEach((dish) => {
+        if (dish instanceof HTMLElement) {
+          const isVegetarian = dish.dataset.vegetarian === "true";
+          dish.style.display =
+            isFilteringVegetarian && !isVegetarian ? "none" : "block";
+        }
+      });
+
+      filterButton.textContent = isFilteringVegetarian
+        ? "Afficher tous les plats"
+        : "Filtrer pour les plats végétariens";
     });
-
-    filterButton.textContent = isFilteringVegetarian
-      ? "Afficher tous les plats"
-      : "Filtrer pour les plats végétariens";
-  });
-
+  }
   // Gestion des modales
   function toggleModal(modal, show) {
     if (show) {

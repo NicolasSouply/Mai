@@ -6,15 +6,11 @@
         <h2>Modifier le plat</h2>
 
 
-        {# Afficher les messages d'erreur ou de succès #}
-        {% if error is defined %}
-            <div class="alert alert-danger">{{ error }}</div>
+        {% if session.error_message %}
+            <div class="alert alert-danger">{{ session.error_message }}</div>
         {% endif %}
-        
-        {% if app.session.flashBag.has('message') %}
-            {% for message in app.session.flashBag.get('message') %}
-                <div class="alert alert-success">{{ message }}</div>
-            {% endfor %}
+        {% if session.success_message %}
+            <div class="alert alert-success">{{ session.success_message }}</div>
         {% endif %}
 
         <form action="index.php?route=admin-editDishe&id={{ dishe.id }}"  method="post" enctype="multipart/form-data">

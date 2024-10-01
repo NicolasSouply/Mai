@@ -11,10 +11,30 @@
         <form action="index.php?route=admin-check-create-user" method="post">
             <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token }}" />
             <fieldset class="mb-2">
+                <label for="first_name" class="form-label">
+                    Prénom
+                </label>
+                <input type="text" name="first_name" id="first_name" required class="form-control" value="{{ user.first_name }}"/>
+            </fieldset>
+            <fieldset class="mb-2">
+                <label for="last_name" class="form-label">
+                    Nom
+                </label>
+                <input type="text" name="last_name" id="last_name" required class="form-control" value="{{ user.last_name }}"/>
+            </fieldset>
+            
+            
+            <fieldset class="mb-2">
                 <label for="email" class="form-label">
                     Email
                 </label>
                 <input type="email" name="email" id="email" required class="form-control"/>
+            </fieldset>
+            <fieldset class="mb-2">
+                <label for="phone" class="form-label">
+                Téléphone
+                </label>
+                <input type="tel" name="phone" id="phone" required class="form-control"/>
             </fieldset>
             <fieldset class="mb-2">
                 <label for="password" class="form-label">

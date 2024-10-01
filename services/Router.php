@@ -78,19 +78,20 @@ class Router
             $this->uc->create();
         }
         else if($route === "admin-check-create-user")
-        {
+        {var_dump('admin-check-create-user');
             $this->checkAdmin();
             $this->uc->checkCreate();
         }
         else if($route === "admin-edit-user" && isset($_GET["user_id"]))
-        {
+        {var_dump(' admin-edit-user');
             $this->checkAdmin();
+            $this->uc->checkEdit(intval($_GET["user_id"]));
             $this->uc->edit(intval($_GET["user_id"]));
         }
         else if($route === "admin-check-edit-user" && isset($_GET["user_id"]))
-        {
+        {var_dump('admin-check-edit-user');
             $this->checkAdmin();
-            $this->uc->checkEdit(intval($_GET["user_id"]));
+            $this->uc->edit(intval($_GET["user_id"]));
         }
         else if($route === "admin-delete-user" && isset($_GET["user_id"]))
         {

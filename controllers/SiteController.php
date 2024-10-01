@@ -8,6 +8,11 @@ class SiteController extends AbstractController
         parent::__construct();
 
     }
+
+    public function card(): void
+{
+    $this->render('card.html.twig', []);
+}
     public function about(): void
     {
         $this->render('about.html.twig', []);

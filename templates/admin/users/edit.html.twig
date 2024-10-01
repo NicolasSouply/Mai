@@ -2,48 +2,72 @@
 
 {% block main %}
     <main class="container py-5">
-        <h2 class="mb-4">Ajouter un utilisateur</h2>
-        <form action="index.php?route=admin-check-edit-user&user_id={{ user.id }}" method="post">
-            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token }}" />
-            <fieldset class="mb-2">
-                <label for="email" class="form-label">
-                    Email
-                </label>
-                <input type="email" name="email" id="email" required class="form-control" value="{{user.email}}"/>
-            </fieldset>
-            <fieldset class="mb-2">
-                <label for="password" class="form-label">
-                    Mot de passe
-                </label>
-                <input type="password" name="password" id="password" required class="form-control"/>
-            </fieldset>
-            <fieldset class="mb-2">
-                <label for="confirm_password" class="form-label">
-                    Confirmation du mot de passe
-                </label>
-                <input type="password" name="confirm_password" id="confirm_password" required class="form-control"/>
-            </fieldset>
-            <fieldset class="mb-2">
-                <label for="role" class="form-label">
-                    Rôle
-                </label>
-                <select class="form-select" id="role" name="role">
-                    {% if user.role =="USER" %}
-                        <option value="USER" selected>User</option>
-                    {% else %}
-                        <option value="USER">User</option>
-                    {% endif %}
-                    {% if user.role == "ADMIN" %}
-                        <option value="ADMIN" selected>Admin</option>
-                    {% else %}
-                        <option value="ADMIN">Admin</option>
-                    {% endif %}
+        <h2 class="mb-4">Modifier un utilisateur</h2>
 
-                </select>
-            </fieldset>
-            <fieldset>
-                <button type="submit" class="btn btn-primary">Modifier l'utilisateur</button>
-            </fieldset>
-        </form>
+        <!-- Bouton Retour -->
+        <a href="index.php?route=admin-list-users" class="btn btn-secondary mb-3">Retour à la liste des utilisateurs</a>
+
+    {# Affichage des messages d'erreur ou de succès #}
+        {% if session.error_message %}
+            <div class="alert alert-danger">{{ session.error_message }}</div>
+        {% endif %}
+        {% if session.success_message %}
+            <div class="alert alert-success">{{ session.success_message }}</div>
+        {% endif %}
+
+        <!-- Formulaire pour modifier l'utilisateur -->
+        <form action="index.php?route=admin-edit-user&user_id={{ user.id }}" method="POST">
+    <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token }}" />
+
+    <!-- Champ Prénom -->
+    <fieldset class="mb-2">
+        <label for="first_name" class="form-label">Prénom</label>
+        <input type="text" name="first_name" id="first_name" required class="form-control" value="{{ user.first_name }}"/>
+    </fieldset>
+
+    <!-- Champ Nom -->
+    <fieldset class="mb-2">
+        <label for="last_name" class="form-label">Nom</label>
+        <input type="text" name="last_name" id="last_name" required class="form-control" value="{{ user.last_name }}"/>
+    </fieldset>
+
+    <!-- Champ Email -->
+    <fieldset class="mb-2">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" id="email" required class="form-control" value="{{ user.email }}"/>
+    </fieldset>
+
+ <!-- téléphone -->
+    <fieldset class="mb-2">
+        <label for="phone" class="form-label">Téléphone</label>
+        <input type="tel" name="phone" id="phone" required class="form-control"/>
+    </fieldset>
+
+    <!-- Mot de passe -->
+    <fieldset class="mb-2">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input type="password" name="password" id="password" required class="form-control"/>
+    </fieldset>
+
+    <!-- Confirmation du mot de passe -->
+    <fieldset class="mb-2">
+        <label for="confirm_password" class="form-label">Confirmation du mot de passe</label>
+        <input type="password" name="confirm_password" id="confirm_password" required class="form-control"/>
+    </fieldset>
+
+    <!-- Sélection du rôle -->
+    <fieldset class="mb-2">
+        <label for="role" class="form-label">Rôle</label>
+        <select name="role" id="role" class="form-control">
+            <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+            <option value="user" {% if user.role == 'user' %}selected{% endif %}>User</option>
+        </select>
+    </fieldset>
+    
+    <!-- Bouton soumettre -->
+    <fieldset>
+        <button type="submit" class="btn btn-primary">Modifier l'utilisateur</button>
+    </fieldset>
+</form>
     </main>
 {% endblock %}

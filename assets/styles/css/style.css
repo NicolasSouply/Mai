@@ -288,8 +288,6 @@ body .card button:hover {
   }
   body {
     font-size: 1.4rem;
-    background-size: cover;
-    background-attachment: scroll;
   }
   h1 {
     font-size: 6rem;
@@ -1068,7 +1066,6 @@ form button:hover {
   background-image: url("../../images/cardbg.webp");
   background-repeat: no-repeat;
   background-position: center top;
-  background-attachment: fixed;
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -1932,7 +1929,7 @@ body {
   width: max-content;
   align-items: center;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   background-color: #f0e9e1;
   margin: 18rem auto;
   padding: 5rem 3rem;

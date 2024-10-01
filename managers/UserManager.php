@@ -50,6 +50,8 @@ class UserManager extends AbstractManager
     // Modifier un utilisateur
     public function updateUser(Users $user) : Users
     {
+
+        
         $query = $this->db->prepare("UPDATE users 
             SET first_name = :first_name,
                 last_name = :last_name,
@@ -76,31 +78,23 @@ class UserManager extends AbstractManager
 
 
     // Supprimer un utilisateur 
-    public function deleteUser(int $id) : void 
-    {
-
+    public function deleteUser(int $id) : void {
         $query = $this->db->prepare(
             "DELETE FROM users WHERE id = :id");
         $parameters = ['id' => $id];
 
         $query->execute($parameters);
-        
     }
 
     // Rechercher un utilisateur par ID
-    public function findUserById(string $id): ?Users
-    {
+public function findUserById(string $id): ?Users
+{
+    $query = $this->db->prepare("SELECT * FROM users WHERE id = :id"); // Ajout de LIMIT 1 pour plus de clarté
+    $parameters = ["id" => $id];
+    $query->execute($parameters);
+    $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        $query = $this->db->prepare("SELECT * FROM users WHERE id = :id");
-        $parameters = ["id" => $id];
-        $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-
-        $user = null;
-        
-        if($result)
-        {
-
+    if ($result) {
         $user = new Users(
             $result["first_name"],
             $result["last_name"],
@@ -111,9 +105,12 @@ class UserManager extends AbstractManager
         );
         $user->setId($result["id"]);
 
-        return $user;
+        return $user; // Retourne l'utilisateur si trouvé
     }
-    }
+
+    return null; // Retourne null si aucun utilisateur n'est trouvé
+}
+
     // Rechercher un utilisateur par adresse mail
     public function findUserByEmail(string $email): ?Users
     {   //var_dump($email);

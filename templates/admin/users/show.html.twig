@@ -3,13 +3,41 @@
 {% block main %}
     <main class="container py-5">
         <h2 class="mb-4">Détails d'un utilisateur</h2>
+
+                <!-- Bouton Retour -->
+        <a href="index.php?route=admin-list-users" class="btn btn-secondary mb-3">Retour à la liste des utilisateurs</a>
+        
         <article>
             <dl>
+                <dt>
+                    Id
+                </dt>
+                <dd>
+                    {{ user.id }}
+                </dd>
+                <dt>
+                    Prénom
+                </dt>
+                <dd>
+                    {{ user.first_name }}
+                </dd>
+                <dt>
+                    Nom
+                </dt>
+                <dd>
+                    {{ user.last_name }}
+                </dd>
                 <dt>
                     Email
                 </dt>
                 <dd>
                     {{ user.email }}
+                </dd>
+                <dt>
+                    Phone
+                </dt>
+                <dd>
+                    {{ user.phone }}
                 </dd>
                 <dt>
                     Role

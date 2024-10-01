@@ -3,13 +3,14 @@
 {% block main %}
     <main class="container py-5">
         <h2>Liste des Plats</h2>
-        {% if app.session.flashBag.get('message') is not empty %}
-            <div class="alert alert-success">
-            {% for message in app.session.flashBag.get('message') %}
-                {{ message }}
-            {% endfor %}
-    </div>
+      {# Affichage des messages d'erreur ou de succès #}
+        {% if session.error_message %}
+            <div class="alert alert-danger">{{ session.error_message }}</div>
         {% endif %}
+        {% if session.success_message %}
+            <div class="alert alert-success">{{ session.success_message }}</div>
+        {% endif %}
+    
     <a href="index.php?route=admin-addDishe">Ajouter un plat</a>
 
     {% if dishes is empty %}

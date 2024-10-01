@@ -40,7 +40,15 @@ class DisheController extends AbstractController
     
 
     public function editDishe(int $disheId): void
-    { var_dump('start editDishe');
+    {
+        if(isset($_SESSION['error_message'])) {
+            unset($_SESSION['error_message']);
+        }
+
+        if(isset($_SESSION['success_message'])) {
+            unset($_SESSION['success_message']);
+        }
+        
         $dishe = $this->dm->findById($disheId); // Trouve le plat à modifier
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

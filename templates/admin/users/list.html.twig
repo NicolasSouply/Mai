@@ -12,8 +12,11 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Id</th>
+                    <th>Prénom</th>
+                    <th>nom</th>
                     <th>Email</th>
+                    <th>Téléphone</th>
                     <th>Role</th>
                     <th>Actions</th>
                 </tr>
@@ -22,7 +25,10 @@
                 {% for user in users %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td>{{ user.email }}</td>
+                        <td>{{ user.first_name}}</td>
+                        <td>{{ user.last_name}}</td>
+                        <td>{{ user.email}}</td>
+                        <td>{{ user.phone}}</td>
                         <td>{{ user.role }}</td>
                         <td>
                             <a class="btn btn-primary" href="index.php?route=admin-show-user&user_id={{ user.id }}" title="Voir l'utilisateur"><span class="bi bi-eye-fill" aria-hidden="true"></span></a>
@@ -53,6 +59,10 @@
                 </div>
             </div>
         </div>
+
     </main>
+            <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
+        <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+      </button>
 {% endblock %}
 
