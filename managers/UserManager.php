@@ -79,11 +79,11 @@ class UserManager extends AbstractManager
 
     // Supprimer un utilisateur 
     public function deleteUser(int $id) : void {
+          // Supprimer d'abord les commandes associées à l'utilisateur
+        $this->db->prepare("DELETE FROM orders WHERE user_id = :userId")->execute([':userId' => $id]);
+        // Ensuite, supprimer l'utilisateur
         $query = $this->db->prepare(
-            "DELETE FROM users WHERE id = :id");
-        $parameters = ['id' => $id];
-
-        $query->execute($parameters);
+            "DELETE FROM users WHERE id = :id")->execute(['id' => $id]);
     }
 
     // Rechercher un utilisateur par ID

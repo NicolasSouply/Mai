@@ -1,0 +1,17 @@
+.py-5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  background: $background-light;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  &.dark-mode {
+    background-color: $background-dark; // Assurez-vous que cette ligne est correcte
+    color: $cream-mai;
+  }
+}

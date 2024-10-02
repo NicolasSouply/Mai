@@ -6,51 +6,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const burgerMenu = document.getElementById("burger-menu");
   const navLinks = document.getElementById("navLinks");
   const darkModeToggle = document.getElementById("js-darkMode");
-
-  const moonIcon = document.getElementById("js-moonIcon");
-  const sunIcon = document.getElementById("js-sunIcon");
-
+  const darkModeToggleMobile = document.getElementById("js-darkModeMobile");
+  const upButtonLink = document.getElementById("up-button-link");
+  const deleteUserModal = document.getElementById("deleteUserModal");
   const footer = document.querySelector(".footer");
   const sections = document.querySelectorAll(
     ".hook, .gallery, .card, .end-page, .about__story, .about__main, .about__title, .about__main-p, .about__lifeStyle, .about__taste, .contact-info__block"
   );
   const footerLegalLinks = document.querySelectorAll(".footer__legal a");
-
   const instaIcon = document.getElementById("js-insta");
   const facebookIcon = document.getElementById("js-facebook");
-
-  const darkModeToggleMobile = document.getElementById("js-darkModeMobile");
+  const moonIcon = document.getElementById("js-moonIcon");
+  const sunIcon = document.getElementById("js-sunIcon");
   const moonIconMobile = document.getElementById("js-moonIconMobile");
   const sunIconMobile = document.getElementById("js-sunIconMobile");
-  const upButtonLink = document.getElementById("up-button-link");
   const galleryInner = document.querySelector(".gallery__inner");
   const containers = document.querySelectorAll(".gallery__container");
-
-  // Sélection spécifique à la page des CGV
   const cgvSections = document.querySelectorAll(
     ".cgv__content h2, .cgv__content p"
   );
 
-  // Fonction pour activer/désactiver le mode sombre
   const toggleDarkMode = () => {
     const isDarkMode = body.classList.toggle("dark-mode");
     body.classList.toggle("light-mode", !isDarkMode);
-    updateIcons();
-    updateFooterBackground();
-    updateFooterLegalLinks();
-    updateSectionsBackground();
-    updateCgvSections(); // Ajout spécifique pour CGV
+    updateIcons(isDarkMode);
+    updateFooterBackground(isDarkMode);
+    updateFooterLegalLinks(isDarkMode);
+    updateSectionsBackground(isDarkMode);
+    updateCgvSections(isDarkMode);
     localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
   };
 
-  // Mise à jour des icônes en fonction du mode sombre
-  const updateIcons = () => {
-    const isDarkMode = body.classList.contains("dark-mode");
+  const updateIcons = (isDarkMode) => {
     moonIcon?.classList.toggle("js-hidden", isDarkMode);
     sunIcon?.classList.toggle("js-hidden", !isDarkMode);
     moonIconMobile?.classList.toggle("js-hidden", isDarkMode);
     sunIconMobile?.classList.toggle("js-hidden", !isDarkMode);
-
     facebookIcon.src = isDarkMode
       ? "./assets/images/icons/facebook-cream.webp"
       : "./assets/images/icons/facebook-blue.webp";
@@ -59,20 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
       : "./assets/images/icons/instagram-blue.webp";
   };
 
-  // Mise à jour de la couleur de fond du pied de page
-  const updateFooterBackground = () => {
-    const isDarkMode = body.classList.contains("dark-mode");
+  const updateFooterBackground = (isDarkMode) => {
     footer.style.backgroundColor = isDarkMode ? "#213F7D" : "#f0e9e1";
     footer.style.color = isDarkMode ? "#fff" : "#213F7D";
   };
 
-  // Mise à jour du fond des sections
-  const updateSectionsBackground = () => {
-    const isDarkMode = body.classList.contains("dark-mode");
+  const updateSectionsBackground = (isDarkMode) => {
     sections.forEach((section) => {
       section.classList.toggle("dark-mode", isDarkMode);
     });
-
     const darkColor = document.querySelector(
       ".privacy-policy, .legals, .cgv, .form-container, .editDishe__container, .container__confirmation"
     );
@@ -82,17 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Mise à jour spécifique aux sections CGV
-  const updateCgvSections = () => {
-    const isDarkMode = body.classList.contains("dark-mode");
+  const updateCgvSections = (isDarkMode) => {
     cgvSections.forEach((section) => {
       section.classList.toggle("dark-mode", isDarkMode);
     });
   };
 
-  // Mise à jour des liens légaux du pied de page
-  const updateFooterLegalLinks = () => {
-    const isDarkMode = body.classList.contains("dark-mode");
+  const updateFooterLegalLinks = (isDarkMode) => {
     footerLegalLinks.forEach(
       (link) => (link.style.color = isDarkMode ? "#fff" : "#213F7D")
     );
@@ -129,10 +111,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("dark-mode") === "enabled") {
     body.classList.add("dark-mode");
     body.classList.remove("light-mode");
-    updateIcons();
-    updateFooterBackground();
-    updateFooterLegalLinks();
-    updateSectionsBackground();
-    updateCgvSections(); // Ajout spécifique pour CGV
+    updateIcons(true);
+    updateFooterBackground(true);
+    updateFooterLegalLinks(true);
+    updateSectionsBackground(true);
+    updateCgvSections(true);
+  }
+
+  // Modale de suppression d'utilisateur
+  if (deleteUserModal) {
+    deleteUserModal.addEventListener("show.bs.modal", function (event) {
+      const button = event.relatedTarget;
+      const userEmail = button.getAttribute("data-bs-user");
+      const userId = button.getAttribute("data-bs-id");
+      const modalBody = deleteUserModal.querySelector(".modal-body p");
+      modalBody.textContent = ` ${userEmail} `;
+      const deleteButton = deleteUserModal.querySelector(".btn-danger");
+      deleteButton.onclick = function () {
+        window.location.href = `index.php?route=admin-delete-user&user_id=${userId}`;
+      };
+    });
   }
 });

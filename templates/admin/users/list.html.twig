@@ -1,56 +1,75 @@
 {% extends 'admin/layout.html.twig' %}
 
 {% block main %}
-    <main class="container py-5">
-        <h2 class="mb-4">Liste des utilisateurs</h2>
-        {% if session.success_message %}
-            <div class="alert alert-success" role="alert">
-                {{ session.success_message }}
-            </div>
-        {% endif %}
-        <a href="index.php?route=admin-create-user" class="btn btn-primary mb-4">Ajouter un utilisateur</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Prénom</th>
-                    <th>nom</th>
-                    <th>Email</th>
-                    <th>Téléphone</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
+<main class="container py-5">
+    <h2 class="mb-4">Liste des utilisateurs</h2>
+    
+    {# Message de succès si l'utilisateur a été supprimé ou ajouté avec succès #}
+    {% if session.success_message %}
+        <div class="alert alert-success" role="alert">
+            {{ session.success_message }}
+        </div>
+    {% endif %}
+    
+    {# Bouton pour ajouter un nouvel utilisateur #}
+    <div class="mb-4">
+        <a href="index.php?route=admin-create-user" class="btn btn-primary">Ajouter un utilisateur</a>
+    </div>
+    
+    {# Tableau listant tous les utilisateurs #}
+    <section>
+        <article>
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.first_name}}</td>
-                        <td>{{ user.last_name}}</td>
-                        <td>{{ user.email}}</td>
-                        <td>{{ user.phone}}</td>
-                        <td>{{ user.role }}</td>
-                        <td>
-                            <a class="btn btn-primary" href="index.php?route=admin-show-user&user_id={{ user.id }}" title="Voir l'utilisateur"><span class="bi bi-eye-fill" aria-hidden="true"></span></a>
-                            <a class="btn btn-success" href="index.php?route=admin-edit-user&user_id={{ user.id }}" title="Modifier l'utilisateur"><span class="bi bi-pencil-fill" aria-hidden="true"></span></a>
-                            <button data-bs-toggle="modal" data-bs-target="#deleteUserModal" class="btn btn-danger" title="Supprimer l'utilisateur" data-bs-user="{{ user.email }}" data-bs-id="{{ user.id }}"><span class="bi bi-trash-fill" aria-hidden="true"></span></button>
-                        </td>
+                        <th>Id</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Rôle</th>
+                        <th>Actions</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteModalTitle" aria-hidden="true">
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>{{ user.role }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="index.php?route=admin-show-user&user_id={{ user.id }}" title="Voir l'utilisateur">
+                                    <span class="bi bi-eye-fill" aria-hidden="true"></span>
+                                </a>
+                                <a class="btn btn-success" href="index.php?route=admin-edit-user&user_id={{ user.id }}" title="Modifier l'utilisateur">
+                                    <span class="bi bi-pencil-fill" aria-hidden="true"></span>
+                                </a>
+                                <button data-bs-toggle="modal" data-bs-target="#deleteUserModal" class="btn btn-danger" title="Supprimer l'utilisateur" data-bs-user="{{ user.email }}" data-bs-id="{{ user.id }}">
+                                    <span class="bi bi-trash-fill" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+    </section>
+</main>
+    {# Modal de suppression d'utilisateur #}
+    <section>
+        <article class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteModalTitle">Supprimer un utilisateur</h1>
+                        <h2 class="modal-title fs-5" id="deleteModalTitle">Supprimer un utilisateur</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h2 class="h4">Voulez vous vraiment supprimer cet utilisateur ?</h2>
-                        <p class="my-2">
-
-                        </p>
+                        <h3 class="h4">Voulez-vous vraiment supprimer cet utilisateur ?</h3>
+                        <p class="my-2"></p> <!-- L'email de l'utilisateur sera inséré ici par JavaScript -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -58,11 +77,15 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
+    </section>
 
-    </main>
-            <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
-        <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
-      </button>
+
+
+{# Bouton retour en haut de page #}
+<button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
+    <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+</button>
+
+
 {% endblock %}
-

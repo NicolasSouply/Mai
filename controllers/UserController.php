@@ -112,105 +112,100 @@ class UserController extends AbstractController
         ]);
     }
     public function checkEdit(int $id) : void 
-{
-    // Nettoyage des messages de session précédents
-    unset($_SESSION['error_message'], $_SESSION['success_message']);
-
-    var_dump("Début de checkEdit"); // Pour vérifier que la méthode est appelée correctement
-
-    // Affiche les données POST envoyées
-    var_dump($_POST);
-    var_dump($id);
-
-    // Vérifie que la requête est bien de type POST
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        var_dump("Requête POST détectée"); // Confirmation de la requête
-
-        if (isset($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['phone'], $_POST['password'], $_POST['confirm_password'], $_POST['csrf_token'], $_POST['role'])) {
-            var_dump("Champs du formulaire présents"); // Vérifie que tous les champs sont bien envoyés
-
-            // Initialisation du gestionnaire CSRF
-            $tm = new CSRFTokenManager();
-
-            // Vérifie le token CSRF
-            if ($tm->validateCSRFToken($_POST['csrf_token'])) {
-                var_dump('CSRF Token validé'); // Confirmation du token CSRF
-
-                // Récupère l'utilisateur à modifier
-                $user = $this->um->findUserById($id);
-                var_dump($user); // Vérifie si l'utilisateur est bien récupéré
-
-                if ($user !== null) {
-                    if ($_POST['password'] === $_POST['confirm_password']) {
-                        // Hache le mot de passe
-                        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-                        // Crée un nouvel objet `Users`
-                        $user = new Users(
-                            $_POST['first_name'],
-                            $_POST['last_name'],
-                            $_POST['email'],
-                            $_POST['phone'],
-                            $password,
-                            $_POST['role']
-                        );
-                        $user->setId($id);
-
-                        try {
-                            $this->um->updateUser($user);
-                            var_dump("Utilisateur mis à jour"); // Confirmation de la mise à jour
-
-                            $_SESSION['success_message'] = "L'utilisateur a bien été modifié";
-                            // Redirection après succès
-                            header('Location: index.php?route=admin-list-users');
-                            exit;
-
-                        } catch (Exception $e) {
-                            // Gestion des erreurs de mise à jour
-                            var_dump($e->getMessage());
-                            $_SESSION['error_message'] = "Erreur lors de la mise à jour.";
+    {
+        // Nettoyage des messages de session précédents
+        unset($_SESSION['error_message'], $_SESSION['success_message']);
+    
+        var_dump("Début de checkEdit"); // Pour vérifier que la méthode est appelée correctement
+    
+        // Affiche les données POST envoyées
+        var_dump($_POST);
+        var_dump($id);
+    
+        // Vérifie que la requête est bien de type POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            var_dump("Requête POST détectée"); // Confirmation de la requête
+    
+            if (isset($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['phone'], $_POST['password'], $_POST['confirm_password'], $_POST['csrf_token'], $_POST['role'])) {
+                var_dump("Champs du formulaire présents"); // Vérifie que tous les champs sont bien envoyés
+    
+                // Initialisation du gestionnaire CSRF
+                $tm = new CSRFTokenManager();
+    
+                // Vérifie le token CSRF
+                if ($tm->validateCSRFToken($_POST['csrf_token'])) {
+                    var_dump('CSRF Token validé'); // Confirmation du token CSRF
+    
+                    // Récupère l'utilisateur à modifier
+                    $user = $this->um->findUserById($id);
+                    var_dump($user); // Vérifie si l'utilisateur est bien récupéré
+    
+                    if ($user !== null) {
+                        if ($_POST['password'] === $_POST['confirm_password']) {
+                            // Hache le mot de passe
+                            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    
+                            // Crée un nouvel objet `Users`
+                            $user = new Users(
+                                $_POST['first_name'],
+                                $_POST['last_name'],
+                                $_POST['email'],
+                                $_POST['phone'],
+                                $password,
+                                $_POST['role']
+                            );
+                            $user->setId($id);
+    
+                            try {
+                                $this->um->updateUser($user);
+                                var_dump("Utilisateur mis à jour"); // Confirmation de la mise à jour
+    
+                                $_SESSION['success_message'] = "L'utilisateur a bien été modifié";
+                                // Redirection après succès
+                                header('Location: index.php?route=admin-list-users');
+                                exit;
+    
+                            } catch (Exception $e) {
+                                // Gestion des erreurs de mise à jour
+                                var_dump($e->getMessage());
+                                $_SESSION['error_message'] = "Erreur lors de la mise à jour.";
+                                header('Location: index.php?route=admin-edit-user&user_id=' . urlencode($id));
+                                exit;
+                            }
+                        } else {
+                            // Si les mots de passe ne correspondent pas
+                            $_SESSION['error_message'] = "Les mots de passe ne correspondent pas.";
                             header('Location: index.php?route=admin-edit-user&user_id=' . urlencode($id));
                             exit;
                         }
                     } else {
-                        // Si les mots de passe ne correspondent pas
-                        $_SESSION['error_message'] = "Les mots de passe ne correspondent pas.";
+                        // Si l'utilisateur n'est pas trouvé
+                        $_SESSION['error_message'] = "Utilisateur introuvable.";
                         header('Location: index.php?route=admin-edit-user&user_id=' . urlencode($id));
                         exit;
                     }
                 } else {
-                    // Si l'utilisateur n'est pas trouvé
-                    $_SESSION['error_message'] = "Utilisateur introuvable.";
+                    // Token CSRF invalide
+                    $_SESSION['error_message'] = "Le jeton CSRF est invalide.";
                     header('Location: index.php?route=admin-edit-user&user_id=' . urlencode($id));
                     exit;
                 }
             } else {
-                // Token CSRF invalide
-                $_SESSION['error_message'] = "Le jeton CSRF est invalide.";
+                // Si tous les champs ne sont pas remplis
+                $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
                 header('Location: index.php?route=admin-edit-user&user_id=' . urlencode($id));
                 exit;
             }
-        } else {
-            // Si tous les champs ne sont pas remplis
-            $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
-            header('Location: index.php?route=admin-edit-user&user_id=' . urlencode($id));
-            exit;
         }
     }
-}
-
-
-    
 
     
     public function delete(int $id) : void {
         if($this->um->deleteUser($id)) {
-            error_log("Plat supprimé avec succès, redirection vers admin-list-users.");
             $_SESSION['success_message'] = "L'utilisateur a été supprimé";
             $this->redirect('admin-list-users');
         }else {
             // Gérer une erreur en cas d'échec de suppression
-            error_log("Erreur lors de la suppression.");
             $this->render('admin/users/list.html.twig', ['error' => 'Erreur lors de la suppression.']);
         }
        
