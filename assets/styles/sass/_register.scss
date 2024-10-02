@@ -1,61 +1,115 @@
 .register {
   display: flex;
-  align-content: center;
-  justify-content: center;
-  padding: 9rem;
-}
-.register__container {
-  justify-content: center;
-  margin-top: 10rem;
-  @include modale;
-  h2 {
-    letter-spacing: 0.2rem;
-    color: $blue-mai;
-  }
-}
-form {
-  display: flex;
-  flex-direction: column;
+  text-align: center;
   align-items: center;
+  justify-content: center;
+  padding: 4rem;
 
-  label {
-    font-size: 2rem;
-    text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
-    color: $blue-mai;
-  }
-  input {
-    padding: 2rem;
-    font-size: 2rem;
-    &:focus {
-      outline: none;
+  &__container {
+    justify-content: center;
+    margin-top: 14rem;
+    @include modale;
+    a {
+      color: $golden-button;
+    }
+    h2 {
+      letter-spacing: 0.2rem;
+      color: $blue-mai;
+    }
+
+    // Dark mode styles
+    &.dark-mode {
+      background: $background-dark;
+      color: $cream-mai;
+
+      h2 {
+        color: $cream-mai;
+      }
+
+      label {
+        color: $cream-mai;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      fieldset {
+        @include fieldset;
+        margin-bottom: 1.5rem;
+      }
+
+      input {
+        padding: 2rem;
+        font-size: 2rem;
+
+        &:focus {
+          outline: none;
+          border-color: $blue-mai; // Custom border color on focus
+        }
+      }
+
+      button {
+        @include button;
+        margin-top: 2rem;
+      }
+
+      // Link "Se connecter" styles
+      a {
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: none;
+          color: your-color-choice; // Ajuste la couleur ici
+        }
+      }
+    }
+
+    // Responsive styles for tablet
+    @media (max-width: 768px) {
+      font-size: 3rem;
+
+      h2 {
+        color: $blue-mai;
+      }
+
+      form {
+        label {
+          font-size: 2.6rem;
+          text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
+          color: $blue-mai;
+        }
+
+        padding: 1.5rem;
+        font-size: 1.4rem;
+      }
     }
   }
 
-  fieldset {
-    @include fieldset;
-  }
-  button {
-    @include button;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .register__container {
-    justify-content: center;
-    @include modale;
+  // Responsive styles for mobile
+  @media (max-width: 480px) {
+    font-size: 3rem;
+
     h2 {
       color: $blue-mai;
     }
-  }
-  form {
-    label {
-      font-size: 1.6rem;
-      text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
-      color: $blue-mai;
-    }
 
-    input {
-      padding: 1.5rem;
-      font-size: 1.4rem;
+    form {
+      label {
+        font-size: 2.6rem;
+        color: $blue-mai;
+      }
+
+      input {
+        padding: 1.5rem;
+        font-size: 1.4rem;
+      }
+
+      p {
+        font-size: 2rem;
+      }
     }
   }
 }

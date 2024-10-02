@@ -1,12 +1,16 @@
 {% extends 'layout.html.twig' %}
 
+{% block description %}
+  Page de d'inscription du restaurant Maï pour pouvoir s'inscrire sur le site et ainsi avoir la possibilité de commander.
+{% endblock %}
+
 {% block title %}Inscription
 {{ parent() }}
 {% endblock %}
 
 {% block main %}
 <main class="register">
-    <section class="register__container">
+    <section class="register__container py-5">
         <h2>Inscription</h2>
    {% if session.error_message %}
             <div class="alert alert-danger" role="alert">

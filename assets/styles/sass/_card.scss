@@ -128,6 +128,9 @@
     color: $blue-mai;
     padding: 2rem;
     box-sizing: border-box;
+    &.dark-mode {
+      background: $background-dark no-repeat center center fixed;
+    }
 
     // Style des plats individuels
     .dish-item {
@@ -271,12 +274,8 @@
         height: auto;
         margin-bottom: 2rem; // Espacement en bas de la sidebar
 
-        ul {
-          display: flex;
-          flex-direction: row;
-          li a {
-            font-size: 3rem;
-          }
+        ul li a {
+          font-size: 3rem;
         }
       }
     }

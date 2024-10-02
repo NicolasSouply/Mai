@@ -4,13 +4,14 @@
   Page de réservation du restaurant Maï pour demander réserver une table dans le résaurant ou des évènement.
 {% endblock %}
 
+
 {% block title %}Réservation
 {{ parent() }}
 {% endblock %}
 
 {% block main %}
-<section class="form ">
- <div class="form-container ">
+<main class="form">
+<section class="reservation__container py-5">
         <div class="form-header">
             <i class="fa fa-calendar"></i>
             <h2>Réserver votre table chez Maï</h2>
@@ -18,45 +19,45 @@
 
     
         <form action="/reservation" method="POST">
-    <div class="form-grid">
-        <div>
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" required>
+            <div class="form-grid">
+            <div>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+            <div>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
+            </div>
+            <div>
+                <label for="personnes">Nombre de personnes</label>
+                <input type="number" id="personnes" name="personnes" required>
+            </div>
+            <div>
+                <label for="telephone">Téléphone</label>
+                <input type="tel" id="telephone" name="telephone" required>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="heure">Heure</label>
+                <input type="time" id="heure" name="heure" required>
+            </div>
+            <div class="full-width">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="full-width">
+                <label for="commentaires">Commentaires</label>
+                <textarea id="commentaires" name="commentaires" rows="4"></textarea>
+            </div>
         </div>
-        <div>
-            <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" required>
-        </div>
-        <div>
-            <label for="personnes">Nombre de personnes</label>
-            <input type="number" id="personnes" name="personnes" required>
-        </div>
-        <div>
-            <label for="telephone">Téléphone</label>
-            <input type="tel" id="telephone" name="telephone" required>
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="heure">Heure</label>
-            <input type="time" id="heure" name="heure" required>
-        </div>
-        <div class="full-width">
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <div class="full-width">
-            <label for="commentaires">Commentaires</label>
-            <textarea id="commentaires" name="commentaires" rows="4"></textarea>
-        </div>
-    </div>
     <button type="submit" class="submit-btn">Réserver</button>
 </form>
 
-    </div>
-</section>
+    </section>
+
 
 {% if session.reservation_success is defined %}
     <div class="alert alert-success">

@@ -28,11 +28,11 @@ body {
   }
 
   &.light-mode {
-    background: $background-light no-repeat center center fixed;
+    background: $background-light;
   }
 
   &.dark-mode {
-    background: $background-dark no-repeat center center fixed;
+    background: $background-dark;
     color: $cream-mai;
   }
 
@@ -364,10 +364,10 @@ body {
     margin-bottom: 0;
 
     .end-page__container {
-      max-width: 100%;
+      width: 100%;
 
       a {
-        font-size: 2rem;
+        font-size: 5rem;
       }
 
       h2,
@@ -452,20 +452,16 @@ body {
     }
   }
 
-  .end-page {
-    padding: 1rem; // Réduit le padding
+  .end-page__container {
+    width: 100%; // Ajuste la largeur pour les très petits écrans
+    padding: 22rem;
+    font-size: 1.4rem; // Réduit la taille de la police
 
-    .end-page__container {
-      width: 100%; // Ajuste la largeur pour les très petits écrans
-      padding: 22rem;
-      font-size: 1.4rem; // Réduit la taille de la police
-
-      h2,
-      h3,
-      p,
-      a {
-        font-size: 5rem; // Réduit la taille de la police
-      }
+    h2,
+    h3,
+    p,
+    a {
+      font-size: 5rem; // Réduit la taille de la police
     }
   }
 
@@ -478,8 +474,8 @@ body {
     }
 
     #up-button-img {
-      width: 2rem; // Réduit encore la taille de l'image du bouton
-      height: 2rem;
+      height: 4rem;
+      width: 4rem;
     }
   }
 }

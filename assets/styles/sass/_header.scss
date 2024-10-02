@@ -200,17 +200,15 @@ body.light-mode {
     top: 0;
     left: 0;
     width: 100%;
-    height: 60%;
-    font-size: 3rem;
-    padding: 1rem;
+    margin: 0;
+    padding: 3rem;
     z-index: 1000;
     overflow-y: auto;
 
     &.show {
       display: flex;
-      padding-top: 12rem;
       justify-content: center;
-      gap: 2rem;
+      gap: 3rem;
       background-color: $cream-mai;
 
       li {
@@ -223,6 +221,7 @@ body.light-mode {
         color: $blue-mai;
         display: block;
         font-weight: bold;
+        font-size: 3rem;
         padding: 1rem;
         text-decoration: none;
         &:hover {

@@ -29,10 +29,10 @@ body .container {
   padding: 0 3rem;
 }
 body.light-mode {
-  background: #f0e9e1 no-repeat center center fixed;
+  background: #f0e9e1;
 }
 body.dark-mode {
-  background: #213f7d no-repeat center center fixed;
+  background: #213f7d;
   color: rgb(240, 233, 225);
 }
 body ul {
@@ -338,10 +338,10 @@ body .card button:hover {
     margin-bottom: 0;
   }
   .end-page .end-page__container {
-    max-width: 100%;
+    width: 100%;
   }
   .end-page .end-page__container a {
-    font-size: 2rem;
+    font-size: 5rem;
   }
   .end-page .end-page__container h2,
   .end-page .end-page__container h3,
@@ -405,18 +405,15 @@ body .card button:hover {
     padding: 0.5rem 0.5rem;
     font-size: 3.2rem;
   }
-  .end-page {
-    padding: 1rem;
-  }
-  .end-page .end-page__container {
+  .end-page__container {
     width: 100%;
     padding: 22rem;
     font-size: 1.4rem;
   }
-  .end-page .end-page__container h2,
-  .end-page .end-page__container h3,
-  .end-page .end-page__container p,
-  .end-page .end-page__container a {
+  .end-page__container h2,
+  .end-page__container h3,
+  .end-page__container p,
+  .end-page__container a {
     font-size: 5rem;
   }
   .go-top {
@@ -427,8 +424,8 @@ body .card button:hover {
     width: 2rem;
   }
   .go-top #up-button-img {
-    width: 2rem;
-    height: 2rem;
+    height: 4rem;
+    width: 4rem;
   }
 }
 header {
@@ -630,17 +627,15 @@ body.light-mode .navbar__sun-icon {
     top: 0;
     left: 0;
     width: 100%;
-    height: 60%;
-    font-size: 3rem;
-    padding: 1rem;
+    margin: 0;
+    padding: 3rem;
     z-index: 1000;
     overflow-y: auto;
   }
   .navbar__links.show {
     display: flex;
-    padding-top: 12rem;
     justify-content: center;
-    gap: 2rem;
+    gap: 3rem;
     background-color: rgb(240, 233, 225);
   }
   .navbar__links.show li {
@@ -652,6 +647,7 @@ body.light-mode .navbar__sun-icon {
     color: #213f7d;
     display: block;
     font-weight: bold;
+    font-size: 3rem;
     padding: 1rem;
     text-decoration: none;
   }
@@ -770,63 +766,70 @@ footer .footer__legal p {
 
 .register {
   display: flex;
-  align-content: center;
+  text-align: center;
+  align-items: center;
   justify-content: center;
-  padding: 9rem;
+  padding: 4rem;
 }
-
 .register__container {
   justify-content: center;
-  margin-top: 10rem;
+  margin-top: 14rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 50rem;
   height: auto;
-  backdrop-filter: blur(10px);
   border-radius: 1rem;
-  background: rgba(252, 251, 251, 0.299);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.register__container a {
+  color: #ffbc0d;
 }
 .register__container h2 {
   letter-spacing: 0.2rem;
   color: #213f7d;
 }
-
-form {
+.register__container.dark-mode {
+  background: #213f7d;
+  color: rgb(240, 233, 225);
+}
+.register__container.dark-mode h2 {
+  color: rgb(240, 233, 225);
+}
+.register__container.dark-mode label {
+  color: rgb(240, 233, 225);
+}
+.register__container form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-form label {
-  font-size: 2rem;
-  text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
-  color: #213f7d;
-}
-form input {
-  padding: 2rem;
-  font-size: 2rem;
-}
-form input:focus {
-  outline: none;
-}
-form fieldset {
+.register__container form fieldset {
   display: flex;
   font-family: "Inter", sans-serif;
   font-weight: bold;
   border: none;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1.5rem;
 }
-form fieldset input {
+.register__container form fieldset input {
   margin: 1rem;
   border: none;
   width: 20rem;
   height: 2rem;
   border-radius: 45px;
 }
-form button {
+.register__container form input {
+  padding: 2rem;
+  font-size: 2rem;
+}
+.register__container form input:focus {
+  outline: none;
+  border-color: #213f7d;
+}
+.register__container form button {
   text-align: center;
   background-color: #213f7d;
   color: white;
@@ -840,40 +843,57 @@ form button {
   transition: background-color 0.3s ease, transform 0.3s ease;
   border: none;
   text-decoration: none;
+  margin-top: 2rem;
 }
-form button:hover {
+.register__container form button:hover {
   background-color: #213f7d;
   color: white;
   transform: scale(1.1);
 }
-
-@media only screen and (min-width: 768px) {
+.register__container form a {
+  text-decoration: none;
+}
+.register__container form a:hover {
+  text-decoration: none;
+  color: your-color-choice;
+}
+@media (max-width: 768px) {
   .register__container {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50rem;
-    height: auto;
-    backdrop-filter: blur(10px);
-    border-radius: 1rem;
-    background: rgba(252, 251, 251, 0.299);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-size: 3rem;
   }
   .register__container h2 {
     color: #213f7d;
   }
-  form label {
-    font-size: 1.6rem;
-    text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
-    color: #213f7d;
-  }
-  form input {
+  .register__container form {
     padding: 1.5rem;
     font-size: 1.4rem;
   }
+  .register__container form label {
+    font-size: 2.6rem;
+    text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
+    color: #213f7d;
+  }
 }
+@media (max-width: 480px) {
+  .register {
+    font-size: 3rem;
+  }
+  .register h2 {
+    color: #213f7d;
+  }
+  .register form label {
+    font-size: 2.6rem;
+    color: #213f7d;
+  }
+  .register form input {
+    padding: 1.5rem;
+    font-size: 1.4rem;
+  }
+  .register form p {
+    font-size: 2rem;
+  }
+}
+
 .connexion {
   display: flex;
   align-content: center;
@@ -890,34 +910,32 @@ form button:hover {
   justify-content: center;
   width: 50rem;
   height: auto;
-  backdrop-filter: blur(10px);
   border-radius: 1rem;
-  background: rgba(252, 251, 251, 0.299);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.connexion__container a {
+  color: #ffbc0d;
 }
 .connexion__container h2 {
   letter-spacing: 0.2rem;
   color: #213f7d;
 }
-
-form {
+.connexion__container.dark-mode {
+  background: #213f7d;
+  color: rgb(240, 233, 225);
+}
+.connexion__container.dark-mode h2 {
+  color: rgb(240, 233, 225);
+}
+.connexion__container.dark-mode label {
+  color: rgb(240, 233, 225);
+}
+.connexion__container form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-form label {
-  font-size: 2rem;
-  text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
-  color: #213f7d;
-}
-form input {
-  padding: 2rem;
-  font-size: 2rem;
-}
-form input:focus {
-  outline: none;
-}
-form fieldset {
+.connexion__container form fieldset {
   display: flex;
   font-family: "Inter", sans-serif;
   font-weight: bold;
@@ -925,14 +943,21 @@ form fieldset {
   flex-direction: column;
   align-items: center;
 }
-form fieldset input {
+.connexion__container form fieldset input {
   margin: 1rem;
   border: none;
   width: 20rem;
   height: 2rem;
   border-radius: 45px;
 }
-form button {
+.connexion__container form input {
+  padding: 2rem;
+  font-size: 2rem;
+}
+.connexion__container form input:focus {
+  outline: none;
+}
+.connexion__container button {
   text-align: center;
   background-color: #213f7d;
   color: white;
@@ -947,32 +972,22 @@ form button {
   border: none;
   text-decoration: none;
 }
-form button:hover {
+.connexion__container button:hover {
   background-color: #213f7d;
   color: white;
   transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
-  .register__container {
+  .connexion__container {
     justify-content: center;
     font-size: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50rem;
-    height: auto;
-    backdrop-filter: blur(10px);
-    border-radius: 1rem;
-    background: rgba(252, 251, 251, 0.299);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
-  .register__container h2 {
+  .connexion__container h2 {
     color: #213f7d;
   }
   form label {
-    font-size: 1.6rem;
+    font-size: 2.6rem;
     text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
     color: #213f7d;
   }
@@ -981,27 +996,16 @@ form button:hover {
     font-size: 1.4rem;
   }
 }
-@media (max-width: 768px) and (max-width: 480px) {
-  .register__container {
+@media (max-width: 480px) {
+  .connexion__container {
     justify-content: center;
     font-size: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50rem;
-    height: auto;
-    backdrop-filter: blur(10px);
-    border-radius: 1rem;
-    background: rgba(252, 251, 251, 0.299);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
-  .register__container h2 {
+  .connexion__container h2 {
     color: #213f7d;
   }
   form label {
-    font-size: 1.6rem;
-    text-shadow: 8px 6px 5px rgba(0, 0, 0, 0.3);
+    font-size: 2.6rem;
     color: #213f7d;
   }
   form input {
@@ -1028,9 +1032,7 @@ form button:hover {
   justify-content: center;
   width: 50rem;
   height: auto;
-  backdrop-filter: blur(10px);
   border-radius: 1rem;
-  background: rgba(252, 251, 251, 0.299);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .error404__container h2 {
@@ -1084,9 +1086,7 @@ form button:hover {
   justify-content: center;
   width: 50rem;
   height: auto;
-  backdrop-filter: blur(10px);
   border-radius: 1rem;
-  background: rgba(252, 251, 251, 0.299);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin: 13rem 0 10rem 0;
   padding: 0;
@@ -1220,6 +1220,9 @@ form button:hover {
   color: #213f7d;
   padding: 2rem;
   box-sizing: border-box;
+}
+.dishes-section .dishes-list.dark-mode {
+  background: #213f7d no-repeat center center fixed;
 }
 .dishes-section .dishes-list .dish-item {
   display: flex;
@@ -1380,10 +1383,6 @@ form button:hover {
     width: 100%;
     height: auto;
     margin-bottom: 2rem;
-  }
-  .dishes-section .content .sidebar ul {
-    display: flex;
-    flex-direction: row;
   }
   .dishes-section .content .sidebar ul li a {
     font-size: 3rem;
@@ -1831,7 +1830,7 @@ body {
   padding: 2rem;
 }
 
-.form-container {
+.reservation__container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -1839,44 +1838,62 @@ body {
   padding: 4rem;
   justify-content: center;
   max-width: 60rem;
-  background: rgb(240, 233, 225);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50rem;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.form-container.dark-mode {
-  background-color: #213f7d;
+.reservation__container.dark-mode {
+  background: #213f7d;
   color: rgb(240, 233, 225);
 }
-.form-container .form-header {
+.reservation__container.dark-mode .form-header {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.form-container .form-grid {
+.reservation__container.dark-mode .form-header h2 {
+  font-size: 3rem;
+}
+
+.form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
-.form-container .form-grid .full-width {
+.form-grid .full-width {
   grid-column: 1/3;
 }
-.form-container .form-grid label {
+.form-grid label {
   font-size: 1.5rem;
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
-.form-container .form-grid input,
-.form-container .form-grid textarea {
+.form-grid input,
+.form-grid textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 14px;
 }
-.form-container .form-grid textarea {
+.form-grid input:focus,
+.form-grid textarea:focus {
+  border-color: #ffbc0d;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.form-grid textarea {
   resize: vertical;
 }
-.form-container .submit-btn {
+
+.submit-btn {
   text-align: center;
   background-color: #213f7d;
   color: white;
@@ -1890,8 +1907,9 @@ body {
   transition: background-color 0.3s ease, transform 0.3s ease;
   border: none;
   text-decoration: none;
+  transition: background-color 0.3s ease;
 }
-.form-container .submit-btn:hover {
+.submit-btn:hover {
   background-color: #213f7d;
   color: white;
   transform: scale(1.1);
@@ -2055,9 +2073,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
   padding: 2rem;
-  backdrop-filter: blur(10px);
   border-radius: 1rem;
   background: #f0e9e1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -2073,9 +2089,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
   padding: 2rem;
-  backdrop-filter: blur(10px);
   border-radius: 1rem;
   background: #f0e9e1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section.classList.toggle("dark-mode", isDarkMode);
     });
     const darkColor = document.querySelector(
-      ".privacy-policy, .legals, .cgv, .form-container, .editDishe__container, .container__confirmation"
+      ".privacy-policy, .legals, .cgv, .reservation__container, .editDishe__container, .container__confirmation, .dishes-list, .connexion__container, .form , .register__container"
     );
     if (darkColor) {
       darkColor.classList.toggle("dark-mode", isDarkMode);
