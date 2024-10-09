@@ -1,2 +1,2 @@
 # Mai
-Creating an Asian Restaurant Website with Click and Collect, Contact Form, and Reservations
+Maï is a final year project at 3W Academy. I developed this website to showcase the restaurant and facilitate takeout orders and table reservations. It also includes a login feature and a back-end section for site management. This project is a training assignment and is not intended for commercial use. The images used in this project are not free to use and may be subject to copyright restrictions.
