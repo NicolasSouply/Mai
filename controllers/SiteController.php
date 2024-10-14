@@ -53,8 +53,6 @@ class SiteController extends AbstractController
     }
       public function notFound() : void
       {
-        //var_dump("404 - Page non trouvée"); // Vérifie si c'est bien la page 404 qui est appelée
-
           $this->render('error404.html.twig', []);
       }
   }

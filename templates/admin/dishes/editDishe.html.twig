@@ -43,14 +43,14 @@
                 <label for="picture">Choisir une nouvelle image (laisser vide pour conserver l'ancienne)</label>
                 <input type="file" name="picture" id="picture" accept="image/*">
                 {% if dishe.picture %}
-                    <img src="private/uploads/{{ dishe.picture }}" alt="{{ dishe.name }}" width="100">
+                    <img src="private/uploads/{{ dishe.picture }}" alt="{{ dishe.name }}" width="100"/>
                 {% endif %}
             </fieldset>
             
             <fieldset>
                 <label for="vegetarian">
                     Végétarien
-                    <input type="checkbox" id="vegetarian" name="vegetarian" value="1" {% if dishe.isVegetarian %}checked{% endif %}>
+                    <input type="checkbox" id="vegetarian" name="isVegetarian" value="1" {% if dishe.isVegetarian %}checked{% endif %}>
                 </label>
             </fieldset>
             

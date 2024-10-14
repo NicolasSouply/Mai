@@ -1,23 +1,22 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}La carte
-{{ parent() }}
-{% endblock %}
+    {% block title %}La carte
+    {{ parent() }}
+    {% endblock %}
 
-
-{% block main %}
-<main class="content">
-    <section class="card-page">
-        <section class="card-page__container">
-            <div class="card-page__blur">
-                <h3>La carte</h3>
-            </div>
+    {% block main %}
+    <main class="content">
+        <section class="card-page">
+            <section class="card-page__container">
+                <div class="card-page__blur">
+                    <h3>La carte</h3>
+                </div>
+            </section>
         </section>
-    </section>
 
-    <section class="dishes-section">
-        <div class="content">
-            <aside class="sidebar">
+        <section class="dishes-section">
+            <div class="content">
+                <aside class="sidebar">
                 <ul>
                     <li><a href="#starter">Nos entrées</a></li>
                     <li><a href="#main-courses">Nos plats</a></li>
@@ -43,46 +42,44 @@
                                     <p>Prix : {{ dish.price|e }}€</p>
                                     <p>
                                     {% if dish.isVegetarian %}
-                                        <img src="/assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20">
+                                        <img src="/assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20" />
                                     {% endif %}
                                     </p>
-                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100" />
                                     
                                     <!-- Bouton pour ouvrir la modale -->
-                                        <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
-                                        <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
-                                    </div>
-                                   
-            <!-- Modale Template -->
-                                    <div id="modal-{{ dish.id }}" class="modal">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
-                                                <h2>{{ dish.name }}</h2>
-                                            </div>
-                                            <div class="modal-body">
-                                                <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image">
-                                                <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
-                                                <p><strong>Description :</strong> {{ dish.description|e }}</p>
-                                                <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
-                                                <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
-                                            </div>
-                                        </div>
-            <!-- Modale de commande -->
-                                    <div id="order-modal-{{ dish.id }}" class="modal">
-                                        <div class="modal-content">
+                                    <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
+                                    <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
+                                </div>
+                                <!-- Modale Template -->
+                                <div id="modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                        <span class="close-button" data-target="#order-modal-{{ dish.id }}">&times;</span>
-                                        <h2>Ajouter au panier {{ dish.name }}</h2>
-                                        <!-- Champ pour entrer la quantité -->
-                                        <label for="quantity-{{ dish.id }}">Quantité :</label>
-                                        <input type="number" id="quantity-{{ dish.id }}" name="quantity" min="1" value="1" />
-                                        <!-- Bouton Valider -->
-                                        <button class="validate-button">Valider</button>
+                                            <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
+                                            <h2>{{ dish.name }}</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image" />
+                                            <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
+                                            <p><strong>Description :</strong> {{ dish.description|e }}</p>
+                                            <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
+                                            <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
+                                        </div>
                                     </div>
+                                </div>
+                                <!-- Modale de commande -->
+                                <div id="order-modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close-button" data-target="#order-modal-{{ dish.id }}">&times;</span>
+                                            <h2>Ajouter au panier {{ dish.name }}</h2>
+                                            <label for="quantity-{{ dish.id }}">Quantité :</label>
+                                            <input type="number" id="quantity-{{ dish.id }}" name="quantity" min="1" value="1" />
+                                            <button class="validate-button">Valider</button>
+                                        </div>
                                     </div>
                                 </div>
                                 {% set hasEntries = true %}
@@ -106,46 +103,44 @@
                                     <p>Prix : {{ dish.price|e }}€</p>
                                     <p>
                                     {% if dish.isVegetarian %}
-                                        <img src="./assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20">
+                                        <img src="./assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20" />
                                     {% endif %}
                                     </p>
-                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100" />
                                 
                                     <!-- Bouton pour ouvrir la modale -->
                                     <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
                                     <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
-                                        </div>
-                                    <!-- Modale Template -->
-                                    <div id="modal-{{ dish.id }}" class="modal">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
-                                                <h2>{{ dish.name }}</h2>
-                                            </div>
-                                            
-                                            <div class="modal-body">
-                                                <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image">
-                                                <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
-                                                <p><strong>Description :</strong> {{ dish.description|e }}</p>
-                                                <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
-                                                <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
-                                            </div>
-                                        </div>
-                                    <!-- Modale de commande -->
-                                    <div id="order-modal-{{ dish.id }}" class="modal">
-                                        <div class="modal-content">
+                                </div>
+                                <!-- Modale Template -->
+                                <div id="modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                        <span class="close-button" data-target="#order-modal-{{ dish.id }}">&times;</span>
-                                        <h2>Ajouter au panier {{ dish.name }}</h2>
-                                        <!-- Champ pour entrer la quantité -->
-                                        <label for="quantity-{{ dish.id }}">Quantité :</label>
-                                        <input type="number" id="quantity-{{ dish.id }}" name="quantity" min="1" value="1" />
-                                        <!-- Bouton Valider -->
-                                        <button class="validate-button">Valider</button>
+                                            <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
+                                            <h2>{{ dish.name }}</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image" />
+                                            <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
+                                            <p><strong>Description :</strong> {{ dish.description|e }}</p>
+                                            <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
+                                            <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
+                                        </div>
                                     </div>
+                                </div>
+                                <!-- Modale de commande -->
+                                <div id="order-modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close-button" data-target="#order-modal-{{ dish.id }}">&times;</span>
+                                            <h2>Ajouter au panier {{ dish.name }}</h2>
+                                            <label for="quantity-{{ dish.id }}">Quantité :</label>
+                                            <input type="number" id="quantity-{{ dish.id }}" name="quantity" min="1" value="1" />
+                                            <button class="validate-button">Valider</button>
+                                        </div>
                                     </div>
                                 </div>
                                 {% set hasMainCourses = true %}
@@ -169,45 +164,43 @@
                                     <p>Prix : {{ dish.price|e }}€</p>
                                     <p>
                                     {% if dish.isVegetarian %}
-                                        <img src="./assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20">
+                                        <img src="./assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20" />
                                     {% endif %}
                                     </p>
-                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100" />
                                     <!-- Bouton pour ouvrir la modale -->
                                     <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
                                     <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
-                        </div>
-                                    <!-- Modale Template -->
-                                    <div id="modal-{{ dish.id }}" class="modal">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
-                                                <h2>{{ dish.name }}</h2>
-                                            </div>
-                                            <div class="modal-body">
-                                                <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image">
-                                                <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
-                                                <p><strong>Description :</strong> {{ dish.description|e }}</p>
-                                                <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
-                                                <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
-                                            </div>
-                                        </div>
-                                    <!-- Modale de commande -->
-                                    <div id="order-modal-{{ dish.id }}" class="modal">
-                                        <div class="modal-content">
+                                </div>
+                                <!-- Modale Template -->
+                                <div id="modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                        <span class="close-button"  data-target="#order-modal-{{ dish.id }}">&times;</span>
-                                        <h2>Ajouter au panier {{ dish.name }}</h2>
-                                        
-                                        <!-- Champ pour entrer la quantité -->
-                                        <label for="quantity-{{ dish.id }}">Quantité :</label>
-                                        <input type="number" id="quantity-{{ dish.id }}" name="quantity" min="1" value="1" />
-                                        <!-- Bouton Valider -->
-                                        <button class="validate-button">Valider</button>
+                                            <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
+                                            <h2>{{ dish.name }}</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image" />
+                                            <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
+                                            <p><strong>Description :</strong> {{ dish.description|e }}</p>
+                                            <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
+                                            <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
+                                        </div>
                                     </div>
+                                </div>
+                                <!-- Modale de commande -->
+                                <div id="order-modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close-button" data-target="#order-modal-{{ dish.id }}">&times;</span>
+                                            <h2>Ajouter au panier {{ dish.name }}</h2>
+                                            <label for="quantity-{{ dish.id }}">Quantité :</label>
+                                            <input type="number" id="quantity-{{ dish.id }}" name="quantity" min="1" value="1" />
+                                            <button class="validate-button">Valider</button>
+                                        </div>
                                     </div>
                                 </div>
                                 {% set hasDesserts = true %}
@@ -231,33 +224,44 @@
                                     <p>Prix : {{ dish.price|e }}€</p>
                                     <p>
                                     {% if dish.isVegetarian %}
-                                        <img src="./assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20">
+                                        <img src="./assets/images/icons/leaf.webp" alt="icon végétarien" class="vegetarian-icon" width="20" />
                                     {% endif %}
                                     </p>
-                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100">
+                                    <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100" />
                                     <!-- Bouton pour ouvrir la modale -->
                                     <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
                                     <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
-                                    </div>
-                                    <!-- Modale Template -->
-                                    <div id="modal-{{ dish.id }}" class="modal">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
-                                                <h2>{{ dish.name }}</h2>
-                                            </div>
-                                            <div class="modal-body">
-                                                <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image">
-                                                <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
-                                                <p><strong>Description :</strong> {{ dish.description|e }}</p>
-                                                <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
-                                                <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
-                                            </div>
+                                </div>
+                                <!-- Modale Template -->
+                                <div id="modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close-button" data-target="#modal-{{ dish.id }}">&times;</span>
+                                            <h2>{{ dish.name }}</h2>
                                         </div>
-                                    
+                                        <div class="modal-body">
+                                            <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" class="modal-image" />
+                                            <p><strong>Catégorie :</strong> {{ dish.category|e }}</p>
+                                            <p><strong>Description :</strong> {{ dish.description|e }}</p>
+                                            <p><strong>Prix :</strong> {{ dish.price|e }}€</p>
+                                            <p><strong>Végétarien :</strong> {% if dish.isVegetarian %} Oui {% else %} Non {% endif %}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="close-button" data-target="#modal-{{ dish.id }}">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modale de commande -->
+                                <div id="order-modal-{{ dish.id }}" class="modal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close-button" data-target="#order-modal-{{ dish.id }}">&times;</span>
+                                            <h2>Ajouter au panier {{ dish.name }}</h2>
+                                            <label for="quantity-{{ dish.id }}">Quantité :</label>
+                                            <input type="number" id="quantity-{{ dish.id }}" name="quantity" min="1" value="1" />
+                                            <button class="validate-button">Valider</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 {% set hasDrinks = true %}
                             {% endif %}
@@ -267,7 +271,8 @@
                         {% endif %}
                     </div>
                 </article>
-                    <section id="cartModal" class="fixed-cart">
+
+                     <section id="cartModal" class="fixed-cart">
                         <article class="modal-header">
                             <h4>Votre panier :</h4>
                             <span id="toggleCart" class="toggle-arrow">▼</span> <!-- Flèche pour replier/déplier -->
@@ -281,12 +286,10 @@
                             <button type="submit" id="checkoutButton" class="btn-commander">Commander</button>
                         </form>
                     </section>
-
             </section>
-            
         </div>
     </section>
-    
+
     <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
         <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
       </button>

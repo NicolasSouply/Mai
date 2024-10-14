@@ -38,7 +38,8 @@
   input[type="tel"],
   textarea {
     width: 100%;
-    padding: 1.75rem;
+    padding: 1rem;
+    margin: 1rem;
     border: 1px solid #ccc;
     border-radius: 20px; /* Arrondir les champs */
     background-color: #fff;
@@ -49,7 +50,8 @@
 
   textarea#message {
     width: 44rem;
-    height: auto;
+    min-height: 10rem; /* Définis une hauteur minimale */
+    resize: vertical;
   }
 
   .btn-submit {

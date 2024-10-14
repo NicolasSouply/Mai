@@ -9,12 +9,8 @@ class AdminManager extends AbstractManager
 
     public function isAdmin(string $email): bool
     {
-        $query = $this->db->prepare(
-            "SELECT COUNT(*) FROM admin WHERE email = :email"
-        );
-        $parameters = [
-            "email" => $email
-        ];
+        $query = $this->db->prepare("SELECT COUNT(*) FROM admin WHERE email = :email");
+        $parameters = ["email" => $email ];
         $query->execute($parameters);
         return $query->fetchColumn() > 0;
     }

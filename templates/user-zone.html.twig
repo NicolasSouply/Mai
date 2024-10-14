@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Page de {{ user.first_name|escape }}
+{% block title %}Page de {{ user.first_name|e }}
 {{ parent() }}
 {% endblock %}
 
@@ -8,8 +8,7 @@
 <main class="user-zone">
   <section class="user-zone__container">
 
-    <h2>Bienvenue {{ user.first_name|escape }} </br></br>
-
+    <h2>Bienvenue {{ user.first_name|e }}</br></br>
     Mes commandes</h2>
 
     {% if orders is empty %}
@@ -25,7 +24,7 @@
             <ul class="order-details">
               {% for item in order.getItems() %}
                 <li class="order-detail">
-                  <p>{{ item.getName() }} - {{ item.getPrice()|number_format(2, ',', ' ') }} € (Quantité: {{ item.getQuantity() }})</p>
+                  <p>{{ item.getName()|e }} - {{ item.getPrice()|number_format(2, ',', ' ') }} € (Quantité: {{ item.getQuantity() }})</p>
                 </li>
               {% endfor %}
             </ul>
@@ -35,7 +34,7 @@
     {% endif %}
   </section>
   <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
-    <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+    <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img"/>
   </button>
 </main>
 {% endblock %}

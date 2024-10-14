@@ -50,19 +50,24 @@
       border: none;
       padding: 0;
     }
-
-    label {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    #picture {
-      padding: 2.5rem;
-      font-size: 1.5rem;
-    }
     select {
       font-size: larger;
       margin-bottom: 1.5rem;
+      text-align: center; /* Centre le texte à l'intérieur du select */
+      display: block;
+      margin: 0 auto; /* Centre le select lui-même dans le conteneur */
+      padding: 0.5rem;
+      border-radius: 10px; /* Ajoute un arrondi */
+      border: 1px solid #ddd; /* Ajoute une bordure subtile */
+      width: 100%; /* S'assure que le select occupe toute la largeur de son conteneur */
+      box-sizing: border-box;
+    }
+    label {
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: block; /* ou inline-block si vous voulez les garder sur une ligne avec les inputs */
+      margin: 1.5rem 0 1.5rem 0;
+      text-align: center; /* Centre le texte du label */
     }
 
     input,
@@ -70,12 +75,14 @@
       width: 100%;
       padding: 1.5rem;
       box-sizing: border-box;
+      border-radius: 10px; /* Ajoute un arrondi aux inputs et textarea */
+      border: 1px solid #ddd; /* Ajoute une bordure subtile */
     }
 
     input[type="file"] {
       width: 100%;
       padding: 0.5rem;
-      border-radius: 5px;
+      border-radius: 10px; /* Arrondi pour le champ de type fichier également */
     }
 
     button {

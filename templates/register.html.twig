@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block description %}
-  Page de d'inscription du restaurant Maï pour pouvoir s'inscrire sur le site et ainsi avoir la possibilité de commander.
+  Page d'inscription du restaurant Maï pour pouvoir s'inscrire sur le site et ainsi avoir la possibilité de commander.
 {% endblock %}
 
 {% block title %}Inscription
@@ -12,35 +12,35 @@
 <main class="register">
     <section class="register__container py-5">
         <h2>Inscription</h2>
-   {% if session.error_message %}
+        {% if session.error_message %}
             <div class="alert alert-danger" role="alert">
-                {{ session.error_message }}
+                {{ session.error_message|e }}
             </div>
-
         {% endif %}
 
-        <form action="index.php?route=check-inscription" method="post">
-            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token }}" />
+        <form action="index.php?route=check-inscription" method="post" onsubmit="return validateForm()">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token|e }}" />
             <fieldset>
                 <label for="first_name" class="form-label">Prénom :</label>
-                <input type="text" name="first_name" id="first_name" required class="form-control" />
+                <input type="text" name="first_name" id="first_name" required class="form-control" value="{{ session.first_name|e }}" />
             </fieldset>
             <fieldset>
                 <label for="last_name" class="form-label">Nom de famille :</label>
-                <input type="text" name="last_name" id="last_name" required class="form-control" />
+                <input type="text" name="last_name" id="last_name" required class="form-control" value="{{ session.last_name|e }}" />
             </fieldset>
 
             <fieldset>
                 <label for="email" class="form-label">Email :</label>
-                <input type="email" name="email" id="email" required class="form-control" />
+                <input type="email" name="email" id="email" required class="form-control" value="{{ session.email|e }}" />
             </fieldset>
             <fieldset>
                 <label for="phone" class="form-label">Téléphone :</label>
-                <input type="tel" name="phone" id="phone" required class="form-control" /> 
+                <input type="tel" name="phone" id="phone" required class="form-control" value="{{ session.phone|e }}" /> 
             </fieldset>
             <fieldset>
                 <label for="password" class="form-label">Mot de passe :</label>
                 <input type="password" name="password" id="password" required class="form-control" />
+                <small>Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
             </fieldset>
             <fieldset>
                 <label for="confirm_password" class="form-label">Vérification du mot de passe :</label>
@@ -53,6 +53,24 @@
         </form>
     </section>
 </main>
+
+<script>
+    function validateForm() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+            alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.");
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Les mots de passe ne correspondent pas.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 {% endblock %}
-
-

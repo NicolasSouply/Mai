@@ -13,44 +13,44 @@
     <!-- version mobile -->
     <header class="header__mobile">
       <nav class="navbar">
-        <a class="navbar__logo" href="index.php?route=home">
+        <a class="navbar__logo" href="index.php?route=home" aria-label="Retour à l'accueil du restaurant Maï">
           <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
         </a>
         
-        <a href="index.php?route=reservation" class="navbar__button">Réserver</a>
+        <a href="index.php?route=reservation" class="navbar__button" aria-label="Réserver une table">Réserver</a>
 
-        <div class="burger-menu" id="burger-menu">
-          <img src="./assets/images/icons/burger-blue.webp" />
+        <div class="burger-menu" id="burger-menu" aria-label="Menu mobile">
+          <img src="./assets/images/icons/burger-blue.webp" alt="Menu burger" />
         </div>
         <div class="navbar__dark-mode">
-          <button id="js-darkModeMobile" class="navbar__toggle">
+          <button id="js-darkModeMobile" class="navbar__toggle" aria-label="Activer ou désactiver le mode sombre">
             <img id="js-moonIconMobile" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
             <img id="js-sunIconMobile" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
           </button>
         </div>
       </nav>
       <ul class="navbar__links" id="navLinks">
-        <a class="navbar__logo" href="index.php?route=home">
+        <a class="navbar__logo" href="index.php?route=home" aria-label="Retour à l'accueil du restaurant Maï">
           <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
         </a>
-        <li><a href="index.php?route=card">La carte</a></li>
-        <li><a href="index.php?route=about">À propos</a></li>
-        <li><a href="index.php?route=localisation">Localiser</a></li>
-        <li><a href="index.php?route=contact">Contact</a></li>
+        <li><a href="index.php?route=card" aria-label="Voir le menu">La carte</a></li>
+        <li><a href="index.php?route=about" aria-label="En savoir plus sur le restaurant">À propos</a></li>
+        <li><a href="index.php?route=localisation" aria-label="Localiser le restaurant">Localiser</a></li>
+        <li><a href="index.php?route=contact" aria-label="Contacter le restaurant">Contact</a></li>
 
   {% if isUserLoggedIn %}
     <!-- Bouton de retour selon le rôle de l'utilisateur -->
     {% if userRole == 'ADMIN' %}
-        <li><a class="navbar__button" href="index.php?route=admin-zone" >Espace admin</a></li>
+        <li><a class="navbar__button" href="index.php?route=admin-zone" aria-label="Accéder à l'espace admin">Espace admin</a></li>
     {% elseif userRole == 'USER' %}
-        <li><a class="navbar__button" href="index.php?route=user-zone">Espace utilisateur</a></li>
+        <li><a class="navbar__button" href="index.php?route=user-zone" aria-label="Accéder à l'espace utilisateur">Espace utilisateur</a></li>
     {% endif %}
 
     <!-- Bouton de déconnexion -->
-    <a class="navbar__button" href="index.php?route=deconnexion">Déconnexion</a>
+    <a class="navbar__button" href="index.php?route=deconnexion" aria-label="Se déconnecter">Déconnexion</a>
 {% else %}
-    <li><a href="index.php?route=connexion" class="navbar__button">Connexion</a></li>
-    <li><a href="index.php?route=inscription" class="navbar__button ">Inscription</a></li>
+    <li><a href="index.php?route=connexion" class="navbar__button" aria-label="Se connecter">Connexion</a></li>
+    <li><a href="index.php?route=inscription" class="navbar__button" aria-label="Créer un compte">Inscription</a></li>
 {% endif %}
       </ul>
     </header>
@@ -58,18 +58,18 @@
     <!-- version desktop -->
     <header class="header__desktop">
       <nav class="navbar">
-        <a class="navbar__logo" href="index.php?route=home">
+        <a class="navbar__logo" href="index.php?route=home" aria-label="Retour à l'accueil du restaurant Maï">
           <img src="./assets/images/logo-mai.webp" alt="logo du restaurant Maï à Saint-Brieuc" />
         </a>
         <ul class="navbar__links">
-          <li><a href="index.php?route=card">La carte</a></li>
-          <li><a href="index.php?route=about">À propos</a></li>
-          <li><a href="index.php?route=localisation">Localiser</a></li>
-          <li><a href="index.php?route=contact">Contact</a></li>
+          <li><a href="index.php?route=card" aria-label="Voir les plats">La carte</a></li>
+          <li><a href="index.php?route=about" aria-label="En savoir plus sur le restaurant">À propos</a></li>
+          <li><a href="index.php?route=localisation" aria-label="Localiser le restaurant">Localiser</a></li>
+          <li><a href="index.php?route=contact" aria-label="Contacter le restaurant">Contact</a></li>
         </ul>
-        <a class="navbar__button" href="index.php?route=reservation">Réserver</a>
+        <a class="navbar__button" href="index.php?route=reservation" aria-label="Réserver une table">Réserver</a>
         <div class="navbar__dark-mode">
-          <button id="js-darkMode" class="navbar__toggle">
+          <button id="js-darkMode" class="navbar__toggle" aria-label="Activer ou désactiver le mode sombre">
             <img id="js-moonIcon" class="navbar__icon js-moonIcon" src="./assets/images/icons/moon.webp" alt="logo de lune" />
             <img id="js-sunIcon" class="navbar__icon js-sunIcon js-hidden" src="./assets/images/icons/sun.webp" alt="logo de soleil" />
           </button>
@@ -80,16 +80,16 @@
   {% if isUserLoggedIn %}
     <!-- Bouton de retour selon le rôle de l'utilisateur -->
     {% if userRole == 'ADMIN' %}
-        <li><a class="navbar__button" href="index.php?route=admin-zone">Espace admin</a></li>
+        <li><a class="navbar__button" href="index.php?route=admin-zone" aria-label="Accéder à l'espace admin">Espace admin</a></li>
     {% elseif userRole == 'USER' %}
-        <li><a class="navbar__button" href="index.php?route=user-zone">Espace utilisateur</a></li>
+        <li><a class="navbar__button" href="index.php?route=user-zone" aria-label="Accéder à l'espace utilisateur">Espace utilisateur</a></li>
     {% endif %}
 
     <!-- Bouton de déconnexion -->
-    <a class="navbar__button" href="index.php?route=deconnexion">Déconnexion</a>
+    <a class="navbar__button" href="index.php?route=deconnexion" aria-label="Se déconnecter">Déconnexion</a>
 {% else %}
-    <li><a href="index.php?route=connexion" class="navbar__button">Connexion</a></li>
-    <li><a href="index.php?route=inscription" class="navbar__button">Inscription</a></li>
+    <li><a href="index.php?route=connexion" class="navbar__button" aria-label="Se connecter">Connexion</a></li>
+    <li><a href="index.php?route=inscription" class="navbar__button" aria-label="Créer un compte">Inscription</a></li>
 {% endif %}
       </div>
     </header>
@@ -113,35 +113,41 @@
       <section class="gallery">
           <div class="gallery__inner">
             <div class="gallery__container">
-              <img src="./assets/images/boules-coco.webp" alt="Image de boules coco">
-              <img src="./assets/images/cuisine.webp" alt="Image de mains en train de faire la cuisine">
-              <img src="./assets/images/boeufSatay.webp" alt="Image de boeuf Satay">
-              <img src="./assets/images/dessert.webp" alt="image de dessert">
-              <img src="./assets/images/gateau-vert-pandan.webp" alt="image gâteau vert">
-              <img src="./assets/images/mangue.webp" alt="Image de mangue">
-              <img src="./assets/images/nem-choco.webp" alt="Image de nems au chocolat">
-              <img src="./assets/images/vitrine.webp" alt="Image vitrine">
-              <img src="./assets/images/porcCaramel.webp" alt="Image de porc au caramel">
-              <img src="./assets/images/poulet-pekinois.webp" alt="Image poulet Pékinois">
+              <img src="./assets/images/boules-coco.webp" alt="Image de boules coco" />
+              <img src="./assets/images/cuisine.webp" alt="Image de mains en train de faire la cuisine"/>
+              <img src="./assets/images/boeufSatay.webp" alt="Image de boeuf Satay"/>
+              <img src="./assets/images/dessert.webp" alt="image de dessert"/>
+              <img src="./assets/images/gateau-vert-pandan.webp" alt="image gâteau vert"/>
+              <img src="./assets/images/mangue.webp" alt="Image de mangue"/>
+              <img src="./assets/images/nem-choco.webp" alt="Image de nems au chocolat"/>
+              <img src="./assets/images/vitrine.webp" alt="Image vitrine"/>
+              <img src="./assets/images/porcCaramel.webp" alt="Image de porc au caramel"/>
+              <img src="./assets/images/poulet-pekinois.webp" alt="Image poulet Pékinois"/>
+                            <img src="./assets/images/boissons.webp" alt="Gamme de boissons" />
+              <img src="./assets/images/gateauv.webp" alt="Image gateau vert" />
+              <img src="./assets/images/lampe.webp" alt="Image lampe"  />
+              <img src="./assets/images/Matcha.webp" alt="Image the matcha"  />
+              <img src="./assets/images/tableau.webp" alt="Image d'un rouleau de printemps" />
+              <img src="./assets/images/vitrine2.webp" alt="Image vitrine" />
             </div>
           </div>
       </section>
       <section class="card">
         <div class="card__blur">
           <h3>La carte</h3>
-          <button><a href="index.php?route=card">Découvrir</a></button>
+          <button aria-label="Découvrir le menu"><a href="index.php?route=card">Découvrir</a></button>
         </div>
       </section>
       <section class="end-page">
         <div class="end-page__container">
-          <a href="index.php?route=localisation">Nous trouver</a>
-          <a href="index.php?route=card">Commander</a>
-          <a href="index.php?route=reservation">Réserver</a>
+          <a href="index.php?route=localisation"  aria-label="lien vers la page localiser le restaurant">Nous trouver</a>
+          <a href="index.php?route=card" aria-label="Lien vers la page consulter et commander des plats">Commander</a>
+          <a href="index.php?route=reservation" aria-label="Lien vers la page réserver une table au restaurant">Réserver</a>
         </div>
       </section>
       <!--Bouton up -->
       <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
-        <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
+        <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img"/>
       </button>
       {% endblock %}
     </main>
@@ -176,13 +182,13 @@
       </section>
 
       <section class="footer__legal">
-        <a href="index.php?route=privacy-policy">
+        <a href="index.php?route=privacy-policy" aria-label="Lien vers la page politique de confidentialité">
           <p>Politique de confidentialité</p>
         </a>
-        <a href="index.php?route=cgv">
+        <a href="index.php?route=cgv" aria-label="Lien vers la page conditions générales de vente">
           <p>Conditions générales de vente</p>
         </a>
-        <a href="index.php?route=legals-mentions">
+        <a href="index.php?route=legals-mentions" aria-label="Lien vers la page des mentions légales">
           <p>Mentions légales</p>
         </a>
       </section>

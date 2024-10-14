@@ -59,14 +59,14 @@ class OrderManager extends AbstractManager
 
 
 private function insertOrder(int $userId, float $total): int
-{error_log("Tentative d'insertion de la commande : userId=$userId, totalPrice=$total");
+{error_log("Tentative d'insertion de la commande : userId=$userId, total_price=$total");
 
-    $query = $this->db->prepare("INSERT INTO orders (user_id, totalPrice, status, date_order, hour_order) 
-                                 VALUES (:user_id, :totalPrice, 'Pending', NOW(), NOW())");
+    $query = $this->db->prepare("INSERT INTO orders (user_id, total_price, status, date_order, hour_order) 
+                                 VALUES (:user_id, :total_price, 'Pending', NOW(), NOW())");
 
     // Liaison des paramètres
     $query->bindValue(':user_id', $userId, PDO::PARAM_INT);
-    $query->bindValue(':totalPrice', $total, PDO::PARAM_STR);
+    $query->bindValue(':total_price', $total, PDO::PARAM_STR);
 
     // Exécution de la requête et gestion des erreurs
     if (!$query->execute()) {
@@ -83,18 +83,18 @@ private function insertOrderItem(int $order_id, array $item): void
 {error_log("Insertion de l'article : " . json_encode($item));
 
     // Vérification des données
-    if (!isset($item['dishe_id'], $item['totalPrice'], $item['quantity'])) {
+    if (!isset($item['dishe_id'], $item['total_price'], $item['quantity'])) {
         error_log("Données manquantes pour l'article : " . json_encode($item));
         return; // Sortir si les données sont manquantes
     }
 
-    $query = $this->db->prepare("INSERT INTO detail_orders (order_id, dishe_id, totalPrice, quantity) 
-        VALUES (:order_id, :dishe_id, :totalPrice, :quantity)");
+    $query = $this->db->prepare("INSERT INTO detail_orders (order_id, dishe_id, total_price, quantity) 
+        VALUES (:order_id, :dishe_id, :total_price, :quantity)");
 
     // Lier les paramètres
     $query->bindValue(':order_id', $order_id);
     $query->bindValue(':dishe_id', $item['dishe_id']); // Correction ici
-    $query->bindValue(':totalPrice', $item['totalPrice']);
+    $query->bindValue(':total_price', $item['total_price']);
     $query->bindValue(':quantity', $item['quantity']);
 
     // Exécution de la requête et gestion des erreurs
@@ -120,11 +120,11 @@ private function insertOrderItem(int $order_id, array $item): void
 
         $createdAt = !empty($order['created_at']) ? $order['created_at'] : '1970-01-01 00:00:00';
         $updatedAt = !empty($order['updated_at']) ? $order['updated_at'] : '1970-01-01 00:00:00';
-        $totalPrice = !empty($order['totalPrice']) ? (float)$order['totalPrice'] : 0.0;
+        $total_price = !empty($order['total_price']) ? (float)$order['total_price'] : 0.0;
 
         return new Orders(
             $order['order_id'],
-            $totalPrice,
+            $total_price,
             new DateTime($createdAt),
             new DateTime($updatedAt)
         );
@@ -156,7 +156,7 @@ private function insertOrderItem(int $order_id, array $item): void
     }
     
     public function getOrdersByUserId($userId) {
-        $query = "SELECT order_id, status, totalPrice, date_order, hour_order 
+        $query = "SELECT order_id, status, total_price, date_order, hour_order 
                   FROM orders WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $userId);
@@ -168,7 +168,7 @@ private function insertOrderItem(int $order_id, array $item): void
             // Initialisation des propriétés avec des valeurs par défaut
             $order = new Orders(
                 $orderData['status'], 
-                $orderData['totalPrice'], 
+                $orderData['total_price'], 
                 new DateTime($orderData['date_order']), 
                 new DateTime($orderData['hour_order'])
             );

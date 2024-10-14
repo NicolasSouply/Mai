@@ -4,8 +4,9 @@
   Page contact du restaurant Maï pour demander des renseignements ou organiser des événements.
 {% endblock %}
 
-{% block title %}Contact
-{{ parent() }}
+{% block title %}
+  Contact
+  {{ parent() }}
 {% endblock %}
 
 {% block main %}
@@ -16,18 +17,18 @@
 
         <form action="" method="post">
             <div class="contact-page__form-group">
-                <input type="text" id="first-name" name="first-name" placeholder="Prénom" required>
-                <input type="text" id="last-name" name="last-name" placeholder="Nom" required>
+                <input type="text" id="first-name" name="first-name" placeholder="Prénom" value="{{ app.request.get('first-name')|e }}" required>
+                <input type="text" id="last-name" name="last-name" placeholder="Nom" value="{{ app.request.get('last-name')|e }}" required>
             </div>
             <div class="contact-page__form-group">
-                <input type="email" id="email" name="email" placeholder="Email" required>
-                <input type="tel" id="phone" name="phone" placeholder="Téléphone" required>
+                <input type="email" id="email" name="email" placeholder="Email" value="{{ app.request.get('email')|e }}" required>
+                <input type="tel" id="phone" name="phone" placeholder="Téléphone" value="{{ app.request.get('phone')|e }}" required>
             </div>
             <div class="contact-page__form-group">
-                <input type="text" id="subject" name="subject" placeholder="Objet" required>
+                <input type="text" id="subject" name="subject" placeholder="Objet" value="{{ app.request.get('subject')|e }}" required>
             </div>
             <div class="contact-page__form-group">
-                <textarea id="message" name="message" placeholder="Message" rows="5" required></textarea>
+                <textarea id="message" name="message" placeholder="Message" rows="5" required>{{ app.request.get('message')|e }}</textarea>
             </div>
             <button type="submit" class="btn-submit">Envoyer</button>
         </form>

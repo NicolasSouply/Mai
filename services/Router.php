@@ -78,18 +78,18 @@ class Router
             $this->uc->create();
         }
         else if($route === "admin-check-create-user")
-        {var_dump('admin-check-create-user');
+        {
             $this->checkAdmin();
             $this->uc->checkCreate();
         }
         else if($route === "admin-edit-user" && isset($_GET["user_id"]))
-        {var_dump(' admin-edit-user');
+        {
             $this->checkAdmin();
             $this->uc->checkEdit(intval($_GET["user_id"]));
             $this->uc->edit(intval($_GET["user_id"]));
         }
         else if($route === "admin-check-edit-user" && isset($_GET["user_id"]))
-        {var_dump('admin-check-edit-user');
+        {
             $this->checkAdmin();
             $this->uc->edit(intval($_GET["user_id"]));
         }
@@ -130,10 +130,10 @@ class Router
         $this->dc->checkEditDishe(intval($_GET["dishe_id"]));
     }
     
-    else if($route === "admin-deleteDishe" && isset($_GET["id"]))
+    else if($route === "admin-deleteDishe" && isset($_GET["dishe_id"]))
     {
         $this->checkAdmin();
-        $this->dc->deleteDishe(intval($_GET["id"]));
+        $this->dc->deleteDishe(intval($_GET["dishe_id"]));
     }
         elseif ($route === 'card') 
         {
@@ -180,8 +180,6 @@ class Router
                 $this->sc->legalsMentions();
         }
         else {
-            //var_dump('Route non trouvée : ' . $route); // Vérifie si la route est inconnue
-
             $this->sc->notFound();
         }
     }

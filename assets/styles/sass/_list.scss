@@ -12,4 +12,34 @@
     background-color: $background-dark; // Assurez-vous que cette ligne est correcte
     color: $cream-mai;
   }
+
+  @media (max-width: 768px) {
+    .table-responsive img {
+      width: 70%; // Ajuste la taille de l'image à 70% de l'espace de la cellule
+    }
+
+    .btn {
+      padding: 0.5rem 1rem; // Rend les boutons plus compacts
+      font-size: 1.2rem;
+    }
+
+    h2 {
+      font-size: 2.5rem; // Adapte la taille du titre pour les petits écrans
+    }
+  }
+
+  @media (max-width: 480px) {
+    .table-responsive img {
+      width: 50%; // Réduit encore plus la taille de l'image
+    }
+
+    .btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem; // Réduit la taille du texte pour les très petits écrans
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+  }
 }

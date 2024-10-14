@@ -1,5 +1,3 @@
-console.log("coucou");
-
 document.addEventListener("DOMContentLoaded", () => {
   // Sélection des éléments du DOM
   const body = document.body;
@@ -60,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section.classList.toggle("dark-mode", isDarkMode);
     });
     const darkColor = document.querySelector(
-      ".privacy-policy, .legals, .cgv, .reservation__container, .editDishe__container, .container__confirmation, .dishes-list, .connexion__container, .form , .register__container"
+      ".privacy-policy, .legals, .cgv, .reservation__container, .editDishe__container, .container__confirmation, .dishes-list, .connexion__container, .reservation__container,.register__container"
     );
     if (darkColor) {
       darkColor.classList.toggle("dark-mode", isDarkMode);
