@@ -10,8 +10,9 @@
 {% endblock %}
 
 {% block main %}
-<main class="connexion">
- <section class="connexion__container py-5">
+
+ <section class="connexion">
+    <div class="connexion__container py-5">
 
         {% if session.error_message %}
             <div class="alert alert-danger" role="alert">
@@ -44,6 +45,7 @@
             </fieldset>
         </form>
         <p>Pas encore de compte ? <a href="index.php?route=inscription">S'inscrire</a></p>
+        </div>
     </section>
-</main>
+
 {% endblock %}

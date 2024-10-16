@@ -7,6 +7,9 @@ header {
   top: 0;
   z-index: 1000;
 }
+.header__desktop {
+  align-items: center;
+}
 // Barre de navigation
 .navbar {
   display: flex;
@@ -62,6 +65,7 @@ header {
 // Boutons
 .navbar__button {
   @include button;
+  display: flex;
   &:hover {
     transform: scale(1.1);
   }
@@ -111,6 +115,10 @@ header {
   }
 }
 .navbar__login {
+  display: flex;
+  align-items: center;
+}
+.navbar__connected {
   display: flex;
   align-items: center;
 }

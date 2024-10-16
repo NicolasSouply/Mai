@@ -103,6 +103,16 @@ body .hook img {
   height: auto;
   padding-right: 2rem;
 }
+body .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 body .gallery {
   position: relative;
   width: 100vw;
@@ -198,6 +208,17 @@ body .card button:hover {
 }
 
 /* **************************** SECTION END PAGE ***************************/
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 .end-page {
   position: relative;
   display: flex;
@@ -443,6 +464,10 @@ header {
   z-index: 1000;
 }
 
+.header__desktop {
+  align-items: center;
+}
+
 .navbar {
   display: flex;
   justify-content: space-around;
@@ -506,6 +531,7 @@ header {
   transition: background-color 0.3s ease, transform 0.3s ease;
   border: none;
   text-decoration: none;
+  display: flex;
 }
 .navbar__button:hover {
   background-color: #213f7d;
@@ -555,6 +581,11 @@ header {
 }
 
 .navbar__login {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__connected {
   display: flex;
   align-items: center;
 }

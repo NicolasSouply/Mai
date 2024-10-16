@@ -111,6 +111,9 @@ body {
   }
 
   /* **************************** SECTION GALLERY ***************************/
+  .visually-hidden {
+    @include visually-hidden;
+  }
 
   .gallery {
     position: relative;
@@ -199,7 +202,9 @@ body {
 }
 
 /* **************************** SECTION END PAGE ***************************/
-
+.visually-hidden {
+  @include visually-hidden;
+}
 .end-page {
   position: relative;
   display: flex;

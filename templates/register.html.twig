@@ -4,13 +4,14 @@
   Page d'inscription du restaurant Maï pour pouvoir s'inscrire sur le site et ainsi avoir la possibilité de commander.
 {% endblock %}
 
-{% block title %}Inscription
+{% block title %}
+Inscription
 {{ parent() }}
 {% endblock %}
 
 {% block main %}
-<main class="register">
-    <section class="register__container py-5">
+<section class="register">
+    <div class="register__container py-5">
         <h2>Inscription</h2>
         {% if session.error_message %}
             <div class="alert alert-danger" role="alert">
@@ -51,26 +52,9 @@
             </fieldset>
             <p>Déjà un compte ? <a href="index.php?route=connexion">Se connecter</a></p>
         </form>
-    </section>
-</main>
+    </div>
+</section>
 
-<script>
-    function validateForm() {
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm_password').value;
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-        if (!passwordRegex.test(password)) {
-            alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.");
-            return false;
-        }
-
-        if (password !== confirmPassword) {
-            alert("Les mots de passe ne correspondent pas.");
-            return false;
-        }
-
-        return true;
-    }
-</script>
+<!-- Inclure le fichier JavaScript -->
+<script src="assets/styles/js/register.js"></script>
 {% endblock %}

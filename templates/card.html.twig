@@ -5,9 +5,11 @@
     {% endblock %}
 
     {% block main %}
-    <main class="content">
+    
         <section class="card-page">
+        <h2 class="visually-hidden">Image de fond de la page carte</h2>
             <section class="card-page__container">
+            <h2 class="visually-hidden">Page des plats</h2>
                 <div class="card-page__blur">
                     <h3>La carte</h3>
                 </div>
@@ -15,21 +17,25 @@
         </section>
 
         <section class="dishes-section">
+        <h2 class="visually-hidden">Menu des plats</h2>
             <div class="content">
                 <aside class="sidebar">
-                <ul>
-                    <li><a href="#starter">Nos entrées</a></li>
-                    <li><a href="#main-courses">Nos plats</a></li>
-                    <li><a href="#desserts">Nos desserts</a></li>
-                    <li><a href="#drinks">Nos boissons</a></li>
-                    <!-- Toggle Button for Vegetarian Filter -->
-                    <div class="btn-group" role="group" aria-label="Filter options">
-                      <button type="button" class="btn btn-secondary" id="filter-vegetarian">Filtre plats végétariens</button>
-                    </div>
-                </ul>
-            </aside>
+                    <ul>
+                        <li><a href="#starter">Nos entrées</a></li>
+                        <li><a href="#main-courses">Nos plats</a></li>
+                        <li><a href="#desserts">Nos desserts</a></li>
+                        <li><a href="#drinks">Nos boissons</a></li>
+                        <!-- Toggle Button for Vegetarian Filter -->
+                        <li>
+                            <div class="btn-group" role="group" aria-label="Filter options">
+                                <button type="button" class="btn btn-secondary" id="filter-vegetarian">Filtre plats végétariens</button>
+                            </div>
+                        </li>
+                    </ul>
+                </aside>
 
             <section class="dishes-list">
+            <h2 class="visually-hidden">Les plats</h2>
                 <!-- Entrées -->
                 <article id="starter" class="dish-category">
                     <h3>Nos entrées</h3>
@@ -49,7 +55,7 @@
                                     
                                     <!-- Bouton pour ouvrir la modale -->
                                     <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
-                                    <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
+                                    <button class="add-button" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
                                 </div>
                                 <!-- Modale Template -->
                                 <div id="modal-{{ dish.id }}" class="modal">
@@ -110,7 +116,7 @@
                                 
                                     <!-- Bouton pour ouvrir la modale -->
                                     <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
-                                    <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
+                                    <button class="add-button" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
                                 </div>
                                 <!-- Modale Template -->
                                 <div id="modal-{{ dish.id }}" class="modal">
@@ -170,7 +176,7 @@
                                     <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100" />
                                     <!-- Bouton pour ouvrir la modale -->
                                     <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
-                                    <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
+                                    <button class="add-button" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
                                 </div>
                                 <!-- Modale Template -->
                                 <div id="modal-{{ dish.id }}" class="modal">
@@ -230,7 +236,7 @@
                                     <img src="ServeurFichiers.php?file={{ dish.picture }}" alt="{{ dish.name }}" width="100" />
                                     <!-- Bouton pour ouvrir la modale -->
                                     <button class="details-button" data-target="#modal-{{ dish.id }}">Détails</button>
-                                    <button class="add-button" id="add-to-cart" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
+                                    <button class="add-button" data-target="#order-modal-{{ dish.id }}">Ajouter au panier</button>
                                 </div>
                                 <!-- Modale Template -->
                                 <div id="modal-{{ dish.id }}" class="modal">
@@ -273,18 +279,19 @@
                 </article>
 
                      <section id="cartModal" class="fixed-cart">
-                        <article class="modal-header">
-                            <h4>Votre panier :</h4>
-                            <span id="toggleCart" class="toggle-arrow">▼</span> <!-- Flèche pour replier/déplier -->
-                        </article>
-                        <div id="cartItems" class="cart-content hidden"></div>
-                        <p>Total (TTC) : <span id="cartTotal">0,00 €</span></p>
-                        <form id="orderForm" action="index.php?route=create-order" method="POST">
-                            <input type="hidden" name="cartItems" id="cartItemsInput">
-                            <input type="hidden" name="cartTotal" id="cartTotalInput">
-                            <input type="hidden" name="order_id" id="orderIdInput">
-                            <button type="submit" id="checkoutButton" class="btn-commander">Commander</button>
-                        </form>
+                        <h2 class="visually-hidden">Le panier</h2>
+                            <article class="modal-header">
+                                <h4>Votre panier :</h4>
+                                <span id="toggleCart" class="toggle-arrow">▼</span> <!-- Flèche pour replier/déplier -->
+                            </article>
+                            <div id="cartItems" class="cart-content hidden"></div>
+                            <p>Total (TTC) : <span id="cartTotal">0,00 €</span></p>
+                            <form id="orderForm" action="index.php?route=create-order" method="POST">
+                                <input type="hidden" name="cartItems" id="cartItemsInput">
+                                <input type="hidden" name="cartTotal" id="cartTotalInput">
+                                <input type="hidden" name="order_id" id="orderIdInput">
+                                <button type="submit" id="checkoutButton" class="btn-commander">Commander</button>
+                            </form>
                     </section>
             </section>
         </div>
@@ -293,7 +300,7 @@
     <button class="go-top" id="up-button-link" aria-label="Retour en haut de la page">
         <img src="./assets/images/icons/up-blue.webp" alt="Bouton retour en haut de la page" id="up-button-img">
       </button>
-</main>
+
 
 {% block scripts %}
   <script src="assets/styles/js/card.js" type="module"></script>

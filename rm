@@ -1,3 +1,0 @@
-     UID     PID    PPID  TTY        STIME COMMAND
-    Hyde     195       1 cons0    16:11:47 /usr/bin/bash
-    Hyde     430     195 cons0    16:14:52 /usr/bin/PS
