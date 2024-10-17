@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleCart.addEventListener("click", () => {
       isCollapsed = !isCollapsed; // Inverser l'état
       cartItemsContainer.classList.toggle("hidden", isCollapsed); // Ajouter ou enlever la classe hidden
-      toggleCart.textContent = isCollapsed ? "▲" : "▼"; // Changer la flèche
+      toggleCart.textContent = isCollapsed ? "⤴️" : "⤵️"; // Changer la flèche
     });
 
     // Ajouter les gestionnaires d'événements pour les croix

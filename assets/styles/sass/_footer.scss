@@ -44,7 +44,9 @@ footer {
       }
     }
   }
-
+  .phone {
+    text-decoration: none;
+  }
   .footer__social {
     a {
       margin: 0.5em;
@@ -88,7 +90,7 @@ footer {
     .footer__legal,
     .footer__location,
     .footer__hours {
-      font-size: small;
+      font-size: initial;
       margin: 0;
       padding: 0;
     }

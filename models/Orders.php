@@ -7,7 +7,7 @@ class Orders
 
     public function __construct(
         private string $status, 
-        private float $totalPrice, 
+        private float $total_price, 
         private DateTime $date_order, 
         private DateTime $hour_order
     ) 
@@ -37,12 +37,12 @@ class Orders
 
     public function getTotalPrice(): float
     {
-        return $this->totalPrice;
+        return $this->total_price;
     }
 
-    public function setTotalPrice(float $totalPrice): void
+    public function setTotalPrice(float $total_price): void
     {
-        $this->totalPrice = $totalPrice;
+        $this->total_price = $total_price;
     }
 
     public function getDate_order(): DateTime
@@ -100,7 +100,7 @@ class Orders
             $total += $item->getTotalPrice();  // Somme des prix de chaque article
         }
         error_log("Total Price for Order: " . $total);  // Log le total final
-        $this->totalPrice = $total;
+        $this->total_price = $total;
     }
     
 }

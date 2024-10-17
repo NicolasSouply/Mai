@@ -16,11 +16,11 @@ class AdminController extends AbstractController
 
     public function home(): void
     {
-        //var_dump("AdminController::home() called"); // Vérifie si la méthode est bien appelée
-
         $this->render('admin/home.html.twig', []);
     }
-    public function login() : void {
+
+    public function login(): void
+    {
         $this->render('admin/login.html.twig', []);
     }
 
@@ -31,27 +31,23 @@ class AdminController extends AbstractController
     
             // Vérifie si l'utilisateur a le rôle "ADMIN"
             if ($user->getRole() === 'ADMIN') {
-                // Debug: Vérifie les données de l'utilisateur admin
-                //var_dump($user);
-    
                 // Affiche la page admin
                 $this->render('admin/home.html.twig', [
                     'user' => $user
                 ]);
             } else {
-                // Si l'utilisateur n'est pas admin, redirige vers la zone utilisateur
+                // Redirige vers la zone utilisateur si l'utilisateur n'est pas admin
                 $_SESSION['error_message'] = "Accès refusé.";
                 header('Location: index.php?route=user-zone');
                 exit();
             }
         } else {
             // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
-            $_SESSION['error_message'] = "Pour faire une commande à emporter vous devez vous connecter.";
+            $_SESSION['error_message'] = "Pour accéder à cette page, vous devez vous connecter.";
             header('Location: index.php?route=admin-connexion');
             exit();
         }
     }
-
 
     public function checkLogin(): void
     {
@@ -66,21 +62,25 @@ class AdminController extends AbstractController
     
         // Vérifie si les données nécessaires sont présentes
         if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['csrf_token'])) {
+            // Encode les champs d'entrée pour se protéger contre les attaques XSS
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+            
             $tm = new CSRFTokenManager();
     
             // Validation du jeton CSRF
             if ($tm->validateCSRFToken($_POST['csrf_token'])) {
-                $user = $this->um->findUserByEmail($_POST['email']);
+                $user = $this->um->findUserByEmail($email);
     
                 // Vérification de l'utilisateur
                 if ($user !== null) {
                     // Vérification du mot de passe
-                    if (password_verify($_POST['password'], $user->getPassword())) {
+                    if (password_verify($password, $user->getPassword())) {
                         $_SESSION['user'] = $user;
     
                         // Redirection selon le rôle de l'utilisateur
                         if ($user->getRole() === 'ADMIN') {
-                            $this->redirect('admin-zone'); // Assure-toi que 'admin-zone' est la route correcte pour les admins
+                            $this->redirect('admin-zone'); // Redirection vers la zone admin
                         } else {
                             $this->redirect('user-zone'); // Redirection pour les utilisateurs normaux
                         }

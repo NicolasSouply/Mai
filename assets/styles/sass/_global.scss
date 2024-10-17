@@ -32,8 +32,7 @@ body {
   }
 
   &.dark-mode {
-    background: $background-dark;
-    color: $cream-mai;
+    @include dark-mode;
   }
 
   ul {
@@ -88,10 +87,8 @@ body {
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
     &.dark-mode {
-      background-color: $background-dark;
-      color: $cream-mai;
+      @include dark-mode;
     }
-
     h2 {
       font-family: "Inter", sans-serif;
       font-size: 5rem;
@@ -114,6 +111,9 @@ body {
   }
 
   /* **************************** SECTION GALLERY ***************************/
+  .visually-hidden {
+    @include visually-hidden;
+  }
 
   .gallery {
     position: relative;
@@ -153,7 +153,7 @@ body {
     }
 
     &.dark-mode {
-      background-color: $background-dark;
+      @include dark-mode;
     }
   }
   /* **************************** SECTION CARD ***************************/
@@ -202,7 +202,9 @@ body {
 }
 
 /* **************************** SECTION END PAGE ***************************/
-
+.visually-hidden {
+  @include visually-hidden;
+}
 .end-page {
   position: relative;
   display: flex;
@@ -215,8 +217,7 @@ body {
   margin-bottom: -3rem;
 
   &.dark-mode {
-    background-color: $background-dark;
-    color: $cream-mai;
+    @include dark-mode;
   }
 
   .end-page__container {
@@ -239,6 +240,8 @@ body {
     a {
       color: $blue-mai;
       text-decoration: none;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      font-weight: 800;
       padding: 1rem;
       margin: 1rem 0;
       font-size: 3rem;
@@ -246,6 +249,8 @@ body {
 
       &:hover {
         transform: scale(1.1);
+        backdrop-filter: inherit;
+        border-radius: 20px;
         color: darken($golden-button, 10%);
       }
     }
@@ -300,7 +305,7 @@ body {
   }
 
   body {
-    font-size: 1.4rem;
+    font-size: $font-size-mobile;
   }
 
   h1 {
@@ -315,7 +320,7 @@ body {
 
   .hook {
     flex-direction: column;
-    padding: 8rem 1rem;
+    padding: $spacing-small 1rem;
 
     h2 {
       font-size: 3rem;
@@ -360,7 +365,7 @@ body {
   }
 
   .end-page {
-    padding: 2rem;
+    padding: 10rem 5rem 10rem 5rem;
     margin-bottom: 0;
 
     .end-page__container {

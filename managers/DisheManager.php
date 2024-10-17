@@ -71,9 +71,8 @@ class DisheManager extends AbstractManager
             $query = $this->db->prepare('SELECT * FROM dishes');
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    
-
             $dishes = [];
+
             foreach ($result as $item) {
                 $dishe = new Dishes(
                     $item['category'],
@@ -86,10 +85,7 @@ class DisheManager extends AbstractManager
                 $dishe->setId($item['dishe_id']);
                 $dishes[] = $dishe;
             }
-        //var_dump($dishes); // Vérifie les données récupérées
-
             return $dishes;
-        
     }
     
 
@@ -109,11 +105,9 @@ class DisheManager extends AbstractManager
             ");
     
             if (!$query) {
-                var_dump("Erreur de préparation de la requête : " . implode(", ", $this->db->errorInfo()));
                 return false;
             }
-    
-            var_dump("Exécution de la requête de mise à jour pour l'ID : " . $dishe->getId());
+
     
             $success = $query->execute([
                 'category' => $dishe->getCategory(),
@@ -129,7 +123,6 @@ class DisheManager extends AbstractManager
                 if ($query->rowCount() > 0) {
                     return true; // Mise à jour réussie
                 } else {
-                    var_dump("Aucune ligne mise à jour pour l'ID : " . $dishe->getId());
                     return false; // Pas de changement
                 }
             } else {
@@ -140,7 +133,13 @@ class DisheManager extends AbstractManager
         return false; // Aucun ID fourni
     }
     
-    
+    public function deleteDetailOrdersByDisheId(int $disheId): void
+{
+    $query = 'DELETE FROM detail_orders WHERE dishe_id = :dishe_id';
+    $stmt = $this->db->prepare($query);
+    $stmt->bindValue(':dishe_id', $disheId, PDO::PARAM_INT);
+    $stmt->execute();
+}
     
 
 public function deleteDishe(int $id): bool

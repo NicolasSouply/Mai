@@ -1,5 +1,3 @@
-console.log("coucou");
-
 document.addEventListener("DOMContentLoaded", () => {
   // Sélection des éléments du DOM
   const body = document.body;
@@ -22,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sunIconMobile = document.getElementById("js-sunIconMobile");
   const galleryInner = document.querySelector(".gallery__inner");
   const containers = document.querySelectorAll(".gallery__container");
+  const discoverMenuButton = document.getElementById("discover-menu");
   const cgvSections = document.querySelectorAll(
     ".cgv__content h2, .cgv__content p"
   );
@@ -60,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section.classList.toggle("dark-mode", isDarkMode);
     });
     const darkColor = document.querySelector(
-      ".privacy-policy, .legals, .cgv, .reservation__container, .editDishe__container, .container__confirmation, .dishes-list, .connexion__container, .form , .register__container"
+      ".privacy-policy, .legals, .cgv, .reservation__container, .editDishe__container, .container__confirmation, .dishes-list, .connexion__container, .reservation__container,.register__container"
     );
     if (darkColor) {
       darkColor.classList.toggle("dark-mode", isDarkMode);
@@ -117,7 +116,12 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSectionsBackground(true);
     updateCgvSections(true);
   }
-
+  // boutton redirection vers la page "card"
+  if (discoverMenuButton) {
+    discoverMenuButton.addEventListener("click", () => {
+      window.location.href = "index.php?route=card"; // Redirection vers la page souhaitée
+    });
+  }
   // Modale de suppression d'utilisateur
   if (deleteUserModal) {
     deleteUserModal.addEventListener("show.bs.modal", function (event) {

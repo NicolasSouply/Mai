@@ -68,6 +68,7 @@ class OrderController extends AbstractController
             // Affichage de la page de confirmation avec les détails de la commande
             $this->render('confirmation.html.twig', [
                 'cartItems' => $orderItems,
+                'orderId' => htmlspecialchars($order_id, ENT_QUOTES, 'UTF-8'),
                 'cartTotal' => array_reduce($orderItems, function($total, $item) {
                     return $total + $item->getTotalPrice();
                 }, 0),

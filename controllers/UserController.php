@@ -31,10 +31,10 @@ class UserController extends AbstractController
             exit();
         }
     }
-    
-    
+
 
     public function create() : void {
+        
         $this->render("admin/users/create.html.twig", []);
     }
     public function checkCreate() : void {
@@ -106,7 +106,7 @@ class UserController extends AbstractController
 
     public function edit(int $id) : void {
         $user = $this->um->findUserById($id);
-
+        $_SESSION['success_message'] = "L'utilisateur a bien été modifié.";
         $this->render("admin/users/edit.html.twig", [
             "user" => $user
         ]);
@@ -115,30 +115,20 @@ class UserController extends AbstractController
     {
         // Nettoyage des messages de session précédents
         unset($_SESSION['error_message'], $_SESSION['success_message']);
-    
-        var_dump("Début de checkEdit"); // Pour vérifier que la méthode est appelée correctement
-    
-        // Affiche les données POST envoyées
-        var_dump($_POST);
-        var_dump($id);
-    
+
         // Vérifie que la requête est bien de type POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump("Requête POST détectée"); // Confirmation de la requête
     
             if (isset($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['phone'], $_POST['password'], $_POST['confirm_password'], $_POST['csrf_token'], $_POST['role'])) {
-                var_dump("Champs du formulaire présents"); // Vérifie que tous les champs sont bien envoyés
-    
+
                 // Initialisation du gestionnaire CSRF
                 $tm = new CSRFTokenManager();
     
                 // Vérifie le token CSRF
                 if ($tm->validateCSRFToken($_POST['csrf_token'])) {
-                    var_dump('CSRF Token validé'); // Confirmation du token CSRF
     
                     // Récupère l'utilisateur à modifier
                     $user = $this->um->findUserById($id);
-                    var_dump($user); // Vérifie si l'utilisateur est bien récupéré
     
                     if ($user !== null) {
                         if ($_POST['password'] === $_POST['confirm_password']) {
@@ -158,7 +148,6 @@ class UserController extends AbstractController
     
                             try {
                                 $this->um->updateUser($user);
-                                var_dump("Utilisateur mis à jour"); // Confirmation de la mise à jour
     
                                 $_SESSION['success_message'] = "L'utilisateur a bien été modifié";
                                 // Redirection après succès
@@ -167,7 +156,6 @@ class UserController extends AbstractController
     
                             } catch (Exception $e) {
                                 // Gestion des erreurs de mise à jour
-                                var_dump($e->getMessage());
                                 $_SESSION['error_message'] = "Erreur lors de la mise à jour.";
                                 header('Location: index.php?route=admin-edit-user&user_id=' . urlencode($id));
                                 exit;
@@ -205,10 +193,9 @@ class UserController extends AbstractController
             $_SESSION['success_message'] = "L'utilisateur a été supprimé";
             $this->redirect('admin-list-users');
         }else {
-            // Gérer une erreur en cas d'échec de suppression
-            $this->render('admin/users/list.html.twig', ['error' => 'Erreur lors de la suppression.']);
+            $_SESSION['error_message'] = "Erreur lors de la suppression de l'utilisateur.";
         }
-       
+        $this->redirect('admin-list-users');
     }
 
     public function list() : void {
@@ -230,8 +217,16 @@ class UserController extends AbstractController
 
         $user = $this->um->findUserById($id);
 
+            // Échappez les données de l'utilisateur
+    $safeUser = [
+        'first_name' => htmlspecialchars($user->getFirst_name(), ENT_QUOTES, 'UTF-8'),
+        'last_name' => htmlspecialchars($user->getLast_name(), ENT_QUOTES, 'UTF-8'),
+        'email' => htmlspecialchars($user->getEmail(), ENT_QUOTES, 'UTF-8'),
+        'phone' => htmlspecialchars($user->getPhone(), ENT_QUOTES, 'UTF-8'),
+    ];
+
         $this->render("admin/users/show.html.twig", [
-            "user" => $user
+            "user" => $safeUser
         ]);
     }
     public function showOrder()

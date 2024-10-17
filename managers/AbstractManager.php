@@ -12,5 +12,6 @@ class AbstractManager
             $_ENV["DB_USER"],
             $_ENV["DB_PASSWORD"]
         );
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 }

@@ -6,16 +6,16 @@
     <section class="addDishe__container">
         <h2>Formulaire d'ajout de plat</h2>
 
-{% if app.session.get('message') %}
-    <div class="alert alert-success">
-        {{ app.session.get('message') }}
-    </div>
-    {% do app.session.remove('message') %}
-{% endif %}
+        {% if app.session.get('message') %}
+            <div class="alert alert-success">
+                {{ app.session.get('message') }}
+            </div>
+            {% do app.session.remove('message') %}
+        {% endif %}
 
-{% if error %}
-    <div class="alert alert-danger">{{ error }}</div>
-{% endif %}
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
 
         <form action="index.php?route=admin-check-addDishe" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}" />
@@ -47,9 +47,9 @@
             </fieldset>
             
             <fieldset>
-                <label for="vegetarian">
+                <label for="isVegetarian">
                     Végétarien
-                    <input type="checkbox" id="vegetarian" name="vegetarian" value="1">
+                    <input type="checkbox" id="isVegetarian" name="isVegetarian" value="1">
                 </label>
             </fieldset>
             

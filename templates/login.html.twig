@@ -1,51 +1,51 @@
 {% extends 'layout.html.twig' %}
 
 {% block description %}
-  Page de de connexion du restaurant Maï.
+  Page de connexion du restaurant Maï.
 {% endblock %}
 
-
-{% block title %}Connexion
-{{ parent() }}
+{% block title %}
+  Connexion
+  {{ parent() }}
 {% endblock %}
-
 
 {% block main %}
-<main class="connexion">
- <section class="connexion__container py-5">
+
+ <section class="connexion">
+    <div class="connexion__container py-5">
 
         {% if session.error_message %}
             <div class="alert alert-danger" role="alert">
-                {{ session.error_message }}
+                {{ session.error_message | e }}  {# Échappe le message d'erreur #}
             </div>
         {% endif %}
         {% if session.success_message %}
             <div class="alert alert-success" role="alert">
-                {{ session.success_message }}
+                {{ session.success_message | e }}  {# Échappe le message de succès #}
             </div>
         {% endif %}
             <h2>Connexion</h2>
 
         <form action="index.php?route=check-connexion" method="post">
-            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token }}" />
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ session.csrf_token | e }}" />  {# Échappe le token CSRF #}
             <fieldset>
                 <label for="email" class="form-label">
                     Email
                 </label>
-                <input type="email" name="email" id="email" required class="form-control"/>
+                <input type="email" name="email" id="email" required class="form-control" />
             </fieldset>
             <fieldset>
                 <label for="password" class="form-label">
                     Mot de passe
                 </label>
-                <input type="password" name="password" id="password" required class="form-control"/>
+                <input type="password" name="password" id="password" required class="form-control" />
             </fieldset>
             <fieldset class="mt-3">
                 <button type="submit" class="btn btn-primary">Connexion</button>
             </fieldset>
         </form>
-        <p>Pas encore de compte ? <a href="index.php?route=inscription">S'inscrire </a></p>
+        <p>Pas encore de compte ? <a href="index.php?route=inscription">S'inscrire</a></p>
+        </div>
     </section>
-</main>
-{% endblock %}
 
+{% endblock %}

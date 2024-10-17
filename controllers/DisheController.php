@@ -55,9 +55,9 @@ class DisheController extends AbstractController
             $category = $_POST['category'] ?? '';
             $name = $_POST['name'] ?? '';
             $price = $_POST['price'] ?? '';
-            $isVegetarian = isset($_POST['vegetarian']) ? true : false;
+            $isVegetarian = isset($_POST['isVegetarian']) ? true : false;
             $description = $_POST['description'] ?? '';
-
+            
             // Validation simple des champs
             if (empty($name) || empty($price) || !is_numeric($price)) {
                 $this->render('admin/dishes/editDishe.html.twig', ['dishe' => $dishe, 'error' => 'Veuillez remplir tous les champs correctement.']);
@@ -85,8 +85,7 @@ class DisheController extends AbstractController
                 $_SESSION['success_message'] = 'Le plat a bien été modifié';
                 $this->redirect('admin-listDishes');
             } else {
-                    var_dump("Erreur lors de la mise à jour du plat : " . json_encode($dishe)); // Log des détails du plat
-
+                    
                 $this->render('admin/dishes/editDishe.html.twig', ['dishe' => $dishe, 'error' => 'Erreur lors de la modification du plat.']);
             }
         } else {
@@ -111,11 +110,11 @@ class DisheController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $picture = $this->handleFileUpload();
             if ($picture) {
-                $category = $_POST['category'];
-                $name = $_POST['name'];
-                $price = $_POST['price'];
-                $isVegetarian = isset($_POST['vegetarian']) ? true : false;
-                $description = $_POST['description'];
+                $category = htmlspecialchars($_POST['category'] ?? '');
+                $name = htmlspecialchars($_POST['name'] ?? '');
+                $price = htmlspecialchars($_POST['price'] ?? '');
+                $isVegetarian = isset($_POST['isVegetarian']) ? true : false;
+$description = htmlspecialchars($_POST['description'] ?? '');
 
                 $dishe = new Dishes($category, $name, $description, $price, $isVegetarian, $picture);
 
@@ -142,7 +141,7 @@ class DisheController extends AbstractController
             $category = $_POST['category'] ?? '';
             $name = $_POST['name'] ?? '';
             $price = $_POST['price'] ?? '';
-            $isVegetarian = isset($_POST['vegetarian']) ? true : false;
+            $isVegetarian = isset($_POST['isVegetarian']) ? true : false;
             $description = $_POST['description'] ?? '';
 
             if (empty($category) || empty($name) || empty($price) || !is_numeric($price)) {
@@ -173,9 +172,7 @@ class DisheController extends AbstractController
     }
 
     public function checkEditDishe(int $disheId): void
-
-    {var_dump('start checkEditDishe');
-
+    {
           if(isset($_SESSION['error_message'])) {
             unset($_SESSION['error_message']);
         }
@@ -213,7 +210,7 @@ class DisheController extends AbstractController
         $category = $_POST['category'] ?? ''; 
         $name = $_POST['name'] ?? '';
         $price = $_POST['price'] ?? '';
-        $isVegetarian = isset($_POST['vegetarian']);
+        $isVegetarian = isset($_POST['isVegetarian']);
         $description = $_POST['description'] ?? '';
     
         // Validation des champs

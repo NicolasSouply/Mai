@@ -13,6 +13,7 @@
   padding-bottom: 5rem;
   position: relative;
 }
+
 // Conteneur de la carte
 .card-page__container {
   @include modale;
@@ -57,7 +58,7 @@
   .content {
     background-color: $blue-mai;
     display: flex;
-    width: 100%;
+    width: 100vw;
     flex: 1;
 
     .sidebar {

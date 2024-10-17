@@ -1,7 +1,15 @@
+//Police
+
+$base-font-size: 1.6rem;
+$font-size-mobile: 1.2rem;
+$container-padding: 3rem;
+$spacing-large: 4rem;
+$spacing-small: 2rem;
+
 // colors
 
 $blue-mai: #213f7d;
-$cream-mai: rgb(240, 233, 225);
+$cream-mai: #f0e9e1;
 $golden-button: #ffbc0d;
 
 //background colors
@@ -45,10 +53,15 @@ $animation-iteration-count: infinite;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(10px);
   width: 50rem;
   height: auto;
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+@mixin dark-mode {
+  background-color: $background-dark;
+  color: $cream-mai;
 }
 
 @mixin fieldset {
@@ -85,4 +98,14 @@ $animation-iteration-count: infinite;
     color: white;
     transform: scale(1.1);
   }
+}
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

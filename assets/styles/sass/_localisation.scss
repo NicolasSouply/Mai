@@ -80,12 +80,12 @@
 
   // Responsive Styles
   @media (max-width: 768px) {
-    font-size: 2rem;
     flex-direction: column; /* Change la direction des éléments en colonne pour les écrans plus petits */
     margin-top: 15rem;
     padding: 1rem; /* Réduit le padding pour les petits écrans */
 
     &__block {
+      font-size: 2rem;
       flex-direction: column;
       align-items: center;
       margin-bottom: 2rem; /* Ajoute de l'espace entre les blocs */
@@ -93,9 +93,6 @@
     }
     h2 {
       font-size: 3rem;
-    }
-    .contact-info__item {
-      align-items: center;
     }
 
     .contact-info__map {
@@ -105,6 +102,14 @@
       width: 40%;
     }
     @media (max-width: 480px) {
+      h2 {
+        font-size: 4rem;
+      }
+      .contact-info__item {
+        p {
+          font-size: 3rem;
+        }
+      }
       .contact-info__map {
         height: 30rem; /* Réduit encore plus la hauteur de la carte pour les très petits écrans */
       }

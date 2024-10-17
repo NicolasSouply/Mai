@@ -5,7 +5,12 @@ class Dishes
   
 private ? int $id = null;
 
-public function __construct(private string $category, private string $name, private string $description, private float $price, private bool $isVegetarian, private string $picture )
+public function __construct(private string $category, 
+                            private string $name, 
+                            private string $description, 
+                            private float $price, 
+                            private bool $isVegetarian, 
+                            private string $picture )
 {
 
 }
