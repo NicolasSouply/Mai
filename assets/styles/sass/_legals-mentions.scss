@@ -4,19 +4,18 @@
   width: max-content;
   align-items: center;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   background-color: $background-light;
   margin: 18rem auto;
   padding: 5rem 3rem;
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   &.dark-mode {
-    background-color: $background-dark; // Assurez-vous que cette ligne est correcte
-    color: $cream-mai;
+    background-color: $background-dark;
   }
-  /* Media query pour les tablettes (à partir de 768px) */
+
   @media (max-width: 768px) {
-    width: 80%; /* Réduire la largeur à 80% sur tablette */
+    width: 80%;
     font-size: 1.8rem;
     margin: 14rem auto;
     padding: 4rem 2rem;

@@ -1,42 +1,47 @@
-.form {
-  display: flex;
-  margin-top: 15rem;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-// Styles pour le conteneur de réservation
+/* Styles pour la page de réservation */
 .reservation__container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  margin-top: 10rem;
-  padding: 4rem;
-  justify-content: center;
+  align-items: center; /* Centrage horizontal */
+  justify-content: center; /* Centrage vertical */
+  margin: 15rem auto;
   max-width: 60rem;
+  padding: 4rem;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  @include modale;
-  &.dark-mode {
-    background: $background-dark;
-    color: $cream-mai;
-    .form-header {
-      align-items: center;
-      justify-content: center;
+  background-color: $background-light;
 
-      h2 {
-        font-size: 3rem; // Exemple de taille de police
-      }
+  &.dark-mode {
+    background-color: $background-dark;
+    color: $cream-mai;
+  }
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 3rem;
     }
   }
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Prendre la largeur du conteneur */
+}
+
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* Deux colonnes */
   gap: 1.5rem;
+  margin-bottom: 2rem;
 
   .full-width {
-    grid-column: 1 / 3;
+    grid-column: 1 / 3; /* Étendre sur les deux colonnes */
   }
 
   label {
@@ -45,18 +50,20 @@
     margin-bottom: 5px;
     font-weight: bold;
   }
-
   input,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
   textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 14px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 
     &:focus {
       border-color: $golden-button;
       outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -66,14 +73,14 @@
 }
 
 .submit-btn {
-  @include button; // Utilisation de votre mixin de bouton
+  @include button;
   transition: background-color 0.3s ease;
 }
 
-// Styles pour les écrans mobiles
+/* Responsive Design pour les petits écrans */
 @media (max-width: 768px) {
-  .form-container {
-    max-width: 100%;
+  .reservation__container {
+    max-width: 100%; /* Prendre toute la largeur de l'écran */
     padding: 2rem;
     margin-top: 5rem;
   }
@@ -86,25 +93,40 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .reservation__container {
+    margin: 12rem 3rem 5rem 3rem;
 
-@media (max-width: 480px) {
-  .form-container {
-    padding: 1.5rem;
-  }
+    .form-header h2 {
+      font-size: 3rem;
+    }
 
-  .form-header h2 {
-    font-size: 3rem;
+    .submit-btn {
+      font-size: 2rem;
+      padding: 12px;
+    }
+
+    .form-grid label {
+      font-size: 2.4rem;
+    }
   }
-  .form-grid input,
-  .form-grid textarea {
-    width: 100%;
-    font-size: small;
-  }
-  .submit-btn {
-    font-size: 2.2rem;
-    padding: 8px;
-  }
-  .form-grid label {
-    font-size: 2.5rem;
+  @media (max-width: 480px) {
+    .reservation__container {
+      margin: 16rem 2rem 5rem 2rem;
+      padding: 1.5rem;
+    }
+
+    .form-header h2 {
+      font-size: 2.5rem; /* Taille plus petite pour les petits écrans */
+    }
+
+    .submit-btn {
+      font-size: 1.8rem;
+      padding: 10px;
+    }
+
+    .form-grid label {
+      font-size: 2.2rem;
+    }
   }
 }

@@ -1059,30 +1059,30 @@ footer .footer__legal p {
 }
 .error404 {
   display: flex;
+  margin: 15rem 0 15rem 0;
   align-content: center;
   justify-content: center;
   padding: 1rem;
 }
 
-.error404__giant404 {
-  font-size: 5rem;
-}
-
 .error404__container {
-  justify-content: center;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  width: 50rem;
-  height: auto;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: #f0e9e1;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Responsive Design */
+}
+.error404__container.dark-mode {
+  background-color: #213f7d;
+}
+.error404__container .error404__giant404 {
+  font-size: 5rem;
 }
 .error404__container h2 {
   letter-spacing: 0.2rem;
-  color: #213f7d;
 }
 .error404__container button {
   text-align: center;
@@ -1107,6 +1107,12 @@ footer .footer__legal p {
 .error404__container a {
   text-decoration: none;
   color: white;
+}
+@media (max-width: 768px) {
+  .error404__container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .card-page {
@@ -1736,7 +1742,7 @@ body {
 
 .contact-page {
   display: flex;
-  margin-top: 15rem;
+  margin: 15rem;
   justify-content: center;
   padding: 2rem;
   /* Dark Mode */
@@ -1855,6 +1861,7 @@ body {
 }
 @media (max-width: 768px) {
   .contact-page {
+    margin: 15rem 0 15rem 0;
     flex-direction: column;
     align-items: center;
   }
@@ -1874,53 +1881,47 @@ body {
   }
 }
 
-.form {
-  display: flex;
-  margin-top: 15rem;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
+/* Styles pour la page de réservation */
 .reservation__container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  margin-top: 10rem;
-  padding: 4rem;
-  justify-content: center;
+  align-items: center; /* Centrage horizontal */
+  justify-content: center; /* Centrage vertical */
+  margin: 15rem auto;
   max-width: 60rem;
+  padding: 4rem;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  width: 50rem;
-  height: auto;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #f0e9e1;
 }
 .reservation__container.dark-mode {
-  background: #213f7d;
+  background-color: #213f7d;
   color: #f0e9e1;
 }
-.reservation__container.dark-mode .form-header {
+.reservation__container .form-header {
+  display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 }
-.reservation__container.dark-mode .form-header h2 {
+.reservation__container .form-header h2 {
   font-size: 3rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Prendre la largeur du conteneur */
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* Deux colonnes */
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 .form-grid .full-width {
-  grid-column: 1/3;
+  grid-column: 1/3; /* Étendre sur les deux colonnes */
 }
 .form-grid label {
   font-size: 1.5rem;
@@ -1929,17 +1930,23 @@ body {
   font-weight: bold;
 }
 .form-grid input,
+.form-grid input[type=text],
+.form-grid input[type=email],
+.form-grid input[type=tel],
 .form-grid textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 14px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 .form-grid input:focus,
+.form-grid input[type=text]:focus,
+.form-grid input[type=email]:focus,
+.form-grid input[type=tel]:focus,
 .form-grid textarea:focus {
   border-color: #ffbc0d;
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 .form-grid textarea {
   resize: vertical;
@@ -1967,9 +1974,10 @@ body {
   transform: scale(1.1);
 }
 
+/* Responsive Design pour les petits écrans */
 @media (max-width: 768px) {
-  .form-container {
-    max-width: 100%;
+  .reservation__container {
+    max-width: 100%; /* Prendre toute la largeur de l'écran */
     padding: 2rem;
     margin-top: 5rem;
   }
@@ -1980,24 +1988,35 @@ body {
     grid-column: 1/2;
   }
 }
-@media (max-width: 480px) {
-  .form-container {
+@media (max-width: 768px) {
+  .reservation__container {
+    margin: 12rem 3rem 5rem 3rem;
+  }
+  .reservation__container .form-header h2 {
+    font-size: 3rem;
+  }
+  .reservation__container .submit-btn {
+    font-size: 2rem;
+    padding: 12px;
+  }
+  .reservation__container .form-grid label {
+    font-size: 2.4rem;
+  }
+}
+@media (max-width: 768px) and (max-width: 480px) {
+  .reservation__container {
+    margin: 16rem 2rem 5rem 2rem;
     padding: 1.5rem;
   }
   .form-header h2 {
-    font-size: 3rem;
-  }
-  .form-grid input,
-  .form-grid textarea {
-    width: 100%;
-    font-size: small;
+    font-size: 2.5rem; /* Taille plus petite pour les petits écrans */
   }
   .submit-btn {
-    font-size: 2.2rem;
-    padding: 8px;
+    font-size: 1.8rem;
+    padding: 10px;
   }
   .form-grid label {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 }
 .container__confirmation,
@@ -2098,22 +2117,20 @@ body {
   width: max-content;
   align-items: center;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   background-color: #f0e9e1;
   margin: 18rem auto;
   padding: 5rem 3rem;
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
-  /* Media query pour les tablettes (à partir de 768px) */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   /* Media query pour les écrans de bureau (à partir de 1024px) */
 }
 .legals.dark-mode {
   background-color: #213f7d;
-  color: #f0e9e1;
 }
 @media (max-width: 768px) {
   .legals {
-    width: 80%; /* Réduire la largeur à 80% sur tablette */
+    width: 80%;
     font-size: 1.8rem;
     margin: 14rem auto;
     padding: 4rem 2rem;

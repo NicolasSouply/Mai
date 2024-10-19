@@ -13,12 +13,17 @@
 <section class="contact-page">
     <div class="contact-page__form">
         <h2>Écrivez-nous</h2>
+        {% if success %}
+            <p class="success">{{ success }}</p>
+        {% elseif error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
         <p>Vous souhaitez des renseignements, organiser un évènement ? Laissez-nous un message avec votre demande et vos coordonnées, et nous vous rappellerons dans les plus brefs délais.</p>
 
-        <form action="/#dummy-action" method="post">
+        <form action="/send-email.php" method="post">
             <div class="contact-page__form-group">
-                <input type="text" id="first-name" name="first-name" placeholder="Prénom" value="{{ app.request.get('first-name')|e }}" required>
-                <input type="text" id="last-name" name="last-name" placeholder="Nom" value="{{ app.request.get('last-name')|e }}" required>
+                <input type="text" id="first_Name" name="first_Name" placeholder="Prénom" value="{{ app.request.get('first_Name')|e }}" required>
+                <input type="text" id="last_Name" name="last_Name" placeholder="Nom" value="{{ app.request.get('last_Name')|e }}" required>
             </div>
             <div class="contact-page__form-group">
                 <input type="email" id="email" name="email" placeholder="Email" value="{{ app.request.get('email')|e }}" required>

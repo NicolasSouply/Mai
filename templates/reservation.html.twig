@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block description %}
-  Page de réservation du restaurant Maï pour demander réserver une table dans le restaurant ou des évènements.
+  Page de réservation du restaurant Maï pour demander réserver une table dans le restaurant ou des événements.
 {% endblock %}
 
 {% block title %}
@@ -10,14 +10,13 @@
 {% endblock %}
 
 {% block main %}
-
-  <section class="reservation__container py-5">
+  <section class="reservation__container">
     <div class="form-header">
       <i class="fa fa-calendar"></i>
       <h2>Réserver votre table chez Maï</h2>
     </div>
 
-    <form action="/#dummy-action" method="POST">
+    <form action="/#dummy-action" method="POST" class="form">
       <div class="form-grid">
         <div>
           <label for="nom">Nom</label>
@@ -55,15 +54,14 @@
       <button type="submit" class="submit-btn">Réserver</button>
     </form>
 
+    {% if session.reservation_success is defined %}
+      <div class="alert alert-success">
+        {{ session.reservation_success | e }}
+      </div>
+    {% elseif session.reservation_error is defined %}
+      <div class="alert alert-danger">
+        {{ session.reservation_error | e }}
+      </div>
+    {% endif %}
   </section>
-
-  {% if session.reservation_success is defined %}
-    <div class="alert alert-success">
-      {{ session.reservation_success | e }}  {# Échappe le message de succès #}
-    </div>
-  {% elseif session.reservation_error is defined %}
-    <div class="alert alert-danger">
-      {{ session.reservation_error | e }}  {# Échappe le message d'erreur #}
-    </div>
-  {% endif %}
 {% endblock %}

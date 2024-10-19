@@ -1,18 +1,29 @@
 .error404 {
   display: flex;
+  margin: 15rem 0 15rem 0;
   align-content: center;
   justify-content: center;
   padding: 1rem;
 }
-.error404__giant404 {
-  font-size: 5rem;
-}
+
 .error404__container {
-  justify-content: center;
-  @include modale;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: $background-light;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  &.dark-mode {
+    background-color: $background-dark;
+  }
+
+  .error404__giant404 {
+    font-size: 5rem;
+  }
+
   h2 {
     letter-spacing: 0.2rem;
-    color: $blue-mai;
   }
   button {
     @include button;
@@ -20,5 +31,11 @@
   a {
     text-decoration: none;
     color: white;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
   }
 }
