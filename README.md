@@ -76,3 +76,6 @@ Wamp Issues: Ensure that no other programs are using the same port as Apache (us
 
 ### License
 This project is licensed under the MIT License.
+
+### Image Rights
+All images included in this project are private and are not covered by the MIT License. Unauthorized use, reproduction, or distribution of the images is prohibited.
