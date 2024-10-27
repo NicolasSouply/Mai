@@ -107,8 +107,6 @@ class DisheManager extends AbstractManager
             if (!$query) {
                 return false;
             }
-
-    
             $success = $query->execute([
                 'category' => $dishe->getCategory(),
                 'name' => $dishe->getName(),

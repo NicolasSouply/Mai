@@ -1236,8 +1236,6 @@ footer .footer__legal p {
   transform: scale(1.1);
 }
 .dishes-section #filter-vegetarian:hover {
-  background-color: #f0e9e1;
-  color: #213f7d;
   transform: scale(1.1);
 }
 .dishes-section .details-button,
@@ -2042,7 +2040,7 @@ body {
 .privacy-policy {
   display: flex;
   flex-direction: column;
-  width: max-content;
+  width: 50%;
   align-items: center;
   text-align: center;
   font-size: 2rem;

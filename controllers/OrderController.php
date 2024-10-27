@@ -3,11 +3,13 @@
 class OrderController extends AbstractController
 {
     private OrderManager $om;
+    private DetailOrderManager $dom;
 
     public function __construct()
     {
         parent::__construct();
         $this->om = new OrderManager();
+        $this->dom = new DetailOrderManager();
     }
 
     private function isCartValid(): bool

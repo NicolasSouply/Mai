@@ -130,30 +130,45 @@ private function insertOrderItem(int $order_id, array $item): void
         );
     }
 
-    public function getOrderItemsByOrderId($orderId) {
-        $query = "SELECT dishe_id, quantity, price FROM detail_orders WHERE detail_order_id = :detail_order_id";
+    public function getOrderItemsByOrderId($orderId)
+    {
+        // Requête SQL avec jointure entre detail_orders et dishes
+        $query = "
+            SELECT do.dishe_id, do.quantity, do.price, d.name, d.description, d.vegetarian
+            FROM detail_orders do
+            JOIN dishes d ON do.dishe_id = d.dishe_id
+            WHERE do.order_id = :order_id
+        ";
+        
+        // Préparation et exécution de la requête
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':detail_order_id', $orderId);
+        $stmt->bindParam(':order_id', $orderId, PDO::PARAM_INT);
         $stmt->execute();
         
         $orderItems = [];
         
+        // Boucle pour récupérer les résultats
         while ($itemData = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // Assurez-vous que les données sont présentes
             if ($itemData) {
+                // Créer un nouvel objet OrderItem avec les informations supplémentaires des plats
                 $orderItem = new OrderItem(
-                    $itemData['dishe_id'], 
-                    $itemData['price'], 
-                    $itemData['quantity']
+                    $itemData['name'],  // Nom du plat
+                    $itemData['price'], // Prix total pour cet article
+                    $itemData['quantity'] // Quantité
                 );
+
+    
                 $orderItems[] = $orderItem;
             } else {
                 error_log("Aucun article trouvé pour l'ID de commande : " . $orderId);
             }
         }
     
-        return $orderItems; // Retourne la liste des articles de la commande
+        // Retourne la liste des articles de la commande
+        return $orderItems;
     }
+    
     
     public function getOrdersByUserId($userId) {
         $query = "SELECT order_id, status, total_price, date_order, hour_order 
