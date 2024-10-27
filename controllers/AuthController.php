@@ -99,7 +99,7 @@ class AuthController extends AbstractController
         }
 
         if (isset($_POST['email'], $_POST['password'], $_POST['csrf_token'])) {
-            // Encode user input to protect against XSS
+            // protection xss
             $email = htmlspecialchars($_POST['email']);
             $password = htmlspecialchars($_POST['password']);
             

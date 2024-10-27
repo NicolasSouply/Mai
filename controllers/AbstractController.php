@@ -14,15 +14,19 @@ abstract class AbstractController
         $this->twig = $twig;
     }
 
-
+    // Méthode pour afficher un template avec les données fournies
     protected function render(string $template, array $data): void
     {     
+        // Vérifie si l'utilisateur est connecté
         $isUserLoggedIn = isset($_SESSION['user']);
+        // Ajoute l'état de connexion de l'utilisateur aux données pour le template
         $data['isUserLoggedIn'] = $isUserLoggedIn;
 
+        // Ajoute le rôle de l'utilisateur (si connecté) aux données pour le template
         if ($isUserLoggedIn) {
             $data['userRole'] = $_SESSION['user']->getRole(); // Par exemple, 'ADMIN' ou 'USER'
         }
+                // Affiche le template avec les données
         echo $this->twig->render($template, $data);
     }
 
@@ -36,6 +40,7 @@ abstract class AbstractController
         {
             header("Location: index.php");
         }
+        
         exit;
     }
     

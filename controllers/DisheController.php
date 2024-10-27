@@ -11,7 +11,7 @@ class DisheController extends AbstractController
         $this->dm = new DisheManager();
         $this->om = new OrderManager();
     }
-
+    // Affiche la liste des plats
     public function listDishes(string $context = 'admin'): void
     {
         $dishes = $this->dm->findAll(); // Récupère tous les plats depuis le DisheManager
@@ -27,18 +27,17 @@ class DisheController extends AbstractController
     
         $this->render($template, ['dishes' => $dishes]);
     }
-
+    // Affiche les plats par catégorie
     public function showDishesByCategory(): void
     {
         $dishes = $this->dm->findAll();
    
-    
         if (is_array($dishes) && !empty($dishes)) {
             $this->render('card.html.twig', ['dishes' => $dishes]);
         } 
     }
     
-
+    // Affiche le formulaire d'édition d'un plat et gère la mise à jour des informations
     public function editDishe(int $disheId): void
     {
         if(isset($_SESSION['error_message'])) {
@@ -51,7 +50,9 @@ class DisheController extends AbstractController
         
         $dishe = $this->dm->findById($disheId); // Trouve le plat à modifier
 
+        // Si la requête est POST, effectue la mise à jour du plat
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Récupération et validation des données du formulaire
             $category = $_POST['category'] ?? '';
             $name = $_POST['name'] ?? '';
             $price = $_POST['price'] ?? '';
@@ -70,7 +71,6 @@ class DisheController extends AbstractController
         if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
             $picture = $this->handleFileUpload(); // Tentez de télécharger la nouvelle image
         }
-        
             // Mise à jour des données du plat
             $dishe->setCategory($category);
             $dishe->setName($name);
@@ -80,7 +80,6 @@ class DisheController extends AbstractController
             $dishe->setPicture($picture);
 
             // Sauvegarde des modifications
-            
             if ($this->dm->updateDishe($dishe)) {
                 $_SESSION['success_message'] = 'Le plat a bien été modifié';
                 $this->redirect('admin-listDishes');
@@ -93,6 +92,9 @@ class DisheController extends AbstractController
         }
     }
 
+
+
+    // Suppression d'un plat selon son ID
     public function deleteDishe(int $disheId): void
     {
         if ($this->dm->deleteDishe($disheId)) {
@@ -105,6 +107,9 @@ class DisheController extends AbstractController
         }
     }
 
+
+
+    // Ajoute un nouveau plat
     public function addDishe(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -114,7 +119,7 @@ class DisheController extends AbstractController
                 $name = htmlspecialchars($_POST['name'] ?? '');
                 $price = htmlspecialchars($_POST['price'] ?? '');
                 $isVegetarian = isset($_POST['isVegetarian']) ? true : false;
-$description = htmlspecialchars($_POST['description'] ?? '');
+                $description = htmlspecialchars($_POST['description'] ?? '');
 
                 $dishe = new Dishes($category, $name, $description, $price, $isVegetarian, $picture);
 
@@ -203,7 +208,7 @@ $description = htmlspecialchars($_POST['description'] ?? '');
             $this->render('admin/dishes/editDishe.html.twig', ['dishe' => $dishe]);
         }
     }
-    
+        
     private function handlePostRequest($dishe): void
     {
         // Récupération et validation des données du formulaire
@@ -223,7 +228,7 @@ $description = htmlspecialchars($_POST['description'] ?? '');
         }
     
         // Gestion du fichier uploadé
-        /*$picture = $this->handleFileUpload() ?? $dishe->getPicture();*/
+        //$picture = $this->handleFileUpload() ?? $dishe->getPicture();
     
         // Mise à jour des données du plat
         $dishe->setCategory($category);
@@ -246,6 +251,7 @@ $description = htmlspecialchars($_POST['description'] ?? '');
     }
     
 
+    // Gère l'upload de fichiers pour les images des plats
     private function handleFileUpload(): ?string
     {
         $target_dir = "private/uploads/";
@@ -281,29 +287,31 @@ $description = htmlspecialchars($_POST['description'] ?? '');
             return null;
         }
     }
-public function confirmerCommande()
-{
-    // Vérifie si le panier est vide
-    if (empty($_SESSION['cartItems'])) {
-        $_SESSION['error'] = 'Votre panier est vide';
-        $this->redirect('panier');
-        return;
-    }
 
-    $cartItems = $_SESSION['cartItems'];
-    $cartTotal = $_SESSION['cartTotal'];
+        // Confirme une commande avec les éléments présents dans le panier de l'utilisateur
+        public function confirmerCommande()
+        {
+            // Vérifie si le panier est vide
+            if (empty($_SESSION['cartItems'])) {
+                $_SESSION['error'] = 'Votre panier est vide';
+                $this->redirect('panier');
+                return;
+            }
 
-    // Enregistre la commande dans la base de données
-    if ($this->om->storeOrder(cartItems: $cartItems, userId: $_SESSION['user']['id'])) {
-        // Redirection vers la page de confirmation avec les détails de la commande
-        return $this->render('confirmation.html.twig', [
-            'cartItems' => $cartItems,
-            'cartTotal' => $cartTotal
-        ]);
-    } else {
-        $_SESSION['error'] = 'Une erreur est survenue lors de la confirmation de la commande.';
-        $this->redirect('panier');
-    }
-}
+            $cartItems = $_SESSION['cartItems'];
+            $cartTotal = $_SESSION['cartTotal'];
+
+            // Enregistre la commande dans la base de données
+            if ($this->om->storeOrder(cartItems: $cartItems, userId: $_SESSION['user']['id'])) {
+                // Redirection vers la page de confirmation avec les détails de la commande
+                return $this->render('confirmation.html.twig', [
+                    'cartItems' => $cartItems,
+                    'cartTotal' => $cartTotal
+                ]);
+            } else {
+                $_SESSION['error'] = 'Une erreur est survenue lors de la confirmation de la commande.';
+                $this->redirect('panier');
+            }
+        }
 
 }
